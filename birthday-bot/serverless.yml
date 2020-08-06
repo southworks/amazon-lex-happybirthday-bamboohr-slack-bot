@@ -1,0 +1,47 @@
+service: birthday-bot
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 128
+  environment:
+    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+functions:
+  configChannel:
+    handler: lambdas/slackChannel.config
+  getBirthdays:
+    handler: lambdas/getBirthdays.handler
+  proactiveBirthdayMessage:
+    handler: lambdas/slackPost.proactive
+    events:
+      - schedule: cron(50 11 * * ? *)
+    environment:
+      slackAuthToken: ${ssm:/birthday-bot/dev/authToken~true}
+
+resources:
+  Resources:
+    BirthdayBotDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}

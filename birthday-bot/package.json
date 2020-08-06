@@ -1,14 +1,15 @@
 {
-  "name": "myservice",
+  "name": "birthday-bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Birthday Bot on AWS",
   "main": "handler.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "SOUTHWORKS",
+  "license": "MIT",
   "dependencies": {
+    "aws-sdk": "^2.726.0",
     "node-fetch": "^2.6.0"
   }
 }
