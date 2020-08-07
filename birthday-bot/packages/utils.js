@@ -1,6 +1,4 @@
-/*
- * Returns current date in DD/MM format.
- */
+/* Returns current date in DD/MM format. */
 const getCurrentDate = () => {
   let date = new Date();
 
@@ -11,9 +9,7 @@ const getCurrentDate = () => {
   return `${day}/${month}`;
 }
 
-/*
- * Read and parse Json file from path.
- */
+/* Read and parse Json file from path. */
 const readJSON = (path) => {
   const fs = require('fs');
   const data = fs.readFileSync(path);
