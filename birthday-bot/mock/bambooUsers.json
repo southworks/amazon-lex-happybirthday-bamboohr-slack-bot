@@ -1,26 +1,50 @@
 [
     {
-        "mail": "facundo.martin@southworks.com",
-        "birthday": "05/08"
+        "birthday": "07/08",
+        "mail": "lazaro.ansaldi@southworks.com"
     },
     {
-        "mail": "billy.delgado@southworks.com",
-        "birthday": "05/08"
+        "birthday": "12/08",
+        "mail": "joaquin.fiora@southworks.com"
     },
     {
-        "mail": "angel.szymczak@southworks.com",
-        "birthday": "05/08"
+        "birthday": "14/08",
+        "mail": "mirco.fiocchi@southworks.com"
     },
     {
-        "mail": "nahuel.schlegel@southworks.com",
-        "birthday": "05/08"
+        "birthday": "15/08",
+        "mail": "eloy.vega@southworks.com"
     },
     {
-        "mail": "gonzalo.munoz@southworks.com",
-        "birthday": "02/08"
+        "birthday": "15/08",
+        "mail": "christian.gelman@southworks.com"
     },
     {
-        "mail": "lazaro.ansaldi@southworks.com",
-        "birthday": "07/08"
+        "birthday": "16/08",
+        "mail": "alejo.pereyra@southworks.com"
+    },
+    {
+        "birthday": "17/08",
+        "mail": "i-nmachulsky@southworks.com"
+    },
+    {
+        "birthday": "18/08",
+        "mail": "damian.steimberg@southworks.com"
+    },
+    {
+        "birthday": "19/08",
+        "mail": "nadia.chiappero@southworks.com"
+    },
+    {
+        "birthday": "20/08",
+        "mail": "santiago.gomez@southworks.com"
+    },
+    {
+        "birthday": "20/08",
+        "mail": "franco.zuccarelli@southworks.com"
+    },
+    {
+        "birthday": "20/08",
+        "mail": "hector.mazzucotelli@southworks.com"
     }
 ]
