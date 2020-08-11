@@ -1,7 +1,6 @@
 'use strict';
-const AWS = require('aws-sdk');
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
-const dynamoDbTable = process.env.DYNAMODB_TABLE;
+
+const channels = require('./channels');
 
 function close(sessionAttributes, fulfillmentState, message) {
   return {
@@ -21,35 +20,20 @@ function dispatch(intentRequest, callback) {
 
   if (typeof newChannel !== 'string' || !newChannel) {
     console.error('Validation Failed');
-    callback( close(sessionAttributes, 'Fulfilled', {
+
+    callback(close(sessionAttributes, 'Fulfilled', {
       'contentType': 'PlainText',
       'content': 'The channel validation failed.'
     }));
   }
 
-  const params = {
-    TableName: dynamoDbTable,
-    Item: {
-      id: 'channel',
-      text: newChannel,
-      updatedAt: new Date().getTime(),
-    },
-  };
+  const newChannelObject = {
+    id: 'channel',
+    text: newChannel,
+    updatedAt: new Date().getTime(),
+  }
 
-  dynamoDb.put(params, (error) => {
-    if (error) {
-      console.error(error);
-      callback( close(sessionAttributes, 'Fulfilled', {
-        'contentType': 'PlainText',
-        'content': `Sorry, I couldn't set the new channel.`
-      }));
-    }
-
-    callback( close(sessionAttributes, 'Fulfilled', {
-      'contentType': 'PlainText',
-      'content': 'The channel #' + newChannel + ' was configured correctly.'
-    }));
-  });
+  channels.setChannel(newChannelObject);
 }
 
 exports.config = (event, context, callback) => {
