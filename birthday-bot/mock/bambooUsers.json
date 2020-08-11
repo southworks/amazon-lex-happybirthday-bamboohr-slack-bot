@@ -1,50 +1,10 @@
 [
-    {
-        "birthday": "07/08",
-        "mail": "lazaro.ansaldi@southworks.com"
-    },
-    {
-        "birthday": "12/08",
-        "mail": "joaquin.fiora@southworks.com"
-    },
-    {
-        "birthday": "14/08",
-        "mail": "mirco.fiocchi@southworks.com"
-    },
-    {
-        "birthday": "15/08",
-        "mail": "eloy.vega@southworks.com"
-    },
-    {
-        "birthday": "15/08",
-        "mail": "christian.gelman@southworks.com"
-    },
-    {
-        "birthday": "16/08",
-        "mail": "alejo.pereyra@southworks.com"
-    },
-    {
-        "birthday": "17/08",
-        "mail": "i-nmachulsky@southworks.com"
-    },
-    {
-        "birthday": "18/08",
-        "mail": "damian.steimberg@southworks.com"
-    },
-    {
-        "birthday": "19/08",
-        "mail": "nadia.chiappero@southworks.com"
-    },
-    {
-        "birthday": "20/08",
-        "mail": "santiago.gomez@southworks.com"
-    },
-    {
-        "birthday": "20/08",
-        "mail": "franco.zuccarelli@southworks.com"
-    },
-    {
-        "birthday": "20/08",
-        "mail": "hector.mazzucotelli@southworks.com"
-    }
+  {
+    "birthday": "DD/MM",
+    "mail": "john.doe@mail.com"
+  },
+  {
+    "birthday": "DD/MM",
+    "mail": "jane.doe@mail.com"
+  }
 ]
