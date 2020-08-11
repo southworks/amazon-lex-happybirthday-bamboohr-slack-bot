@@ -4,8 +4,6 @@ provider:
   name: aws
   runtime: nodejs12.x
   memorySize: 128
-  environment:
-    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
   iamRoleStatements:
     - Effect: Allow
       Action:
