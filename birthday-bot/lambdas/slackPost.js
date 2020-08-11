@@ -9,37 +9,46 @@ const authToken = process.env.slackAuthToken;
 function postToSlack(channel, callback) {
   let url = "https://slack.com/api/chat.postMessage";
   let message = birthdays.getBirthdaysMessage();
+  let response;
 
-  fetch(url, {
-    method: "post",
-    body: JSON.stringify({
-        text: message,
-        channel: channel
-    }),
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${authToken}`
-    }
-  })
-  .then(res => res.json())
-  .then(json => {
-    console.log(json);
-
-    let response;
-    if (json.ok) {
-      response = {
-        statusCode: 200,
-        body: 'Message sent!'
+  if (message) {
+    fetch(url, {
+      method: "post",
+      body: JSON.stringify({
+          text: message,
+          channel: channel
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${authToken}`
       }
-    } else {
-      response = {
-        statusCode: 501,
-        body: JSON.stringify(json)
+    })
+    .then(res => res.json())
+    .then(json => {
+      console.log(json);
+  
+      if (json.ok) {
+        response = {
+          statusCode: 200,
+          body: 'Message sent!'
+        }
+      } else {
+        response = {
+          statusCode: 501,
+          body: JSON.stringify(json)
+        }
       }
+  
+      callback(response)
+    });
+  } else {
+    response = {
+      statusCode: 200,
+      body: `There aren't any birthday today.`
     }
-
     callback(response)
-  });
+  }
+  
 }
 
 exports.proactive = (event, context, callback) => {
