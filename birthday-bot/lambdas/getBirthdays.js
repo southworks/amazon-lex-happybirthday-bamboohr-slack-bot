@@ -18,7 +18,8 @@ function dispatch(intentRequest, callback) {
     { 'contentType': 'PlainText', 'content': birthdays.getBirthdaysMessage() }));
 }
 
-exports.handler = (event, context, callback) => {
+module.exports.handler = (event, context, callback) => {
+  console.log(event)
   try {
     dispatch(event,
       (response) => {

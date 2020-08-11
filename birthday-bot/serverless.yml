@@ -4,16 +4,11 @@ provider:
   name: aws
   runtime: nodejs12.x
   memorySize: 128
-  environment:
-    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+        - s3:*
+      Resource: "arn:aws:s3:::birthday-bot-s3-store/*"
 
 functions:
   configChannel:
@@ -29,19 +24,7 @@ functions:
 
 resources:
   Resources:
-    BirthdayBotDynamoDbTable:
-      Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
+    BirthdayBotS3StoreTest:
+      Type: AWS::S3::Bucket
       Properties:
-        AttributeDefinitions:
-          -
-            AttributeName: id
-            AttributeType: S
-        KeySchema:
-          -
-            AttributeName: id
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+        BucketName: birthday-bot-s3-store
