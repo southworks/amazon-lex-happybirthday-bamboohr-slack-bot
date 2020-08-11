@@ -13,7 +13,7 @@ const getBirthdayGreeting = (emails) => {
     return `${icon1} ${icon2} Happy birthday ${users}! ${icon2} ${icon1}`;
   }
 
-  return `We don't have any birthday today ${icon3} ${icon4}`
+  return false;
 }
 
 /* Returns an Array with Slack users IDs by email */
