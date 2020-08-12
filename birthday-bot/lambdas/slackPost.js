@@ -59,15 +59,9 @@ exports.proactive = (event, context, callback) => {
     },
   };
 
-  dynamoDb.get(params, (error, result) => {
-    if (error) {
-      console.error(error);
-      return "error";
-    }
 
-    postToSlack(result.Item.text,
+    postToSlack("gnalog-team",
       (response) => {
         callback(null, response);
       });
-  });
 };

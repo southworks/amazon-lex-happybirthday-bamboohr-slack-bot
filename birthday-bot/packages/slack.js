@@ -1,4 +1,5 @@
 const utils = require('./utils');
+const { getMsgWithEmojis } = require('./birthdaymessage');
 
 const icon1 = ':birthday:';
 const icon2 = ':birthday_party_parrot:';
@@ -8,13 +9,15 @@ const icon4 = ':pepecrydrink:';
 const getBirthdayGreeting = (emails) => {
   const ids = getUserIds(emails)
   const users = joinUsers(ids)
-
+  
   if (ids.length > 0) {
-    return `${icon1} ${icon2} Happy birthday ${users}! ${icon2} ${icon1}`;
+    return getMsgWithEmojis(users)
+    //return `${icon1} ${icon2} Happy birthday ${users}! ${icon2} ${icon1}`;
   }
 
   return false;
 }
+
 
 /* Returns an Array with Slack users IDs by email */
 const getUserIds = (emails) => {
