@@ -1,23 +1,4 @@
 const utils = require('./utils');
-const { getMsgWithEmojis } = require('./birthdaymessage');
-
-const icon1 = ':birthday:';
-const icon2 = ':birthday_party_parrot:';
-const icon3 = ':pepecryhands:';
-const icon4 = ':pepecrydrink:';
-
-const getBirthdayGreeting = (emails) => {
-  const ids = getUserIds(emails)
-  const users = joinUsers(ids)
-  
-  if (ids.length > 0) {
-    return getMsgWithEmojis(users)
-    //return `${icon1} ${icon2} Happy birthday ${users}! ${icon2} ${icon1}`;
-  }
-
-  return false;
-}
-
 
 /* Returns an Array with Slack users IDs by email */
 const getUserIds = (emails) => {
@@ -35,25 +16,6 @@ const getUserIds = (emails) => {
 }
 
 /* It should perform Http request to Slack API. */
-const getUsers = () => utils.readJSON('./mock/slackUsers.json');
+const getUsers = () => utils.readJSON('../mock/slackUsers.json');
 
-/* Returns a string with tagged users. */
-const joinUsers = (ids) => {
-  const taggedUsers = ids.map(userTag);
-  let joined = '';
-
-  if (taggedUsers.length > 1) {
-    const lastOne = taggedUsers.pop();
-    joined = taggedUsers.join(', ');
-    joined += ` and ${lastOne}`;
-  } else {
-    joined = taggedUsers.join('');
-  }
-
-  return joined;
-}
-
-/* Tags ID with mention */
-const userTag = (id) => `<@${id}>`;
-
-module.exports = { getBirthdayGreeting }
+module.exports = getUserIds

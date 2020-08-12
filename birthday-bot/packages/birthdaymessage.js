@@ -1,36 +1,50 @@
-const messages = require("../mock/messages.json"); 
+const utils = require('./utils')
+const messages = utils.readJSON('../mock/messages.json')
 
-users=["user 1" , "user 2"]
+/* Returns a string with tagged users. */
+const joinIds = (ids) => {
+  const taggedUsers = ids.map(idTag);
+  let joined = '';
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
+  if (taggedUsers.length > 1) {
+    const lastOne = taggedUsers.pop();
+    joined = taggedUsers.join(', ');
+    joined += ` and ${lastOne}`;
+  } else {
+    joined = taggedUsers.join('');
+  }
+
+  return joined;
 }
 
-function getRandom (array) {
-  return array[getRandomInt(array.length)];
-}
+/* Tags ID with mention */
+const idTag = (id) => `<@${id}>`;
 
-function getRandomGreet(users) {
-  let firstPart = getRandom(messages.firstPart)
-  let secondPart = getRandom(messages.secondPart)
-  return `${firstPart} ${users}. ${secondPart}`
+// users=["user 1" , "user 2"]
+
+function getRandomGreet(ids) {
+  let firstPart = utils.getRandom(messages.firstPart)
+  let secondPart = utils.getRandom(messages.secondPart)
+  return `${firstPart} ${ids}. ${secondPart}`
 }
 
 function getRandomEmojis() {
-  let randomEmojis = messages.emojis
-  //randomEmojis[0] = messages.emojis.splice(getRandomInt(randomEmojis.length, 1))[0]
-  for (var i = 0; i < 4; i++) {
-    randomEmojis[i] = messages.emojis.splice(getRandomInt(randomEmojis.length), 1)[0]
- }
+  let randomEmojis = []
 
+  for (var i = 0; i < 4; i++) {
+    randomEmojis[i] = messages.emojis.splice(utils.getRandomInt(messages.emojis.length), 1)[0]
+ }
+ 
   return randomEmojis
 }
 
 
-function getMsgWithEmojis(users) {
+function getMsgWithEmojis(ids) {
+    let taggedIds = joinIds(ids)
+    let greet = getRandomGreet(taggedIds)
     let emojis = getRandomEmojis()
-    let greet = getRandomGreet(users)
+
     return `${emojis[0]} ${emojis[1]} ${greet} ${emojis[2]} ${emojis[3]}`
 }
 
-module.exports = { getMsgWithEmojis }
+module.exports = getMsgWithEmojis
