@@ -7,10 +7,8 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - s3:ListBucket
-        - s3:GetObject
-        - s3:PutObject
-      Resource: "arn:aws:s3:::birthday-bot-s3-operations-bucket/*"
+        - s3:*
+      Resource: "arn:aws:s3:::birthday-bot-s3-store-test/*"
 
 functions:
   configChannel:
@@ -26,7 +24,7 @@ functions:
 
 resources:
   Resources:
-    BirthdayBotS3OperationsBucket:
+    BirthdayBotS3StoreTest:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: 'birthday-bot-s3-operations-bucket'
+        BucketName: birthday-bot-s3-store-test
