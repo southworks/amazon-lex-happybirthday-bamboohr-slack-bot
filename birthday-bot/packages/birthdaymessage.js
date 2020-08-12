@@ -1,5 +1,5 @@
 const utils = require('./utils')
-const messages = utils.readJSON('../mock/messages.json')
+const messages = require('../mock/messages.json')
 
 /* Returns a string with tagged users. */
 const joinIds = (ids) => {

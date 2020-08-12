@@ -1,5 +1,3 @@
-const utils = require('./utils');
-
 /* Returns an Array with Slack users IDs by email */
 const getUserIds = (emails) => {
   const users = getUsers();
@@ -16,6 +14,6 @@ const getUserIds = (emails) => {
 }
 
 /* It should perform Http request to Slack API. */
-const getUsers = () => utils.readJSON('../mock/slackUsers.json');
+const getUsers = () => require('../mock/slackUsers.json');
 
 module.exports = getUserIds
