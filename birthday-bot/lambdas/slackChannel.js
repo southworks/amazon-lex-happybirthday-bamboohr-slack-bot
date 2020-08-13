@@ -14,18 +14,21 @@ function close(sessionAttributes, fulfillmentState, message) {
 function dispatch(intentRequest, callback) {
   const sessionAttributes = intentRequest.sessionAttributes
   const slots = intentRequest.currentIntent.slots
-  const channelName = slots.channel
+  const name = slots.channel
 
-  if (typeof channelName !== 'string' || !channelName) {
+  let response
+  if (typeof name !== 'string' || !name) {
     console.error('Validation Failed')
 
-    callback(close(sessionAttributes, 'Fulfilled', {
-      'contentType': 'PlainText',
-      'content': 'The channel name validation failed.'
-    }))
+    response = 'The channel name validation failed.'
+  } else {
+    channels.setChannel(name)
+
+    response = `The channel #${name} was configured correctly`
   }
 
-  channels.setChannel(channelName)
+  callback(close(sessionAttributes, 'Fulfilled',
+    { 'contentType': 'PlainText', 'content': response }))
 }
 
 const config = (event, context, callback) => {

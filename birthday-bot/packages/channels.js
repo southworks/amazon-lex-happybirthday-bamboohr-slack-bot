@@ -41,7 +41,7 @@ const setChannel = name => {
 
   S3.putObject(params, (err, data) => {
     if (err) console.log(err, err.stack)
-    else console.log(data)
+    else return data
   })
 }
 
