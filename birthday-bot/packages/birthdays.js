@@ -9,5 +9,5 @@ const getBirthdaysMessage = () => {
 
   return getMsgWithEmojis(ids)
 }
-
+console.log(getBirthdaysMessage())
 module.exports = { getBirthdaysMessage }
