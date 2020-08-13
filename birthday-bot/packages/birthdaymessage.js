@@ -25,31 +25,10 @@ const joinIds = (ids) => {
 /* Tags ID with mention */
 const idTag = (id) => `<@${id}>`;
 
-// users=["user 1" , "user 2"]
-
-function getRandomGreet(ids) {
-  let firstPart = utils.getRandom(messages.firstPart)
-  let secondPart = utils.getRandom(messages.secondPart)
-  return `${firstPart} ${ids}. ${secondPart}`
-}
-
-function getRandomEmojis() {
-  let randomEmojis = []
-
-  for (var i = 0; i < 4; i++) {
-    randomEmojis[i] = messages.emojis.splice(utils.getRandomInt(messages.emojis.length), 1)[0]
- }
- 
-  return randomEmojis
-}
-
-
+/* Returns a generated random message */
 function getMsgWithEmojis(ids) {
     let taggedIds = joinIds(ids)
-    //let greet = getRandomGreet(taggedIds)
-    //let emojis = getRandomEmojis()
     let output = multiLangLG.generate('greetingTemplate',{ name: taggedIds })
-    //return `${emojis[0]} ${emojis[1]} ${greet} ${emojis[2]} ${emojis[3]}`
     return output 
 }
 
