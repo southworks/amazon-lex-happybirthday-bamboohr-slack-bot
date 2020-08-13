@@ -8,7 +8,7 @@ provider:
     - Effect: Allow
       Action:
         - s3:*
-      Resource: "arn:aws:s3:::birthday-bot-s3-store-test/*"
+      Resource: "arn:aws:s3:::birthday-bot-s3-store/*"
 
 functions:
   configChannel:
@@ -27,4 +27,4 @@ resources:
     BirthdayBotS3StoreTest:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: birthday-bot-s3-store-test
+        BucketName: birthday-bot-s3-store
