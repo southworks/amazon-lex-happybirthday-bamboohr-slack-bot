@@ -12,7 +12,13 @@ Before start, these are some concept you might familiar with
 
 ## How it works
 
+The Birthday Bot is an integration of Amazon services with Slack. The logic of the bot is based on Lambda functions and AWS Lexbot. The bot works in two ways:
 
+**Responding to a Slack conversion:** The AWS Lex bot has three intents configured, each of them has one lambda function behind. This intents allows the bot to greet, respond the birthdays of the day and configurate the channel where proactive messages are going to be posted .
+
+When the user configures the channel, the lambda function triggered by this intent writes on a S3 bucket file, storing the configured channel.
+
+**Sending proactive messages:** A Lambda function is triggered by EventBridge (CloudWatch Events). It reads the configured channel on the S3 file, the birthdays of the day, and post it to the channel. The authentication tokens for Slack are stored on Parameter Store inside AWS System Manager.
 
 ## Architecture diagram
 
@@ -25,3 +31,10 @@ You can see the architecture that we used to make the birthday bot work in the f
 ## Prerequisites
 
 - [AWS Account](https://aws.amazon.com/)
+
+## Further reading
+
+- [Create AWS Lex intents](https://docs.aws.amazon.com/lex/latest/dg/gs2-create-bot-intent.html)
+- [Create AWS Lex Slot types](https://docs.aws.amazon.com/lex/latest/dg/gs2-create-bot-slot-types.html)
+- [Using Lambda functions on AWS Lex](https://docs.aws.amazon.com/lex/latest/dg/using-lambda.html)
+- [Secure strings on Parameter Store](https://docs.aws.amazon.com/es_es/systems-manager/latest/userguide/sysman-paramstore-securestring.html)
