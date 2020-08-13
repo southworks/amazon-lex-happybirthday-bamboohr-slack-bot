@@ -62,7 +62,7 @@ const newChannel = name => {
   return {
     id: CHANNEL_ID,
     text: name,
-    updatedAt: new Date().getTime()
+    updatedAt: new Date().toISOString()
   }
 }
 
