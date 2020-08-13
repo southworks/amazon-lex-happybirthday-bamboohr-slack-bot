@@ -2,7 +2,7 @@ const utils = require('./utils')
 const messages = require('../mock/messages.json')
 const { Templates, MultiLanguageLG } = require('botbuilder-lg');
 const templatesPerLocale = new Map();
-templatesPerLocale.set('', Templates.parseFile(`${__dirname}/sentences.lg`));
+templatesPerLocale.set('', Templates.parseFile(`../${__dirname}/sentences.lg`));
 const multiLangLG = new MultiLanguageLG(templatesPerLocale);
 
 
