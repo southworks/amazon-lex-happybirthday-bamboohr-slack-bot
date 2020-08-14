@@ -15,19 +15,24 @@ const getChannel = () => {
     ...configParams,
     ResponseContentType: 'application/json'
   }
-  console.log(`Getting Channel: ${JSON.stringify(configParams)}`)
 
-  S3.getObject(configParams, (err, data) => {
-    if (err) {
-      console.log(`Channel File Not Found, then I will create it`)
+  readS3(params)
+    .then(data => parseS3(data))
+    .catch(err => console.log(err))
+}
 
-      createConfigFile()
-    } else {
-      console.log(`Channel File Found: ${data.Body.toString()}`)
+const readS3 = payload => {
+  return new Promise((resolve, reject) => {
+    console.log(`Getting Channel: ${JSON.stringify(payload)}`)
 
-      return JSON.parse(data.Body).text
-    }
+    S3.getObject(payload, (err, data) => resolve(data))
   })
+}
+
+const parseS3 = data => {
+  console.log(`Channel File Found: ${data.Body.toString()}`)
+
+  return JSON.parse(data.Body).text
 }
 
 /* [String] Set a channel name to storage S3 file */
