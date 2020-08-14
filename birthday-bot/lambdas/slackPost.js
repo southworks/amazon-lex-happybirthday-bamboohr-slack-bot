@@ -65,7 +65,7 @@ exports.proactive = (event, context, callback) => {
       return "error";
     }
 
-    postToSlack("facu-gonza-tests",
+    postToSlack(result.Item.text,
       (response) => {
         callback(null, response);
       });
