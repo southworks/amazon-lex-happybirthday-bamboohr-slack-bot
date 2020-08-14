@@ -18,4 +18,12 @@ const readJSON = (path) => {
   return json;
 }
 
-module.exports = { getCurrentDate, readJSON }
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+function getRandom(array) {
+  return array[getRandomInt(array.length)];
+}
+
+module.exports = { getCurrentDate, readJSON, getRandomInt, getRandom }

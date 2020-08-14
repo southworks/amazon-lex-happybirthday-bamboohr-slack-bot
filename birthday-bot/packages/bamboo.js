@@ -18,7 +18,7 @@ const getBirthdaysEmails = () => {
  * It should give us at least emails and birthday dates.
  */
 function getUsers() {
-  return utils.readJSON('./mock/bambooUsers.json')
+  return require('../mock/bambooUsers.json')
 }
 
-module.exports = { getBirthdaysEmails }
+module.exports = getBirthdaysEmails
