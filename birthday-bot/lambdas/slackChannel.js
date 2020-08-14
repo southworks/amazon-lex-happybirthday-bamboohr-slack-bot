@@ -14,17 +14,17 @@ function close(sessionAttributes, fulfillmentState, message) {
 function dispatch(intentRequest, callback) {
   const sessionAttributes = intentRequest.sessionAttributes
   const slots = intentRequest.currentIntent.slots
-  const name = slots.channel
+  const channelName = slots.channel
 
   let response
-  if (typeof name !== 'string' || !name) {
+  if (typeof channelName !== 'string' || !channelName) {
     console.error('Validation Failed')
 
     response = 'The channel name validation failed.'
   } else {
-    channels.setChannel(name)
+    channels.setChannel(channelName)
 
-    response = `The channel #${name} was configured correctly`
+    response = `The channel #${channelName} was configured correctly`
   }
 
   callback(close(sessionAttributes, 'Fulfilled',
