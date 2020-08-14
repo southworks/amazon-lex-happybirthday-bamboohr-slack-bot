@@ -129,6 +129,12 @@ In order to link our bot to Slack, we have to create an application on the Slack
   - Save the changes.
 
 9. Choose **Manage Distribution** under **Settings**. Choose **Add to Slack** to install the application. Authorize the bot to respond to messages.
-
 10. In slack app go to **Direct Messages** section, choose your bot and send messages related to the configured intents.
+
+
+
+### Further reading
+
+- [Create AWS Lex custom bot](https://docs.aws.amazon.com/lex/latest/dg/getting-started-ex2.html)
+- [AWS Lex bot and Slack integration](https://docs.aws.amazon.com/lex/latest/dg/slack-bot-association.html)
 
