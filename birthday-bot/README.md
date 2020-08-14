@@ -95,9 +95,8 @@ In order to link our bot to Slack, we have to create an application on the Slack
    - The **Postback URL** is the Amazon Lex bot's endpoint that listens to Slack events. You use this URL:
 
       - As the request URL in the **Event Subscriptions** feature of the Slack application.
-- To replace the placeholder value for the request URL in the **Interactive Messages** feature of the Slack application.
+      - To replace the placeholder value for the request URL in the **Interactive Messages** feature of the Slack application.
    - The **OAuth URL** is your Amazon Lex bot's endpoint for an OAuth handshake with Slack.
-
 5. Go back to the [Slack API console](https://api.slack.com/apps) and choose the app previously created on **step 1**.
 
 6. In the left menu, choose **OAuth & Permissions**.
@@ -119,7 +118,7 @@ In order to link our bot to Slack, we have to create an application on the Slack
    2. Enter the **Postback URL** that you saved in step 4.
    3. Then, click on **Save Changes**
 
-   <img alt="save-interactive-changes" src="./images/save-interactive-changes.png" style="width:60%; float:left">
+      <img alt="save-interactive-changes" src="./images/save-interactive-changes.png" style="width:60%; float:left">
 
 8. In the left menu, choose **Event Subscriptions**.
 
@@ -133,7 +132,14 @@ In order to link our bot to Slack, we have to create an application on the Slack
 
       <img alt="subscribe-events" src="./images/subscribe-events.png" style="float:left; width:60%">
 
-9. In the left menu, choose **Manage Distribution**, click on **Add to Slack** to install the application. Authorize the bot to respond to messages.
+11. In the left menu, choose **Manage Distribution**, click on **Add to Slack** to install the application. Authorize the bot to respond to messages.
 
-10. In slack app go to **Direct Messages** section, choose your bot and send messages related to the configured intents.
+12. In slack app go to **Direct Messages** section, choose your bot and send messages related to the configured intents.
+
+
+
+### Further reading
+
+- [Create AWS Lex custom bot](https://docs.aws.amazon.com/lex/latest/dg/getting-started-ex2.html)
+- [AWS Lex bot and Slack integration](https://docs.aws.amazon.com/lex/latest/dg/slack-bot-association.html)
 
