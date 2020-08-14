@@ -38,9 +38,11 @@ const postToSlack = (channel, callback) => {
 }
 
 const proactive = (event, context, callback) => {
-  const channelName = channels.getChannel()
-
-  postToSlack(channelName, (response) => { callback(null, response) })
+  channels.getChannel()
+    .then(channelName => {
+      postToSlack(channelName, (response) => { callback(null, response) })
+    })
+    .catch(err => callback(null, err))
 }
 
 module.exports = { proactive }
