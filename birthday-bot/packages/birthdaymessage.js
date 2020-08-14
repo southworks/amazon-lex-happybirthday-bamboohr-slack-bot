@@ -1,5 +1,3 @@
-const utils = require('./utils')
-const messages = require('../mock/messages.json')
 const { Templates, MultiLanguageLG } = require('botbuilder-lg');
 const templatesPerLocale = new Map();
 templatesPerLocale.set('', Templates.parseFile(`${__dirname}/sentences.lg`));
@@ -27,9 +25,12 @@ const idTag = (id) => `<@${id}>`;
 
 /* Returns a generated random message */
 function getMsgWithEmojis(ids) {
-    let taggedIds = joinIds(ids)
-    let output = multiLangLG.generate('greetingTemplate',{ name: taggedIds })
-    return output 
+  if (!ids.length)
+    return ""
+
+  let taggedIds = joinIds(ids)
+  let output = multiLangLG.generate('greetingTemplate',{ name: taggedIds })
+  return output 
 }
 
 module.exports = getMsgWithEmojis
