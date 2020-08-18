@@ -1,6 +1,6 @@
 # Amazon-Lex-Happy-Birthday-Bot
 
-This project aims to show you how to use AWS services to implement a proactive HappyBirthdayBot, integrating Amazon Lex as a conversational interface, Slack as a messaging channel, and BambooHR as a source of birthday dates.
+This project aims to show you how to use AWS services to implement a proactive HappyBirthdayBot, integrating Amazon Lex as a conversational interface, Slack as a messaging channel, and BambooHR as a source of birthdates.
 
 Before start, these are some concept you might familiar with
 
