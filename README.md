@@ -12,7 +12,9 @@ Before starting, these are some concept you might familiar with
 
 ## How it works
 
-The Birthday Bot is an integration of Amazon services with Slack. The logic of the bot is based on Lambda functions and AWS Lexbot. The bot works in two ways:
+The Birthday Bot is an integration of AWS with Slack. The logic of the bot is based on Lambda functions and AWS Lex.
+
+The bot works in two ways:
 
 **Responding to a Slack conversation:** The AWS Lex bot has three intents configured, each of them has one lambda function behind. These intents allows the bot to greet, respond the birthdays of the day and configurate the channel where proactive messages will be posted.
 
