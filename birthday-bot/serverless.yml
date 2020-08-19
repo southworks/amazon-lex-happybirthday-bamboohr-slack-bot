@@ -9,6 +9,8 @@ provider:
       Action:
         - s3:*
       Resource: "arn:aws:s3:::birthday-bot-s3-store/*"
+  environment:      
+    AZURE_STORAGE_STRING_CONNECTION: "https://juanarstaticcontent.blob.core.windows.net/$web/api/gateway.php/southworks/v1/reports/custom?format=json&onlyCurrent=false"
 
 functions:
   configChannel:
