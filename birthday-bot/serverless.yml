@@ -4,19 +4,22 @@ provider:
   name: aws
   runtime: nodejs12.x
   memorySize: 128
+
   iamRoleStatements:
     - Effect: Allow
       Action:
         - s3:*
       Resource: "arn:aws:s3:::birthday-bot-s3-store/*"
-  environment:      
-    AZURE_STORAGE_STRING_CONNECTION: "https://juanarstaticcontent.blob.core.windows.net/$web/api/gateway.php/southworks/v1/reports/custom?format=json&onlyCurrent=false"
+
+  environment: ${file(env.${opt:stage,self:provider.stage}.yml)}
 
 functions:
   configChannel:
     handler: lambdas/slackChannel.config
+
   getBirthdays:
     handler: lambdas/getBirthdays.handler
+
   proactiveBirthdayMessage:
     handler: lambdas/slackPost.proactive
     events:

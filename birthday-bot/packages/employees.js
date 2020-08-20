@@ -1,9 +1,9 @@
 const { getCurrentDate } = require("./utils");
 const { BlobServiceClient } = require("@azure/storage-blob");
-const connectionString =
-  "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;QueueEndpoint=http://127.0.0.1:10001/devstoreaccount1;";
-const containerName = "birthday-bot-blob-store";
-const blobName = "employees.json";
+
+const connectionString = process.env.AZURE_BLOB_CONNECTION_STRING;
+const containerName = process.env.AZURE_BLOB_CONTAINER_NAME;
+const blobName = process.env.AZURE_BLOB_NAME;
 
 /*
  * It reads employees data from Azure Blob Store
@@ -12,9 +12,7 @@ const readStore = async () => {
   const blobServiceClient = BlobServiceClient.fromConnectionString(
     connectionString
   );
-
   const containerClient = blobServiceClient.getContainerClient(containerName);
-
   const blockBlobClient = containerClient.getBlockBlobClient(blobName);
 
   const downloadBlockBlobResponse = await blockBlobClient.download(0);
@@ -28,32 +26,17 @@ const readStore = async () => {
   return blobData;
 };
 
+/*
+ * It compose binary data to String
+ */
 const streamToString = async (readableStream) => {
+  let chunks = [];
+
   return new Promise((resolve, reject) => {
-    let chunks = [];
-
-    readableStream.on("data", (data) => {
-      chunks.push(data.toString());
-    });
-
-    readableStream.on("end", () => {
-      resolve(chunks.join(""));
-    });
-
+    readableStream.on("data", (data) => chunks.push(data.toString()));
+    readableStream.on("end", () => resolve(chunks.join("")));
     readableStream.on("error", reject);
   });
-};
-
-const getBirthdaysEmails = async () => {
-  const today = getCurrentDate();
-  const users = await readStore();
-
-  let emails = [];
-  users.forEach((user) => {
-    if (user.birthday == today) emails.push(user.email);
-  });
-
-  return emails;
 };
 
 /*
@@ -68,6 +51,18 @@ const userParser = (employee) => {
   const birthday = `${date[BIRTH_DAY_INDEX]}/${date[BIRTH_MONTH_INDEX]}`;
 
   return { birthday: birthday, email: employee.workEmail };
+};
+
+const getBirthdaysEmails = async () => {
+  const today = getCurrentDate();
+  const users = await readStore();
+
+  let emails = [];
+  users.forEach((user) => {
+    if (user.birthday == today) emails.push(user.email);
+  });
+
+  return emails;
 };
 
 module.exports = getBirthdaysEmails;
