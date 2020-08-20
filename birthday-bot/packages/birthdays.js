@@ -2,8 +2,8 @@ const getBirthdaysEmails = require("./employees");
 const getUserIds = require("./slack");
 const getMsgWithEmojis = require("./birthdaymessage");
 
-const getBirthdaysMessage = () => {
-  let emails = getBirthdaysEmails();
+const getBirthdaysMessage = async () => {
+  let emails = await getBirthdaysEmails();
 
   let ids = getUserIds(emails);
 

@@ -55,8 +55,8 @@
       "lastName": "Doe",
       "preferredName": null,
       "displayName": "John Doe",
-      "dateOfBirth": "1900-01-01",
-      "workEmail": "juan.doe@work.com",
+      "dateOfBirth": "1900-08-20",
+      "workEmail": "john.doe@mail.com",
       "hireDate": "1920-01-01",
       "terminationDate": "0000-00-00"
     },
@@ -67,8 +67,8 @@
       "lastName": "Joe",
       "preferredName": null,
       "displayName": "Jae Doe",
-      "dateOfBirth": "2000-12-31",
-      "workEmail": "jane.doe@work.com",
+      "dateOfBirth": "2000-08-19",
+      "workEmail": "jane.doe@mail.com",
       "hireDate": "2010-01-01",
       "terminationDate": "0000-00-00"
     }

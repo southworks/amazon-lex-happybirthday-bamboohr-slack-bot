@@ -11,8 +11,8 @@ const getCurrentDate = () => {
 
 /* Read and parse Json file from path. */
 const readJSON = (path) => {
-  const fs = require("fs");
-  const data = fs.readFileSync(path);
+  const { readFileSync } = require("fs");
+  const data = readFileSync(path);
   const json = JSON.parse(data);
 
   return json;
