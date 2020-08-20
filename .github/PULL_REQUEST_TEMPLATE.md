@@ -9,6 +9,3 @@ Fixes #<!-- If this addresses a specific issue, please provide the issue number 
   - 
   -
   -
-
-## Testing
-<!-- If you are adding a new feature to a library, you must include tests for your new code. -->
