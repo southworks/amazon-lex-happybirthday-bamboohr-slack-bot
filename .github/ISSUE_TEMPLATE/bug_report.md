@@ -22,5 +22,5 @@ Steps to reproduce the behavior:
 **Related code:**
 `A concise snippet`
 
-**Other information:**
+**More information:**
 Information that can clarify the problem (logs, screenshots, etc)
