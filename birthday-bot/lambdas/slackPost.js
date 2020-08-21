@@ -1,12 +1,12 @@
 const authToken = process.env.slackAuthToken
-const birthdays = require('../packages/birthdays')
+const getBirthdaysMessage = require('../packages/birthdays')
 const channels = require('../packages/channels')
 const fetch = require('node-fetch')
 
 const postToSlack = (channel, callback) => {
   const url = 'https://slack.com/api/chat.postMessage'
 
-  const message = birthdays.getBirthdaysMessage()
+  const message = getBirthdaysMessage()
 
   let response
 

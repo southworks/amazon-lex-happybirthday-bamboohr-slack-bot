@@ -50,7 +50,7 @@ const userParser = (employee) => {
   const date = employee.Birthday.split('-');
   const birthday = `${date[BIRTH_DAY_INDEX]}/${date[BIRTH_MONTH_INDEX]}`;
 
-  return { birthday: birthday, email: employee.email };
+  return { birthday: birthday, email: employee.Email };
 };
 
 const getBirthdaysEmails = async () => {
