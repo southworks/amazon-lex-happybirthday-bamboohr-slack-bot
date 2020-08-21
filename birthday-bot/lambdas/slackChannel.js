@@ -20,15 +20,15 @@ function dispatch(intentRequest, callback) {
 
   let response
 
-  checkchannel(channelName).then(exists => {
+  checkchannel(channelName).then(channelNameCorrect => {
 
-      if (exists === undefined) {
+      if (channelNameCorrect === undefined) {
         console.error('Validation Failed');
 
         response = 'The channel name validation failed.';
       }
       else {
-        if (exists) {
+        if (channelNameCorrect) {
           channels.setChannel(channelName)
           response = `The channel #${channelName} was configured correctly`
         }
