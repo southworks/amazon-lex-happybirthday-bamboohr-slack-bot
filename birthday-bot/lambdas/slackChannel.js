@@ -19,23 +19,26 @@ function dispatch(intentRequest, callback) {
   const channelName = slots.channel
 
   let response
-  if (typeof channelName !== 'string' || !channelName) {
-    console.error('Validation Failed')
 
-    response = 'The channel name validation failed.'
-  } else {
+  checkchannel(channelName).then(exists => {
 
-    if (checkchannel(channelName)) {
-      channels.setChannel(channelName)
-      response = `The channel #${channelName} was configured correctly`
-    }
-    else {
-      response = `The channel is not available for me, add me to the channel #${channelName}`
-    }
-  }
+      if (exists === undefined) {
+        console.error('Validation Failed');
 
-  callback(close(sessionAttributes, 'Fulfilled',
-    { 'contentType': 'PlainText', 'content': response }))
+        response = 'The channel name validation failed.';
+      }
+
+      if (exists) {
+        channels.setChannel(channelName)
+        response = `The channel #${channelName} was configured correctly`
+      }
+      else {
+        response = `The channel is not available for me, add me to the channel #${channelName}`
+      }
+
+      callback(close(sessionAttributes, 'Fulfilled',
+      { 'contentType': 'PlainText', 'content': response }));
+  });
 }
 
 const checkchannel = (name) => {
@@ -45,10 +48,15 @@ const checkchannel = (name) => {
     'Authorization': `Bearer ${authToken}`
   }
 
-  fetch(url, { method: 'get', headers: headers })
+  if (typeof name !== 'string' || !name) {
+    return;
+  }
+
+  return fetch(url, { method: 'get', headers: headers })
       .then(res => res.json())
       .then(json => {
-        const channelsArray = json.channels
+        const channelsArray = json.channels;
+
         return channelsArray.length > 0 && channelsArray.filter(channel => channel.name === name).length > 0;
       });
 }
