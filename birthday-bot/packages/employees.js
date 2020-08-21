@@ -20,7 +20,7 @@ const readStore = async () => {
   const blobData = await streamToString(
     downloadBlockBlobResponse.readableStreamBody
   )
-    .then((data) => JSON.parse(data).employees)
+    .then((data) => JSON.parse(data))
     .then((employees) => employees.map(userParser));
 
   return blobData;
@@ -47,10 +47,10 @@ const BIRTH_MONTH_INDEX = 1;
 const BIRTH_DAY_INDEX = 2;
 
 const userParser = (employee) => {
-  const date = employee.dateOfBirth.split('-');
+  const date = employee.Birthday.split('-');
   const birthday = `${date[BIRTH_DAY_INDEX]}/${date[BIRTH_MONTH_INDEX]}`;
 
-  return { birthday: birthday, email: employee.workEmail };
+  return { birthday: birthday, email: employee.email };
 };
 
 const getBirthdaysEmails = async () => {
