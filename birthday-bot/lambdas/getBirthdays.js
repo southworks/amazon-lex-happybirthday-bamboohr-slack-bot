@@ -1,10 +1,10 @@
-const { getBirthdaysMessage } = require("../packages/birthdays");
+const getBirthdaysMessage = require('../packages/birthdays');
 
 const close = (sessionAttributes, fulfillmentState, message) => {
   return {
     sessionAttributes,
     dialogAction: {
-      type: "Close",
+      type: 'Close',
       fulfillmentState,
       message,
     },
@@ -16,8 +16,8 @@ const dispatch = async (intentRequest, callback) => {
   const content = await getBirthdaysMessage();
 
   callback(
-    close(sessionAttributes, "Fulfilled", {
-      contentType: "PlainText",
+    close(sessionAttributes, 'Fulfilled', {
+      contentType: 'PlainText',
       content: content,
     })
   );

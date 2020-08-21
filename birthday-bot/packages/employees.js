@@ -1,5 +1,5 @@
-const { getCurrentDate } = require("./utils");
-const { BlobServiceClient } = require("@azure/storage-blob");
+const { getCurrentDate } = require('./utils');
+const { BlobServiceClient } = require('@azure/storage-blob');
 
 const connectionString = process.env.AZURE_BLOB_CONNECTION_STRING;
 const containerName = process.env.AZURE_BLOB_CONTAINER_NAME;
@@ -33,21 +33,21 @@ const streamToString = async (readableStream) => {
   let chunks = [];
 
   return new Promise((resolve, reject) => {
-    readableStream.on("data", (data) => chunks.push(data.toString()));
-    readableStream.on("end", () => resolve(chunks.join("")));
-    readableStream.on("error", reject);
+    readableStream.on('data', (data) => chunks.push(data.toString()));
+    readableStream.on('end', () => resolve(chunks.join('')));
+    readableStream.on('error', reject);
   });
 };
 
 /*
  * It parse users to give us digested data:
- *   { email: "employee@company.com", birthday: "DD/MM" }
+ *   { email: 'employee@company.com', birthday: 'DD/MM' }
  */
 const BIRTH_MONTH_INDEX = 1;
 const BIRTH_DAY_INDEX = 2;
 
 const userParser = (employee) => {
-  const date = employee.dateOfBirth.split("-");
+  const date = employee.dateOfBirth.split('-');
   const birthday = `${date[BIRTH_DAY_INDEX]}/${date[BIRTH_MONTH_INDEX]}`;
 
   return { birthday: birthday, email: employee.workEmail };
