@@ -1,4 +1,6 @@
 const channels = require('../packages/channels')
+const fetch = require('node-fetch')
+const authToken = process.env.slackAuthToken
 
 function close(sessionAttributes, fulfillmentState, message) {
   return {
@@ -22,13 +24,33 @@ function dispatch(intentRequest, callback) {
 
     response = 'The channel name validation failed.'
   } else {
-    channels.setChannel(channelName)
 
-    response = `The channel #${channelName} was configured correctly`
+    if (checkchannel(channelName)) {
+      channels.setChannel(channelName)
+      response = `The channel #${channelName} was configured correctly`
+    }
+    else {
+      response = `The channel is not available for me, add me to the channel #${channelName}`
+    }
   }
 
   callback(close(sessionAttributes, 'Fulfilled',
     { 'contentType': 'PlainText', 'content': response }))
+}
+
+const checkchannel = (name) => {
+  const url = 'https://slack.com/api/users.conversations'
+
+  const headers = {
+    'Authorization': `Bearer ${authToken}`
+  }
+
+  fetch(url, { method: 'get', headers: headers })
+      .then(res => res.json())
+      .then(json => {
+        const channelsArray = json.channels
+        return channelsArray.length > 0 && channelsArray.filter(channel => channel.name === name).length > 0;
+      });
 }
 
 const config = (event, context, callback) => {
