@@ -27,8 +27,7 @@ function dispatch(intentRequest, callback) {
 
         response = 'The channel name validation failed.';
       }
-
-      if (exists) {
+      else if (exists) {
         channels.setChannel(channelName)
         response = `The channel #${channelName} was configured correctly`
       }
