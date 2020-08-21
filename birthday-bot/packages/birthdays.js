@@ -2,12 +2,13 @@ const getBirthdaysEmails = require('./bamboo');
 const getUserIds = require('./slack');
 const getMsgWithEmojis = require('./birthdaymessage');
 
-const getBirthdaysMessage = () => {
+const getBirthdaysMessage = async () => {
   let emails = getBirthdaysEmails()
 
-  let ids = getUserIds(emails)
-
-  return getMsgWithEmojis(ids)
+  return new Promise((resolve, reject) => {
+    getUserIds(emails)
+      .then(ids => resolve(getMsgWithEmojis(ids)) )
+  })
 }
 
 module.exports = { getBirthdaysMessage }
