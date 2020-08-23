@@ -17,6 +17,8 @@ functions:
     handler: lambdas/slackChannel.config
   getBirthdays:
     handler: lambdas/getBirthdays.handler
+    environment:
+      slackAuthToken: ${ssm:/birthday-bot/dev/authToken~true}
   proactiveBirthdayMessage:
     handler: lambdas/slackPost.proactive
     events:
