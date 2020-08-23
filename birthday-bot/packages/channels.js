@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk')
 const S3 = new AWS.S3()
 
-const BUCKET = process.env.S3_BUCKET
+const BUCKET = 'birthday-bot-s3-store'
 const CONFIG_KEY = 'config.json'
 const configParams = {
   Bucket: BUCKET,
