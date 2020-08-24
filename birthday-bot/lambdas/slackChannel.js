@@ -20,53 +20,34 @@ function dispatch(intentRequest, callback) {
 
   let response
 
-  checkchannel(channelName).then(channelNameCorrect => {
+  checkChannel(channelName).then(channelNameCorrect => {
 
-      if (channelNameCorrect == null) {
-        console.error('Validation Failed');
-
-        response = 'The channel name validation failed.';
+      if (channelNameCorrect) {
+        channels.setChannel(channelName)
+        response = `The channel #${channelName} was configured correctly`
       }
       else {
-        if (channelNameCorrect) {
-          channels.setChannel(channelName)
-          response = `The channel #${channelName} was configured correctly`
-        }
-        else {
-          response = `The channel is not available for me, add me to the channel #${channelName}`
-        }
+        response = `The channel is not available for me, add me to the channel #${channelName}`
       }
-
+     
       callback(close(sessionAttributes, 'Fulfilled',
       { 'contentType': 'PlainText', 'content': response }));
   });
 }
 
-const checkchannel = (name) => {
-  const url = 'https://slack.com/api/users.conversations'
+const checkChannel = (name) => {
+  const url = `https://slack.com/api/users.conversations?token=${authToken}`
 
-  const headers = {
-    'Authorization': `Bearer ${authToken}`
+  if (typeof name !== 'string' || !name || name.length <= 0) {
+    return false;
   }
 
-  if (typeof name !== 'string' || !name) {
-    return;
-  }
-
-  return fetch(url, { method: 'get', headers: headers })
+  return fetch(url, { method: 'get' })
       .then(res => res.json())
       .then(json => {
 
-        let channelsArray;
-
-        if (json.channels) {
-          if (Array.isArray(json.channels))
-            channelsArray = json.channels;
-        }
-        
-        if (!channelsArray)
-          return;
-
+        let channelsArray = json.channels;
+      
         return channelsArray.length > 0 && channelsArray.filter(channel => channel.name === name).length > 0;
       });
 }
