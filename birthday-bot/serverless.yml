@@ -13,6 +13,8 @@ provider:
 functions:
   configChannel:
     handler: lambdas/slackChannel.config
+    environment:
+      slackAuthToken: ${ssm:/birthday-bot/dev/authToken~true}
   getBirthdays:
     handler: lambdas/getBirthdays.handler
   proactiveBirthdayMessage:
