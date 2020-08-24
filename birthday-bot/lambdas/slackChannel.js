@@ -22,7 +22,7 @@ function dispatch(intentRequest, callback) {
 
   checkchannel(channelName).then(channelNameCorrect => {
 
-      if (channelNameCorrect === undefined) {
+      if (channelNameCorrect == null) {
         console.error('Validation Failed');
 
         response = 'The channel name validation failed.';
@@ -56,7 +56,16 @@ const checkchannel = (name) => {
   return fetch(url, { method: 'get', headers: headers })
       .then(res => res.json())
       .then(json => {
-        const channelsArray = json.channels;
+
+        let channelsArray;
+
+        if (json.channels) {
+          if (Array.isArray(json.channels))
+            channelsArray = json.channels;
+        }
+        
+        if (!channelsArray)
+          return;
 
         return channelsArray.length > 0 && channelsArray.filter(channel => channel.name === name).length > 0;
       });
