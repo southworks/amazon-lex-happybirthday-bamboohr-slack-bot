@@ -1,23 +1,23 @@
-const utils = require('./utils');
+const utils = require('./utils')
 
 const getBirthdaysEmails = () => {
-  const today = utils.getCurrentDate();
-  const users = getUsers();
+  const today = utils.getCurrentDate()
+  const users = getUsers()
 
-  let emails = [];
+  const emails = []
 
-  users.forEach(user => {
-    if (user.birthday == today) emails.push(user.mail);
-  });
+  users.forEach((user) => {
+    if (user.birthday === today) emails.push(user.mail)
+  })
 
-  return emails;
+  return emails
 }
 
 /*
  * It should perform Http request to Bamboo API
  * It should give us at least emails and birthday dates.
  */
-function getUsers() {
+function getUsers () {
   return require('../mock/bambooUsers.json')
 }
 

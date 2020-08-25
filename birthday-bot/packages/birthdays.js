@@ -1,9 +1,9 @@
-const getBirthdaysEmails = require('./bamboo');
-const getUserIds = require('./slack');
-const getMsgWithEmojis = require('./birthdaymessage');
+const getBirthdaysEmails = require('./bamboo')
+const getUserIds = require('./slack')
+const getMsgWithEmojis = require('./birthdaymessage')
 
 const getBirthdaysMessage = () => {
-  let emails = getBirthdaysEmails()
+  const emails = getBirthdaysEmails()
 
   return getUserIds(emails).then(ids => getMsgWithEmojis(ids))
 }

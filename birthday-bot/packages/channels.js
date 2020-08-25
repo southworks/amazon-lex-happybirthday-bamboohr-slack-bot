@@ -19,7 +19,7 @@ const getChannel = () => {
   return new Promise((resolve, reject) => {
     S3.getObject(params, (err, data) => {
       if (err) {
-        console.log(`Channel File Not Found, then I will create it`)
+        console.log('Channel File Not Found, then I will create it')
 
         reject(err)
       } else {

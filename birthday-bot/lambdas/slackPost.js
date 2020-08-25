@@ -13,26 +13,26 @@ const postToSlack = (channel, callback) => {
       if (message) {
         const headers = {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${authToken}`
+          Authorization: `Bearer ${authToken}`
         }
-        const body = JSON.stringify({ text: message, channel: channel }) 
-    
+        const body = JSON.stringify({ text: message, channel: channel })
+
         fetch(url, { method: 'post', body: body, headers: headers })
           .then(res => res.json())
           .then(json => {
             console.log(json)
-    
+
             if (json.ok) {
               response = { statusCode: 200, body: 'Message sent!' }
             } else {
               response = { statusCode: 501, body: JSON.stringify(json) }
             }
-    
+
             callback(response)
           })
       } else {
-        response = { statusCode: 200, body: `There aren't any birthday today.` }
-    
+        response = { statusCode: 200, body: 'There aren\'t any birthday today.' }
+
         callback(response)
       }
     })
