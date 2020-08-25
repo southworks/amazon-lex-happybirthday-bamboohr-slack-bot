@@ -4,11 +4,13 @@ provider:
   name: aws
   runtime: nodejs12.x
   memorySize: 128
+  environment:	
+    S3_BUCKET: ${self:service}-${opt:stage, self:provider.stage}-config
   iamRoleStatements:
     - Effect: Allow
       Action:
         - s3:*
-      Resource: "arn:aws:s3:::birthday-bot-s3-store/*"
+      Resource: "arn:aws:s3:::${self:provider.environment.S3_BUCKET}/*"
 
 functions:
   configChannel:
@@ -26,7 +28,7 @@ functions:
 
 resources:
   Resources:
-    BirthdayBotS3StoreTest:
+    BirthdayBotS3:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: birthday-bot-s3-store
+        BucketName: ${self:provider.environment.S3_BUCKET}
