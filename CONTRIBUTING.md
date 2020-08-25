@@ -30,7 +30,7 @@ Before reporting an **issue**, **feature request,** or **question**, please do a
 
 - **Main**: Accepts merges from Features/Issues and Hotfixes
 - **Features/Issues**: Always branch off HEAD of Main
-  - Prefix: action/* ex: `add/new-command`, `fix/birhtday-message-issue`
+  - Prefix: action/* ex: `add/new-command`, `fix/birthday-message-issue`
 - **Hotfix**: Always branch off HEAD of Main. 
   - Prefix: hotfix/* ex: `hotfix/remove-duplicate-load-data`
 
