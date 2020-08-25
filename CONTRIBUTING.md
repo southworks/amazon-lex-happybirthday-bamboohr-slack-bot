@@ -30,11 +30,13 @@ Before reporting an **issue**, **feature request,** or **question**, please do a
 
 - **Main**: Accepts merges from Features/Issues and Hotfixes
 - **Features/Issues**: Always branch off HEAD of Main
-  - Prefix: topic/* ex: `add/new-command`, `fix/birhtday-message-issue`
+  - Prefix: action/* ex: `add/new-command`, `fix/birhtday-message-issue`
 - **Hotfix**: Always branch off HEAD of Main. 
   - Prefix: hotfix/* ex: `hotfix/remove-duplicate-load-data`
 
-### Developing on Lambdas functions
+
+
+### Contributing on Lambdas functions
 
 If you are going to contribute to the lambdas functions, follow the next steps to deploy and test them. 	
 
@@ -62,8 +64,6 @@ If you are going to contribute to the lambdas functions, follow the next steps t
 
 6. Test it using the [AWS console](https://console.aws.amazon.com) portal.
 
-
-
 #### Run Lambda Functions using Serverless Framework
 
 Using  [Serverless Framework](https://www.serverless.com/open-source/) you are able to run an instance of the Lambda function from your computer without deploy it. 
@@ -84,17 +84,36 @@ Using  [Serverless Framework](https://www.serverless.com/open-source/) you are a
 
 
 
-### Amazon Lex Birthday Bot
+### Contributing on Birthday Bot
 
-If you are going to contribute to the Birthday Bot, Follow the Set up steps to import the bot to the AWS resource. 
+If you are going to contribute to the Birthday Bot. Follow the [Import Amazon Lex Bot Model](https://github.com/southworks/amazon-lex-happybirthday-bamboohr-slack-bot/blob/main/birthday-bot/README.md#import-amazon-lex-bot) steps to set up the bot in AWS.
+
+**Steps to make changes to the Amazon Lex Birthday Bot**
+
+1. Import the Bot model, steps [here](https://github.com/southworks/amazon-lex-happybirthday-bamboohr-slack-bot/blob/main/birthday-bot/README.md#import-amazon-lex-bot)
+2. Make your changes ex: Update/Remove/Add intents, utterances, slot types etc.
+3. Save and build the Bot.
+4. Export the Bot model.
+
+When **exporting** a new version of the Amazon Lex Birthday Bot Model, please take into account:
+
+- Avoid leaving keys or sensitive data, the file must only contain the Amazon Lex model. 
+- Remove the **CodeHook** property of the intent to let the user to choose their own lambdas function to connect to the intent. 
+- Export the latest version of the model.
 
 
 
-If you want to import a new version of the Amazon Lex Birthday Bot Model. 
+### **Submit contribution** 
 
-Please remove the values of the lambdas names. 
+Pull Requests are a great way to keep track of tasks, enhancements, and bugs for the projects. When we were writing them, we must to think about how the rest of the team going to read it? what kind of information we will place in it to make it easy to read and understand their changes?. Follow this practices to help you to write a great pull request. 
 
+##### Writing great pull request
 
-
-
+- Provide all the information about changes added in the pull request.
+- Add screenshots or animated GIF.
+- Choose a descriptive title, add the context of the changes using brakes. 
+  - ex: `[serverless] Remove dynamo reference`, `[aws lex] add channel slot`
+- If the pull request fixes an issue, add the number of the related issue at the beginning following the rull request template. ex: `Fixes #002` 
+- For fixes issues pull request, add the name of the issue as the title. 
+  - ex: ISSUE #003: `Use s3 instead of dynamoDB` ---> PR Title: `[ISSUE#003] use s3 instead of dynamoDB`
 
