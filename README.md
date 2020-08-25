@@ -18,7 +18,7 @@ The bot works in two ways:
 
 When the user configures the channel, the lambda function triggered by this intent writes on a S3 bucket file, storing the configured channel.
 
-- **Sending proactive messages:** A Lambda function is triggered by EventBridge (CloudWatch Events). It reads the configured channel on the S3 file, the birthdays of the day, and post it to the channel. The authentication tokens for Slack are stored on Parameter Store inside AWS System Manager.
+- **Sending proactive messages:** A Lambda function is triggered by EventBridge (CloudWatch Events). It reads the configured channel on the S3 file, the birthdays of the day, and post it to the channel. The authentication tokens for Slack are stored on Parameter Store inside [AWS Systems Manager](https://aws.amazon.com/systems-manager/).
 
 ## Architecture diagram
 
