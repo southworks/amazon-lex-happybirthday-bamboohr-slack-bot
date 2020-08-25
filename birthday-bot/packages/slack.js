@@ -3,18 +3,10 @@ const authToken = process.env.slackAuthToken
 
 /* Returns an Array with Slack users IDs by email */
 const getUserIds = (emails) => {
-  return new Promise((resolve, reject) => {
-    let promises = []
-    emails.map((email) => promises.push(getSlackId(email)) )
+  let promises = []
+  emails.map((email) => promises.push(getSlackId(email)) )
 
-    Promise.all(promises)
-      .then(userIds => {
-        userIds = userIds.filter(function (el) {
-          return el; // Remove undefined values
-        });
-        resolve(userIds)
-      })
-  })
+  return Promise.all(promises).then(userIds => userIds.filter((el) => el))
 }
 
 /* It should perform HTTP request to Slack API. */
