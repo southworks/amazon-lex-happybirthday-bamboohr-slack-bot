@@ -5,9 +5,7 @@ const getMsgWithEmojis = require('./birthdaymessage');
 const getBirthdaysMessage = () => {
   let emails = getBirthdaysEmails()
 
-  let ids = getUserIds(emails)
-
-  return getMsgWithEmojis(ids)
+  return getUserIds(emails).then(ids => getMsgWithEmojis(ids))
 }
 
 module.exports = { getBirthdaysMessage }

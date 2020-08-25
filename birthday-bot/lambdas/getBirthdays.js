@@ -14,8 +14,11 @@ function close(sessionAttributes, fulfillmentState, message) {
 function dispatch(intentRequest, callback) {
   const sessionAttributes = intentRequest.sessionAttributes;
 
-  callback(close(sessionAttributes, 'Fulfilled',
-    { 'contentType': 'PlainText', 'content': birthdays.getBirthdaysMessage() }));
+  birthdays.getBirthdaysMessage()
+    .then(message => {
+      callback(close(sessionAttributes, 'Fulfilled',
+        { 'contentType': 'PlainText', 'content': message }));
+    })
 }
 
 module.exports.handler = (event, context, callback) => {
