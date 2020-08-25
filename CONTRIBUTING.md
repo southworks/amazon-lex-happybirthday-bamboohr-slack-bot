@@ -36,7 +36,7 @@ Before reporting an **issue**, **feature request,** or **question**, please do a
 
 
 
-### Contributing on Lambdas functions
+### Contributing to Lambdas functions
 
 If you are going to contribute to the lambdas functions, follow the next steps to deploy and test them. 	
 
@@ -84,7 +84,7 @@ Using  [Serverless Framework](https://www.serverless.com/open-source/) you are a
 
 
 
-### Contributing on Birthday Bot
+### Contributing to Birthday Bot
 
 **Steps to make changes to the Amazon Lex Birthday Bot**
 
