@@ -1,0 +1,1 @@
+Check our [docs](../docs/serverless.md) on how to use **Serverless**.
