@@ -8,8 +8,6 @@ Before starting, these are some concept you might familiar with
 + [BambooHR](https://www.bamboohr.com/) is a technology company that provides human resources software as a service.
 + [Slack](https://slack.com/) is a communication platform developed by the software company Slack Technologies.
 
-
-
 ## How it works
 
 The Birthday Bot is an integration of AWS with Slack. The logic of the bot is based on Lambda functions and AWS Lex.
@@ -26,11 +24,7 @@ When the user configures the channel, the lambda function triggered by this inte
 
 You can see the architecture that we used to make the birthday bot work in the following diagram:
 
-
-
-<img alt="birthday-bot-diagram" src="./images/birthday-bot.jpg" style="float: left">
-
-
+![Architecture diagram](./images/birthday-bot.jpg)
 
 ## Prerequisites
 
