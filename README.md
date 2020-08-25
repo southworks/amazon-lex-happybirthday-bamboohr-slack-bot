@@ -16,7 +16,7 @@ In this project, you will see how to use AWS technologies to implement a proacti
 
 You can see the architecture that we used to make the birthday bot work in the following diagram:
 
-<img alt="birthday-bot-diagram" src="./images/birthday-bot.png" style="float: left">
+<img alt="birthday-bot-diagram" src="./docs/images/birthday-bot.png" style="float: left">
 
 
 
