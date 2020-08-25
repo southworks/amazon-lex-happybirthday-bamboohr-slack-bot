@@ -27,7 +27,9 @@ function dispatch(intentRequest, callback) {
         response = `The channel #${channelName} was configured correctly`
       }
       else {
-        response = `The channel is not available for me, add me to the channel #${channelName}`
+        response = `The channel is not available for me, add me to the channel #${channelName}. 
+                    You can add me by clicking in "channel details", 
+                    then click on "more" and finally click on "add Apps"...`
       }
      
       callback(close(sessionAttributes, 'Fulfilled',
