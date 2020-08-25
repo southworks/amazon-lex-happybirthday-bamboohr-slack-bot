@@ -10,7 +10,7 @@ Before starting, these are some concept you might familiar with:
 
 ## How it works
 
-The Birthday Bot is an integration of AWS with Slack. The logic of the bot is based on Lambda functions and AWS Lex.
+The Birthday Bot is an integration of AWS with Slack. Its logic is based on AWS Lambda functions and Lex.
 
 The bot works in two ways:
 
