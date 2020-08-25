@@ -105,7 +105,7 @@ When **exporting** a new version of the Amazon Lex Birthday Bot Model, please ta
 
 Pull Requests are a great way to keep track of tasks, enhancements, and bugs for the projects. When we were writing them, we must think about how the rest of the team going to read it? what kind of information we will place in it to make it easy to read and understand their changes?. Follow theses practices to help you to write a great pull request. 
 
-##### Writing great pull request
+##### Writing great pull requests
 
 - Provide all the information about changes added in the pull request.
 - Add screenshots or animated GIF.
