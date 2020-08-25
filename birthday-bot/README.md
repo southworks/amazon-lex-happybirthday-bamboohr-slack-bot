@@ -10,7 +10,7 @@ Setup [Serverless](https://www.serverless.com/framework/docs/providers/aws/guide
 
 
 
-### Create Amazon Lex Bot
+### Import Amazon Lex Bot
 
 > You need to setup and deploy the resources using [Serverless](https://www.serverless.com/framework/docs/providers/aws/guide/intro/) before configure the AWS Lex service. You can configure it following this [guide](./setup-serveless.md)
 
