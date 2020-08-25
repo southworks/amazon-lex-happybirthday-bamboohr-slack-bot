@@ -19,16 +19,12 @@ const getSlackId = (userEmail) => {
     'Authorization': `Bearer ${authToken}`
   }
 
-  return new Promise((resolve, reject) => {
-    fetch(url + params, { headers: headers })
-      .then(res => res.json())
-      .then(json => {
-        if (json.ok)
-          resolve(json.user.id)
-        else
-          resolve()
-      })
-  })
+  return fetch(url + params, { headers: headers })
+    .then(res => res.json())
+    .then(json => {
+      if (json.ok)
+        return json.user.id
+    })
 }
 
 module.exports = getUserIds
