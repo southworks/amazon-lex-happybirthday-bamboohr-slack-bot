@@ -11,7 +11,7 @@ const close = (sessionAttributes, fulfillmentState, message) => {
   };
 };
 
-const dispatch = async (intentRequest, callback) => {
+const dispatch = (intentRequest, callback) => {
   const sessionAttributes = intentRequest.sessionAttributes;
 
   getBirthdaysMessage().then(message => {
@@ -20,7 +20,7 @@ const dispatch = async (intentRequest, callback) => {
         content: message,
     }));
   })
-  };
+};
 
 const handler = (event, context, callback) => {
   console.log(event);
