@@ -4,13 +4,14 @@ provider:
   name: aws
   runtime: nodejs12.x
   memorySize: 128
-  environment:	
-    S3_BUCKET: ${self:service}-${opt:stage, self:provider.stage}-config
   iamRoleStatements:
     - Effect: Allow
       Action:
         - s3:*
       Resource: "arn:aws:s3:::${self:provider.environment.S3_BUCKET}/*"
+  environment:
+    S3_BUCKET: ${self:service}-${opt:stage, self:provider.stage}-config
+    utcOffset: -3
 
 functions:
   configChannel:

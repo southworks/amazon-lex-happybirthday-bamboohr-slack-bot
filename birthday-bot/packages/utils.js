@@ -1,10 +1,13 @@
+const utcOffset = process.env.utcOffset
+
 /* Returns current date in DD/MM format. */
 const getCurrentDate = () => {
-  let date = new Date();
+  const utcTime = new Date().getTime()
+  const date = new Date(utcTime + utcOffset * 3600000);
 
   // Left justify with 0
-  let day = ('0' + date.getDate()).slice(-2);
-  let month = ('0' + (date.getMonth() + 1)).slice(-2);
+  const day = ('0' + date.getUTCDate()).slice(-2);
+  const month = ('0' + (date.getUTCMonth() + 1)).slice(-2);
 
   return `${day}/${month}`;
 }
