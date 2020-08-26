@@ -1,11 +1,11 @@
-const getBirthdaysEmails = require('./bamboo');
+const getBirthdaysEmails = require('./employees');
 const getUserIds = require('./slack');
 const getMsgWithEmojis = require('./birthdaymessage');
 
 const getBirthdaysMessage = () => {
-  let emails = getBirthdaysEmails()
+  return getBirthdaysEmails()
+    .then(emails => getUserIds(emails))
+    .then(ids => getMsgWithEmojis(ids))
+};
 
-  return getUserIds(emails).then(ids => getMsgWithEmojis(ids))
-}
-
-module.exports = { getBirthdaysMessage }
+module.exports = getBirthdaysMessage;
