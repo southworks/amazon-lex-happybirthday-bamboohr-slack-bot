@@ -6,7 +6,7 @@ const getUserIds = (emails) => {
   const promises = []
   emails.map((email) => promises.push(getSlackId(email)))
 
-  return Promise.all(promises).then(userIds => userIds.filter((el) => el))
+  return Promise.all(promises).then((userIds) => userIds.filter((el) => el))
 }
 
 /* It should perform HTTP request to Slack API. */
@@ -16,13 +16,15 @@ const getSlackId = (userEmail) => {
 
   const headers = {
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${authToken}`
+    Authorization: `Bearer ${authToken}`,
   }
 
   return fetch(url + params, { headers: headers })
-    .then(res => res.json())
-    .then(json => {
-      if (json.ok) { return json.user.id }
+    .then((res) => res.json())
+    .then((json) => {
+      if (json.ok) {
+        return json.user.id
+      }
     })
 }
 

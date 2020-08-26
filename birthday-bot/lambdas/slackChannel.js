@@ -1,17 +1,17 @@
 const channels = require('../packages/channels')
 
-function close (sessionAttributes, fulfillmentState, message) {
+function close(sessionAttributes, fulfillmentState, message) {
   return {
     sessionAttributes,
     dialogAction: {
       type: 'Close',
       fulfillmentState,
-      message
-    }
+      message,
+    },
   }
 }
 
-function dispatch (intentRequest, callback) {
+function dispatch(intentRequest, callback) {
   const sessionAttributes = intentRequest.sessionAttributes
   const slots = intentRequest.currentIntent.slots
   const channelName = slots.channel
@@ -27,13 +27,19 @@ function dispatch (intentRequest, callback) {
     response = `The channel #${channelName} was configured correctly`
   }
 
-  callback(close(sessionAttributes, 'Fulfilled',
-    { contentType: 'PlainText', content: response }))
+  callback(
+    close(sessionAttributes, 'Fulfilled', {
+      contentType: 'PlainText',
+      content: response,
+    })
+  )
 }
 
 const config = (event, context, callback) => {
   try {
-    dispatch(event, (response) => { callback(null, response) })
+    dispatch(event, (response) => {
+      callback(null, response)
+    })
   } catch (err) {
     callback(err)
   }

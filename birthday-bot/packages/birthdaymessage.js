@@ -23,8 +23,10 @@ const joinIds = (ids) => {
 const idTag = (id) => `<@${id}>`
 
 /* Returns a generated random message */
-function getMsgWithEmojis (ids) {
-  if (!ids.length) { return '' }
+function getMsgWithEmojis(ids) {
+  if (!ids.length) {
+    return ''
+  }
 
   const taggedIds = joinIds(ids)
   const output = multiLangLG.generate('greetingTemplate', { name: taggedIds })

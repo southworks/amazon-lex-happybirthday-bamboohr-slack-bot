@@ -18,11 +18,11 @@ const readJSON = (path) => {
   return json
 }
 
-function getRandomInt (max) {
+function getRandomInt(max) {
   return Math.floor(Math.random() * max)
 }
 
-function getRandom (array) {
+function getRandom(array) {
   return array[getRandomInt(array.length)]
 }
 

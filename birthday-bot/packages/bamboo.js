@@ -17,7 +17,7 @@ const getBirthdaysEmails = () => {
  * It should perform Http request to Bamboo API
  * It should give us at least emails and birthday dates.
  */
-function getUsers () {
+function getUsers() {
   return require('../mock/bambooUsers.json')
 }
 
