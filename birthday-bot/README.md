@@ -30,11 +30,7 @@ Setup [Serverless](https://www.serverless.com/framework/docs/providers/aws/guide
 
 5. Open the **BirthdayBot**, for the **GetBirthdays** and **SelectChannel** intents.
 
-   1. In the **Lambda initialization and validation** section
-
-   2. Mark the **code hook** checkbox.
-
-   3. Choose the **Lambda function** for the Intent. Accept the **Add permission to Lambda Function** dialog. 
+   1. In the **Fulfillment** section, choose the **Lambda function** related to the **Intent** and Accept the **Add permission to Lambda Function** dialog. Make sure you have selected the Latest version of the function. 
 
       Lambdas functions will have a name related with the intent
 
@@ -42,13 +38,9 @@ Setup [Serverless](https://www.serverless.com/framework/docs/providers/aws/guide
 
       Intent: **selectChannel** => Lambda function: **birthday-bot-dev-configChannel**
 
-      <img alt="select-lambda" src="./images/select-lambda.png" style="float: left; width:60%">
-
-   4. In the **Fulfillment** section, choose the **Lambda function** for the Intent. Make sure you have the Latest version. 
-
       <img alt="select-lambda-fulfillment" src="./images/select-lambda-fulfillment.png" style="float: left; width:60%">
 
-   5. Click on **Save Intent**
+   2. Click on **Save Intent**
 
 6. On the up right corner, Click on **Build**. Then, click on **Test Chatbot** to test the bot.
 
