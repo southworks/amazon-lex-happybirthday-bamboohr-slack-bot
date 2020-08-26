@@ -1,19 +1,30 @@
+const fetch = require('node-fetch')
+const authToken = process.env.slackAuthToken
+
 /* Returns an Array with Slack users IDs by email */
 const getUserIds = (emails) => {
-  const users = getUsers();
-  let ids = [];
+  let promises = []
+  emails.map((email) => promises.push(getSlackId(email)) )
 
-  emails.some(email => {
-    users.some(user => {
-      return user.mail == email ? ids.push(user.id) : false;
-    });
-    return emails.length == ids.length;
-  })
-
-  return ids;
+  return Promise.all(promises).then(userIds => userIds.filter((el) => el))
 }
 
-/* It should perform Http request to Slack API. */
-const getUsers = () => require('../mock/slackUsers.json');
+/* It should perform HTTP request to Slack API. */
+const getSlackId = (userEmail) => {
+  let url = 'https://slack.com/api/users.lookupByEmail?'
+  const params = new URLSearchParams({ email: userEmail })
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${authToken}`
+  }
+
+  return fetch(url + params, { headers: headers })
+    .then(res => res.json())
+    .then(json => {
+      if (json.ok)
+        return json.user.id
+    })
+}
 
 module.exports = getUserIds

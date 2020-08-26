@@ -3,11 +3,9 @@ const getUserIds = require('./slack');
 const getMsgWithEmojis = require('./birthdaymessage');
 
 const getBirthdaysMessage = async () => {
-  let emails = await getBirthdaysEmails();
-
-  let ids = getUserIds(emails);
-
-  return getMsgWithEmojis(ids);
+  return getBirthdaysEmails()
+    .then(emails => getUserIds(emails))
+    .then(ids => getMsgWithEmojis(ids))
 };
 
 module.exports = getBirthdaysMessage;

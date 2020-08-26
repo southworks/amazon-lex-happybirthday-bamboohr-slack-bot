@@ -13,15 +13,14 @@ const close = (sessionAttributes, fulfillmentState, message) => {
 
 const dispatch = async (intentRequest, callback) => {
   const sessionAttributes = intentRequest.sessionAttributes;
-  const content = await getBirthdaysMessage();
 
-  callback(
-    close(sessionAttributes, 'Fulfilled', {
-      contentType: 'PlainText',
-      content: content,
-    })
-  );
-};
+  getBirthdaysMessage().then(message => {
+    callback( close(sessionAttributes, 'Fulfilled', {
+        contentType: 'PlainText',
+        content: message,
+    }));
+  })
+  };
 
 const handler = (event, context, callback) => {
   console.log(event);
