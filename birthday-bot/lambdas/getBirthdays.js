@@ -1,6 +1,6 @@
-const birthdays = require('../packages/birthdays');
+const getBirthdaysMessage = require('../packages/birthdays');
 
-function close(sessionAttributes, fulfillmentState, message) {
+const close = (sessionAttributes, fulfillmentState, message) => {
   return {
     sessionAttributes,
     dialogAction: {
@@ -9,23 +9,27 @@ function close(sessionAttributes, fulfillmentState, message) {
       message,
     },
   };
-}
+};
 
-function dispatch(intentRequest, callback) {
+const dispatch = (intentRequest, callback) => {
   const sessionAttributes = intentRequest.sessionAttributes;
 
-  callback(close(sessionAttributes, 'Fulfilled',
-    { 'contentType': 'PlainText', 'content': birthdays.getBirthdaysMessage() }));
-}
+  getBirthdaysMessage().then(message => {
+    callback( close(sessionAttributes, 'Fulfilled', {
+        contentType: 'PlainText',
+        content: message,
+    }));
+  })
+};
 
-module.exports.handler = (event, context, callback) => {
-  console.log(event)
+const handler = (event, context, callback) => {
+  console.log(event);
+
   try {
-    dispatch(event,
-      (response) => {
-        callback(null, response);
-      });
+    dispatch(event, (response) => callback(null, response));
   } catch (err) {
     callback(err);
   }
 };
+
+module.exports = { handler };

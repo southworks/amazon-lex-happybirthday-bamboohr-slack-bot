@@ -3,12 +3,13 @@ service: birthday-bot
 provider:
   name: aws
   runtime: nodejs12.x
-  memorySize: 128
+  memorySize: 256
+  environment: ${file(env.${opt:stage,self:provider.stage}.yml)}
   iamRoleStatements:
     - Effect: Allow
       Action:
         - s3:*
-      Resource: "arn:aws:s3:::birthday-bot-s3-store/*"
+      Resource: "arn:aws:s3:::${self:provider.environment.S3_BUCKET}/*"
 
 functions:
   configChannel:
@@ -17,6 +18,8 @@ functions:
       slackAuthToken: ${ssm:/birthday-bot/dev/authToken~true}
   getBirthdays:
     handler: lambdas/getBirthdays.handler
+    environment:
+      slackAuthToken: ${ssm:/birthday-bot/dev/authToken~true}
   proactiveBirthdayMessage:
     handler: lambdas/slackPost.proactive
     events:
@@ -26,7 +29,7 @@ functions:
 
 resources:
   Resources:
-    BirthdayBotS3StoreTest:
+    BirthdayBotS3:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: birthday-bot-s3-store
+        BucketName: ${self:provider.environment.S3_BUCKET}
