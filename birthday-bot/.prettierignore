@@ -1,6 +1,9 @@
 # package directories
 node_modules
+package.json
 package-json.lock
+.eslintrc.json
+.prettierrc
 
 # Serverless directories
 .serverless
