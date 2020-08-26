@@ -9,6 +9,7 @@
   "author": "SOUTHWORKS",
   "license": "MIT",
   "dependencies": {
+    "@azure/storage-blob": "^12.2.0-preview.1",
     "aws-sdk": "^2.726.0",
     "botbuilder-lg": "^4.9.3",
     "node-fetch": "^2.6.0"
