@@ -1,0 +1,7 @@
+# package directories
+node_modules
+package-json.lock
+
+# Serverless directories
+.serverless
+serverless.md
