@@ -15,11 +15,12 @@ Before submitting  and **issue**, **feature request**, or **question**, please d
 
 ### Submitting Issues 
 
-1. Go to the [repository](https://github.com/southworks/amazon-lex-happybirthday-bamboohr-slack-bot) page, click on **New issue**.
-2. Select the **template**. Choose the one that fixes to your case. 
+1. Go to the [repository](https://github.com/southworks/amazon-lex-happybirthday-bamboohr-slack-bot) page, click on [New issue](https://github.com/southworks/amazon-lex-happybirthday-bamboohr-slack-bot/issues).
+2. Select the **template**. Choose the one that fits to your case. 
    1. Bug
    2. Documentation Bug
-   3. Question
+   3. Feature request
+   4. Question
 3. Fill the issue template. Remember to follow the best practices to write Issues and Feature requests.
 
 
@@ -30,15 +31,19 @@ Before submitting  and **issue**, **feature request**, or **question**, please d
 
 - **Main**: Accepts merges from Features/Issues and Hotfixes
 - **Features/Issues**: Always branch off HEAD of Main
+  
   - Prefix: action/* ex: `add/new-command`, `fix/birthday-message-issue`
+  
+    >  Actions available: `add`, `update`, `fix`, and `remove`
 - **Hotfix**: Always branch off HEAD of Main. 
+  
   - Prefix: hotfix/* ex: `hotfix/remove-duplicate-load-data`
 
 
 
 ### Contributing to Lambdas functions
 
-If you are going to contribute to the lambdas functions, follow the next steps to deploy and test them. 	
+If you are going to contribute to the lambdas functions, follow the next steps to deploy and test them:
 
 1. Clone the repo
 
@@ -46,11 +51,7 @@ If you are going to contribute to the lambdas functions, follow the next steps t
    git clone https://github.com/southworks/amazon-lex-happybirthday-bamboohr-slack-bot.git
    ```
 
-2. Navigate to the project 
-
-   ```
-   cd amazon-lex-happybirthday-bamboohr-slack-bot
-   ```
+2.  Open a terminal in the **birthday-bot** directory
 
 3. Install the dependencies
 
@@ -60,13 +61,13 @@ If you are going to contribute to the lambdas functions, follow the next steps t
 
 4. Make your great contribution. Like updates, hotfix and enhancements. Please, remember to follow the [branching model](#branching-model)
 
-5. Follow the next [guide](https://github.com/southworks/amazon-lex-happybirthday-bamboohr-slack-bot.git) to deploy to an AWS environment. We are using the [Serverless Framework](https://www.serverless.com/open-source/) to deploy the resources to AWS.
+5. Follow the next [guide](https://github.com/southworks/amazon-lex-happybirthday-bamboohr-slack-bot/blob/main/docs/serverless.md) to deploy to an AWS environment. We are using the [Serverless Framework](https://www.serverless.com/open-source/) to deploy the resources to AWS.
 
-6. Test it using the [AWS console](https://console.aws.amazon.com) portal.
+6. Test your work using the [AWS console](https://console.aws.amazon.com) portal.
 
 #### Run Lambda Functions using Serverless Framework
 
-Using  [Serverless Framework](https://www.serverless.com/open-source/) you are able to run an instance of the Lambda function from your computer without deploy it. 
+Using  [Serverless Framework](https://www.serverless.com/open-source/) you are able to run an instance of the Lambda function from your computer without deploying it. 
 
 1. In the **birthday-bot** directory, open a terminal.
 
@@ -79,7 +80,7 @@ Using  [Serverless Framework](https://www.serverless.com/open-source/) you are a
 3. Run the next command.
 
    ```
-   serverless invoke local --function FUNCTION_NAME
+   serverless invoke local --function <FUNCTION_NAME>
    ```
 
 
@@ -88,10 +89,10 @@ Using  [Serverless Framework](https://www.serverless.com/open-source/) you are a
 
 **To make changes to the Amazon Lex Birthday Bot**
 
-1. Import the Bot model, steps [here](https://github.com/southworks/amazon-lex-happybirthday-bamboohr-slack-bot/blob/main/birthday-bot/README.md#import-amazon-lex-bot)
+1. Import the Bot model, follow the steps provided [here](https://github.com/southworks/amazon-lex-happybirthday-bamboohr-slack-bot/blob/main/birthday-bot/README.md#import-amazon-lex-bot).
 2. Make your changes ex: Update/Remove/Add intents, utterances, slot types, etc.
 3. Save and build the Bot.
-4. Export the Bot model.
+4. Select the bot, click on **Actions**. Then, **Export** the bot model.
 
 When **exporting** a new version of the Amazon Lex Birthday Bot Model, please take into account:
 
@@ -103,12 +104,12 @@ When **exporting** a new version of the Amazon Lex Birthday Bot Model, please ta
 
 ### **Submit contribution** 
 
-Pull Requests are a great way to keep track of tasks, enhancements, and bugs for the projects. When we were writing them, we must think about how the rest of the team going to read it? what kind of information we will place in it to make it easy to read and understand their changes?. Follow theses practices to help you to write a great pull request. 
+Pull Requests are a great way to keep track of tasks, enhancements, and bugs for the projects. When we are writing them, we must think about how the rest of the team is going to read it? What kind of information we will place in it to make it easy to read and understand their changes?. Follow these practices to help you to write a great pull requests. 
 
 #### Writing great pull requests
 
-- Choose a descriptive title, add the context of the changes using brakes. 
-  - ex: `[serverless] Remove dynamo reference`, `[aws lex] add channel slot`
+- Choose a descriptive title and add the context of the changes using brakes. 
+  - ex: `[Serverless] Remove dynamo reference`, `[AWS Lex] add channel slot`
 - If the pull request fixes an issue:
   - Add the name of the issue as the title. 
     - ex: ISSUE #003: `Use s3 instead of dynamoDB` ---> PR Title: `[ISSUE#003] use s3 instead of dynamoDB`
