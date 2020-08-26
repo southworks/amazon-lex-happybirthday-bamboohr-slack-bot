@@ -97,7 +97,10 @@ Using  [Serverless Framework](https://www.serverless.com/open-source/) you are a
 When **exporting** a new version of the Amazon Lex Birthday Bot Model, please take into account:
 
 - Avoid leaving keys or sensitive data, the file must only contain the Amazon Lex model. 
-- Remove the **CodeHook** property of the intent to let the user choose their own lambdas function to connect to the intent. 
+- Remove the AWS Lambda function information to let the user choose their own. 
+  - For the **selectChannel** and **GetBirthdays** intents:.
+    - Remove the **CodeHook** property. This property will have the URI to the AWS Lambda function. 
+    - Change the **Type** from `CodeHook` to `ReturnIntent`.
 - Export the latest version of the model.
 
 
