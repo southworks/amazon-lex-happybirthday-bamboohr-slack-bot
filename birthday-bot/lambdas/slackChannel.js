@@ -50,7 +50,7 @@ const checkChannel = (name) => {
 
         let channelsArray = json.channels;
       
-        return channelsArray.length > 0 && channelsArray.filter(channel => channel.name === name).length > 0;
+        return channelsArray.length > 0 && channelsArray.find(channel => channel.name === name).length > 0;
       });
 }
 
