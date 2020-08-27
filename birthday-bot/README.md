@@ -24,9 +24,15 @@
 
 3. On the **Bots** page, choose **Action**, select **Import**.
 
-4. In the **Import Bot** dialog, browse to the **models** directory, select the **BirthdayBot_Model.zip** and click on **import**. Accept the **overwrite** confirmation dialog.
+4. In the **Import Bot** dialog, browse to the **models** directory, select the **BirthdayBot_Model.zip** and click on **import**. 
 
    <img alt="import-bot" src="./images/import-bot.png" style="float:left; width:60%">
+
+   (Optional) In case you already have a resource with the same name, you will see a confirmation dialog to **overwrite** it, be careful.
+
+   <img alt="overwrite-resource" src="./images/overwrite-bot.png" style="float:left; width:60%">
+
+   
 
 5. Open the **BirthdayBot**, for the **GetBirthdays** and **SelectChannel** intents.
 
