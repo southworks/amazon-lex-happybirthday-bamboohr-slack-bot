@@ -27,13 +27,19 @@ function dispatch(intentRequest, callback) {
     response = `The channel #${channelName} was configured correctly`
   }
 
-  callback(close(sessionAttributes, 'Fulfilled',
-    { 'contentType': 'PlainText', 'content': response }))
+  callback(
+    close(sessionAttributes, 'Fulfilled', {
+      contentType: 'PlainText',
+      content: response,
+    })
+  )
 }
 
 const config = (event, context, callback) => {
   try {
-    dispatch(event, (response) => { callback(null, response)})
+    dispatch(event, (response) => {
+      callback(null, response)
+    })
   } catch (err) {
     callback(err)
   }
