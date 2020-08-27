@@ -32,8 +32,6 @@
 
    <img alt="overwrite-resource" src="./images/overwrite-bot.png" style="float:left; width:60%">
 
-   
-
 5. Open the **BirthdayBot**, for the **GetBirthdays** and **SelectChannel** intents.
 
    1. In the **Fulfillment** section, choose the **Lambda function** related to the **Intent** and Accept the **Add permission to Lambda Function** dialog. Make sure you have selected the Latest version of the function. 
