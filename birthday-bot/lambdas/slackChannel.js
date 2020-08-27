@@ -1,7 +1,4 @@
-'use strict';
-const AWS = require('aws-sdk');
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
-const dynamoDbTable = process.env.DYNAMODB_TABLE;
+const channels = require('../packages/channels')
 
 function close(sessionAttributes, fulfillmentState, message) {
   return {
@@ -11,54 +8,41 @@ function close(sessionAttributes, fulfillmentState, message) {
       fulfillmentState,
       message,
     },
-  };
+  }
 }
 
 function dispatch(intentRequest, callback) {
-  const sessionAttributes = intentRequest.sessionAttributes;
-  const slots = intentRequest.currentIntent.slots;
-  const newChannel = slots.channel;
+  const sessionAttributes = intentRequest.sessionAttributes
+  const slots = intentRequest.currentIntent.slots
+  const channelName = slots.channel
 
-  if (typeof newChannel !== 'string' || !newChannel) {
-    console.error('Validation Failed');
-    callback( close(sessionAttributes, 'Fulfilled', {
-      'contentType': 'PlainText',
-      'content': 'The channel validation failed.'
-    }));
+  let response
+  if (typeof channelName !== 'string' || !channelName) {
+    console.error('Validation Failed')
+
+    response = 'The channel name validation failed.'
+  } else {
+    channels.setChannel(channelName)
+
+    response = `The channel #${channelName} was configured correctly`
   }
 
-  const params = {
-    TableName: dynamoDbTable,
-    Item: {
-      id: 'channel',
-      text: newChannel,
-      updatedAt: new Date().getTime(),
-    },
-  };
-
-  dynamoDb.put(params, (error) => {
-    if (error) {
-      console.error(error);
-      callback( close(sessionAttributes, 'Fulfilled', {
-        'contentType': 'PlainText',
-        'content': `Sorry, I couldn't set the new channel.`
-      }));
-    }
-
-    callback( close(sessionAttributes, 'Fulfilled', {
-      'contentType': 'PlainText',
-      'content': 'The channel #' + newChannel + ' was configured correctly.'
-    }));
-  });
+  callback(
+    close(sessionAttributes, 'Fulfilled', {
+      contentType: 'PlainText',
+      content: response,
+    })
+  )
 }
 
-exports.config = (event, context, callback) => {
+const config = (event, context, callback) => {
   try {
-    dispatch(event,
-      (response) => {
-        callback(null, response);
-      });
+    dispatch(event, (response) => {
+      callback(null, response)
+    })
   } catch (err) {
-    callback(err);
+    callback(err)
   }
-};
+}
+
+module.exports = { config }

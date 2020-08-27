@@ -1,9 +1,10 @@
 # package directories
 node_modules
-jspm_packages
+package.json
+package-json.lock
+.eslintrc.json
+.prettierrc
 
 # Serverless directories
 .serverless
-
-# Environment
-env.*.yml
+serverless.md

@@ -53,6 +53,12 @@ You can see the architecture defined in the serverless application in the follow
 
    *The default value of the* `--stage` *flag is* `dev`*. You can choose whatever stage you want to deploy the app, like `prod`. This parameter will be added to the name of each resource to recognize it.*
 
+   > **Environment Variables**
+   >
+   > The environment variables are in `env.yml`.
+   >
+   > For development set them `env.dev.yml`.
+
 ## Further reading
 - [Serverless CLI Reference for AWS](https://www.serverless.com/framework/docs/providers/aws/cli-reference/)
 - [AWS Lambda](https://aws.amazon.com/es/lambda/)
