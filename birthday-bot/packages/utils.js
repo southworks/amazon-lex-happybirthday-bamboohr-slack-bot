@@ -8,11 +8,11 @@ const getCurrentDate = () => {
   const utcTime = new Date().getTime()
 
   // Creates a new date using the UTC time, plus the UTC_OFFSET (multiplied by 3600000 in order to get milliseconds)
-  const date = new Date(utcTime + UTC_OFFSET * 3600000);
+  const date = new Date(utcTime + UTC_OFFSET * 3600000)
 
   // Left justify with 0
-  const day = ('0' + date.getUTCDate()).slice(-2);
-  const month = ('0' + (date.getUTCMonth() + 1)).slice(-2);
+  const day = ('0' + date.getUTCDate()).slice(-2)
+  const month = ('0' + (date.getUTCMonth() + 1)).slice(-2)
 
   return `${day}/${month}`
 }
