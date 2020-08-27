@@ -28,7 +28,7 @@
 
    <img alt="import-bot" src="./images/import-bot.png" style="float:left; width:60%">
 
-   (Optional) In case you already have a resource with the same name, you will see a confirmation dialog to **overwrite** it, be careful.
+   (Optional) In case you already have a resource with the same name, you will see a confirmation dialog to **overwrite** it. Be careful and check twice before clicking on **overwrite and continue**.
 
    <img alt="overwrite-resource" src="./images/overwrite-bot.png" style="float:left; width:60%">
 
