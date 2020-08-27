@@ -12,7 +12,7 @@
         "name": "selectChannel",
         "version": "4",
         "fulfillmentActivity": {
-          "type": "CodeHook"
+          "type": "ReturnIntent"
         },
         "sampleUtterances": [
           "I want to select a new channel"
@@ -81,7 +81,7 @@
         "name": "GetBirthdays",
         "version": "9",
         "fulfillmentActivity": {
-          "type": "CodeHook"
+          "type": "ReturnIntent"
         },
         "sampleUtterances": [
           "I want birthdays of today"
