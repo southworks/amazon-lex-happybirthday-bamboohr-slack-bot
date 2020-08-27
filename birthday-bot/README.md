@@ -2,11 +2,11 @@
 
 ### Prerequisites
 
-[AWS Account](https://aws.amazon.com/account/) 
+- [AWS Account](https://aws.amazon.com/account/) 
 
-Setup [Serverless](https://www.serverless.com/framework/docs/providers/aws/guide/intro/) to deploy the bot resources. You can configure it following this [guide](./setup-serveless.md)
+- Setup [Serverless](https://www.serverless.com/framework/docs/providers/aws/guide/intro/) to deploy the bot resources. You can configure it following this [guide](./setup-serveless.md)
 
-[PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7)
+- [PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7)
 
 
 
@@ -134,4 +134,3 @@ In order to link our bot to Slack, we have to create an application on the Slack
 
 - [Create AWS Lex custom bot](https://docs.aws.amazon.com/lex/latest/dg/getting-started-ex2.html)
 - [AWS Lex bot and Slack integration](https://docs.aws.amazon.com/lex/latest/dg/slack-bot-association.html)
-
