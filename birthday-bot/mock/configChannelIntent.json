@@ -1,47 +1,39 @@
 {
-    "messageVersion":"1.0",
-    "invocationSource":"FulfillmentCodeHook",
-    "userId":"q71r121o37gj1esuxx9wmlqer4e4z0gw",
-    "sessionAttributes":{
- 
+  "messageVersion": "1.0",
+  "invocationSource": "FulfillmentCodeHook",
+  "userId": "123456abcdef",
+  "sessionAttributes": {},
+  "requestAttributes": null,
+  "bot": {
+    "name": "BirthdayBot",
+    "alias": "$LATEST",
+    "version": "$LATEST"
+  },
+  "outputDialogMode": "Text",
+  "currentIntent": {
+    "name": "selectChannel",
+    "slots": {
+      "channel": "{TEAM_NAME_WITHOUT_#}"
     },
-    "requestAttributes":null,
-    "bot":{
-       "name":"BirthdayBot",
-       "alias":"$LATEST",
-       "version":"$LATEST"
+    "slotDetails": {
+      "channel": ["Object"]
     },
-    "outputDialogMode":"Text",
-    "currentIntent":{
-       "name":"selectChannel",
-       "slots":{
-          "channel":"bot-arena"
-       },
-       "slotDetails":{
-          "channel":[
-             "Object"
-          ]
-       },
-       "confirmationStatus":"None",
-       "nluIntentConfidenceScore":null
-    },
-    "alternativeIntents":[
- 
-    ],
-    "inputTranscript":"bot-arena",
-    "recentIntentSummaryView":[
-       {
-          "intentName":"selectChannel",
-          "checkpointLabel":null,
-          "slots":[
-             "Object"
-          ],
-          "confirmationStatus":"None",
-          "dialogActionType":"ElicitSlot",
-          "fulfillmentState":null,
-          "slotToElicit":"channel"
-       }
-    ],
-    "sentimentResponse":null,
-    "kendraResponse":null
- }
+    "confirmationStatus": "None",
+    "nluIntentConfidenceScore": null
+  },
+  "alternativeIntents": [],
+  "inputTranscript": "{TEAM_NAME_WITHOUT_#}",
+  "recentIntentSummaryView": [
+    {
+      "intentName": "selectChannel",
+      "checkpointLabel": null,
+      "slots": ["Object"],
+      "confirmationStatus": "None",
+      "dialogActionType": "ElicitSlot",
+      "fulfillmentState": null,
+      "slotToElicit": "channel"
+    }
+  ],
+  "sentimentResponse": null,
+  "kendraResponse": null
+}

@@ -1,73 +1,51 @@
-const birthdays = require('../packages/birthdays');
-const fetch = require("node-fetch");
-const AWS = require('aws-sdk');
+const authToken = process.env.slackAuthToken
+const getBirthdaysMessage = require('../packages/birthdays')
+const channels = require('../packages/channels')
+const fetch = require('node-fetch')
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
-const dynamoDbTable = process.env.DYNAMODB_TABLE;
-const authToken = process.env.slackAuthToken;
+const postToSlack = (channel, callback) => {
+  const url = 'https://slack.com/api/chat.postMessage'
 
-function postToSlack(channel, callback) {
-  let url = "https://slack.com/api/chat.postMessage";
-  let message = birthdays.getBirthdaysMessage();
-  let response;
+  getBirthdaysMessage().then((message) => {
+    let response
 
-  if (message) {
-    fetch(url, {
-      method: "post",
-      body: JSON.stringify({
-          text: message,
-          channel: channel
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${authToken}`
+    if (message) {
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
       }
-    })
-    .then(res => res.json())
-    .then(json => {
-      console.log(json);
-  
-      if (json.ok) {
-        response = {
-          statusCode: 200,
-          body: 'Message sent!'
-        }
-      } else {
-        response = {
-          statusCode: 501,
-          body: JSON.stringify(json)
-        }
-      }
-  
+      const body = JSON.stringify({ text: message, channel: channel })
+
+      fetch(url, { method: 'post', body: body, headers: headers })
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json)
+
+          if (json.ok) {
+            response = { statusCode: 200, body: 'Message sent!' }
+          } else {
+            response = { statusCode: 501, body: JSON.stringify(json) }
+          }
+
+          callback(response)
+        })
+    } else {
+      response = { statusCode: 200, body: "There aren't any birthday today." }
+
       callback(response)
-    });
-  } else {
-    response = {
-      statusCode: 200,
-      body: `There aren't any birthday today.`
     }
-    callback(response)
-  }
-  
+  })
 }
 
-exports.proactive = (event, context, callback) => {
-  const params = {
-    TableName: dynamoDbTable,
-    Key: {
-      id: "channel",
-    },
-  };
+const proactive = (event, context, callback) => {
+  channels
+    .getChannel()
+    .then((channelName) => {
+      postToSlack(channelName, (response) => {
+        callback(null, response)
+      })
+    })
+    .catch((err) => callback(null, err))
+}
 
-  dynamoDb.get(params, (error, result) => {
-    if (error) {
-      console.error(error);
-      return "error";
-    }
-
-    postToSlack(result.Item.text,
-      (response) => {
-        callback(null, response);
-      });
-  });
-};
+module.exports = { proactive }

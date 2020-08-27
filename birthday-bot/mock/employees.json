@@ -1,0 +1,10 @@
+[
+  {
+    "Birthday": "1900-08-20",
+    "Email": "john.doe@mail.com"
+  },
+  {
+    "Birthday": "2000-08-19",
+    "workEmail": "jane.doe@mail.com"
+  }
+]
