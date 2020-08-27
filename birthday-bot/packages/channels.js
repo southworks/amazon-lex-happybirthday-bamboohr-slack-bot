@@ -5,7 +5,7 @@ const BUCKET = process.env.S3_BUCKET
 const CONFIG_KEY = 'config.json'
 const configParams = {
   Bucket: BUCKET,
-  Key: CONFIG_KEY
+  Key: CONFIG_KEY,
 }
 const CHANNEL_ID = 'channel'
 
@@ -13,13 +13,13 @@ const CHANNEL_ID = 'channel'
 const getChannel = () => {
   const params = {
     ...configParams,
-    ResponseContentType: 'application/json'
+    ResponseContentType: 'application/json',
   }
 
   return new Promise((resolve, reject) => {
     S3.getObject(params, (err, data) => {
       if (err) {
-        console.log(`Channel File Not Found, then I will create it`)
+        console.log('Channel File Not Found, then I will create it')
 
         reject(err)
       } else {
@@ -32,11 +32,11 @@ const getChannel = () => {
 }
 
 /* [String] Set a channel name to storage S3 file */
-const setChannel = name => {
+const setChannel = (name) => {
   const params = {
     ...configParams,
     ContentType: 'application/json',
-    Body: JSON.stringify(newChannel(name))
+    Body: JSON.stringify(newChannel(name)),
   }
   console.log(`Setting Channel: ${JSON.stringify(params)}`)
 
@@ -46,11 +46,11 @@ const setChannel = name => {
   })
 }
 
-const newChannel = name => {
+const newChannel = (name) => {
   return {
     id: CHANNEL_ID,
     text: name,
-    updatedAt: new Date().toISOString()
+    updatedAt: new Date().toISOString(),
   }
 }
 
