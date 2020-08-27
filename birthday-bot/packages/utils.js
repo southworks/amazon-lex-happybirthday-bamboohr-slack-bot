@@ -1,3 +1,5 @@
+// This environment variable is an int used to change the bot timezone, it can be positive or negative.
+// When set to 0, it'll take UTC time, which you can change by setting the offset that works best for you.
 const UTC_OFFSET = process.env.UTC_OFFSET
 
 /* Returns a string with current date in DD/MM format. */
