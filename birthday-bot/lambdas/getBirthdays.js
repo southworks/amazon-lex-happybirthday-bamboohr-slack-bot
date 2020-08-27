@@ -18,7 +18,7 @@ const dispatch = (intentRequest, callback) => {
     callback(
       close(sessionAttributes, 'Fulfilled', {
         contentType: 'PlainText',
-        content: message,
+        content: message || `There aren't birthdays today`,
       })
     )
   })
