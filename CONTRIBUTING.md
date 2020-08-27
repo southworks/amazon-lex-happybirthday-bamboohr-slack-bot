@@ -118,6 +118,5 @@ Pull Requests are a great way to keep track of tasks, enhancements, and bugs for
     - ex: ISSUE #003: `Use s3 instead of dynamoDB` ---> PR Title: `[ISSUE#003] use s3 instead of dynamoDB`
   - Add the number of the related issue at the beginning following the pull request template.
     - ex: `Fixes #003` 
-- Provide all the information about changes added in the pull request.
+- Provide all the information about the changes made in the pull request.
 - Add screenshots or animated GIF.
-
