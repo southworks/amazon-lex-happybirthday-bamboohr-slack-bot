@@ -1,12 +1,12 @@
-const utcOffset = process.env.utcOffset
+const UTC_OFFSET = process.env.UTC_OFFSET
 
 /* Returns a string with current date in DD/MM format. */
 const getCurrentDate = () => {
   // Get UTC time in milliseconds
   const utcTime = new Date().getTime()
 
-  // Creates a new date using the UTC time, plus the utcOffset (multiplied by 3600000 in order to get milliseconds)
-  const date = new Date(utcTime + utcOffset * 3600000);
+  // Creates a new date using the UTC time, plus the UTC_OFFSET (multiplied by 3600000 in order to get milliseconds)
+  const date = new Date(utcTime + UTC_OFFSET * 3600000);
 
   // Left justify with 0
   const day = ('0' + date.getUTCDate()).slice(-2);
