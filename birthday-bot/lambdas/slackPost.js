@@ -38,7 +38,7 @@ const postToSlack = (channel, callback) => {
           });
       });
     } else {
-      response = { statusCode: 200, body: "There aren't any birthday today." }
+      response = { statusCode: 200, body: "There aren't any birthdays today." }
 
       callback(response)
     }
@@ -53,7 +53,7 @@ const proactive = (event, context, callback) => {
         callback(null, response)
       })
     })
-    .catch((err) => callback(null, err));
+    .catch((err) => callback(null, err))
 }
 
 module.exports = { proactive }
