@@ -3,27 +3,28 @@ const authToken = process.env.slackAuthToken
 
 /* Returns an Array with Slack users IDs by email */
 const getUserIds = (emails) => {
-  let promises = []
-  emails.map((email) => promises.push(getSlackId(email)) )
+  const promises = []
+  emails.map((email) => promises.push(getSlackId(email)))
 
-  return Promise.all(promises).then(userIds => userIds.filter((el) => el))
+  return Promise.all(promises).then((userIds) => userIds.filter((el) => el))
 }
 
 /* It should perform HTTP request to Slack API. */
 const getSlackId = (userEmail) => {
-  let url = 'https://slack.com/api/users.lookupByEmail?'
+  const url = 'https://slack.com/api/users.lookupByEmail?'
   const params = new URLSearchParams({ email: userEmail })
 
   const headers = {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${authToken}`
+    Authorization: `Bearer ${authToken}`,
   }
 
   return fetch(url + params, { headers: headers })
-    .then(res => res.json())
-    .then(json => {
-      if (json.ok)
+    .then((res) => res.json())
+    .then((json) => {
+      if (json.ok) {
         return json.user.id
+      }
     })
 }
 

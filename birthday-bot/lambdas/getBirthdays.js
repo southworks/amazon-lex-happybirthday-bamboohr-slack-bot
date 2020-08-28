@@ -1,4 +1,4 @@
-const getBirthdaysMessage = require('../packages/birthdays');
+const getBirthdaysMessage = require('../packages/birthdays')
 
 const close = (sessionAttributes, fulfillmentState, message) => {
   return {
@@ -8,28 +8,30 @@ const close = (sessionAttributes, fulfillmentState, message) => {
       fulfillmentState,
       message,
     },
-  };
-};
+  }
+}
 
 const dispatch = (intentRequest, callback) => {
-  const sessionAttributes = intentRequest.sessionAttributes;
+  const sessionAttributes = intentRequest.sessionAttributes
 
-  getBirthdaysMessage().then(message => {
-    callback( close(sessionAttributes, 'Fulfilled', {
+  getBirthdaysMessage().then((message) => {
+    callback(
+      close(sessionAttributes, 'Fulfilled', {
         contentType: 'PlainText',
-        content: message,
-    }));
+        content: message || `There aren't birthdays today`,
+      })
+    )
   })
-};
+}
 
 const handler = (event, context, callback) => {
-  console.log(event);
+  console.log(event)
 
   try {
-    dispatch(event, (response) => callback(null, response));
+    dispatch(event, (response) => callback(null, response))
   } catch (err) {
-    callback(err);
+    callback(err)
   }
-};
+}
 
-module.exports = { handler };
+module.exports = { handler }

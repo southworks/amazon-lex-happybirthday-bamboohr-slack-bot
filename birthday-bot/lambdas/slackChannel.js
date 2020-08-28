@@ -45,7 +45,9 @@ const checkChannel = (name) => {
 
 const config = (event, context, callback) => {
   try {
-    dispatch(event, (response) => { callback(null, response)})
+    dispatch(event, (response) => {
+      callback(null, response)
+    })
   } catch (err) {
     callback(err)
   }

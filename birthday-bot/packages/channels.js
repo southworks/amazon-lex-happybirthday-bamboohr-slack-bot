@@ -5,14 +5,14 @@ const BUCKET = process.env.S3_BUCKET
 const CONFIG_KEY = 'config.json'
 const configParams = {
   Bucket: BUCKET,
-  Key: CONFIG_KEY
+  Key: CONFIG_KEY,
 }
 
 /* [String] Retrieve a channel name from storage S3 file */
 const getChannel = () => {
   const params = {
     ...configParams,
-    ResponseContentType: 'application/json'
+    ResponseContentType: 'application/json',
   }
 
   return new Promise((resolve, reject) => {
@@ -31,11 +31,11 @@ const getChannel = () => {
 }
 
 /* [String] Set a channel name to storage S3 file */
-const setChannel = name => {
+const setChannel = (name) => {
   const params = {
     ...configParams,
     ContentType: 'application/json',
-    Body: JSON.stringify(newChannel(name))
+    Body: JSON.stringify(newChannel(name)),
   }
   console.log(`Setting Channel: ${JSON.stringify(params)}`)
 
@@ -45,10 +45,10 @@ const setChannel = name => {
   })
 }
 
-const newChannel = name => {
+const newChannel = (name) => {
   return {
     channel: name,
-    updatedAt: new Date().toISOString()
+    lastUpdate: new Date().toISOString()
   }
 }
 
