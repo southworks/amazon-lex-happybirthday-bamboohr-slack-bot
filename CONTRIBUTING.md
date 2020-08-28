@@ -31,14 +31,14 @@ Before submitting  and **issue**, **feature request**, or **question**, please d
 ### Branching Model
 
 - **Main**: Accepts merges from Features/Issues and Hotfixes
-- **Features/Issues**: Always branch off HEAD of Main
+- **Features/Issues**: Always branch off from Main
   
-  - Prefix: action/* ex: `add/new-command`, `fix/birthday-message-issue`
+  - Prefix: action/* e.g.: `add/new-command`, `fix/birthday-message-issue`
   
     >  Actions available: `add`, `update`, `fix`, and `remove`
-- **Hotfix**: Always branch off HEAD of Main. 
+- **Hotfix**: Always branch off from Main
   
-  - Prefix: hotfix/* ex: `hotfix/remove-duplicate-load-data`
+  - Prefix: hotfix/* e.g.: `hotfix/remove-duplicate-load-data`
 
 
 
