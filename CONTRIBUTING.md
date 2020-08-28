@@ -1,10 +1,10 @@
 # Contributing to Amazon Lex Happy Birthday Bot with Slack
 
-Thank you for reading the contributing guide of the project. It will help you to make great contributions like reporting issues, creating feature request, and submitting pull requests.
+Thank you for reading the contributing guidelines of the project. It will help you to make great contributions like reporting issues, creating feature requests, and submitting pull requests.
 
 ## Issues, Feature Request & Questions
 
-Before submitting  and **issue**, **feature request**, or **question**, please do a quick search in [Open Issues](https://github.com/southworks/amazon-lex-happybirthday-bamboohr-slack-bot/issues?q=is%3Aopen+is%3Aissue) to verify if it was already created. If there is an existing issue, add your comments to that one. 
+Before submitting **issues**, **features requests**, or **questions**, please do a quick search in [Open Issues](https://github.com/southworks/amazon-lex-happybirthday-bamboohr-slack-bot/issues?q=is%3Aopen+is%3Aissue) to verify if it was already created. If there is an existing issue, add your comments to that one. 
 
 ### Writing Great Issues & Feature Requests
 
@@ -35,6 +35,7 @@ Before submitting  and **issue**, **feature request**, or **question**, please d
   - Prefix: action/* e.g.: `add/new-command`, `fix/birthday-message-issue`
   
     >  Actions available: `add`, `update`, `fix`, and `remove`
+    
 - **Hotfix**: Always branch off from Main
   
   - Prefix: hotfix/* e.g.: `hotfix/remove-duplicate-load-data`
@@ -105,7 +106,7 @@ When **exporting** a new version of the Amazon Lex Birthday Bot Model, please ta
 
 
 
-### **Submit contribution** 
+### Submit contribution
 
 Pull Requests are a great way to keep track of tasks, enhancements, and bugs for the projects. When we are writing them, we must think about how the rest of the team is going to read it? What kind of information we will place in it to make it easy to read and understand their changes?. Follow these practices to help you to write a great pull requests. 
 
