@@ -52,7 +52,11 @@ If you are going to contribute to the lambdas functions, follow the next steps t
    git clone https://github.com/southworks/amazon-lex-happybirthday-bamboohr-slack-bot.git
    ```
 
-2.  Open a terminal in the **birthday-bot** directory
+2. Go to the **birthday-bot** directory
+
+   ```
+   cd amazon-lex-happybirthday-bamboohr-slack-bot/birthday-bot
+   ```
 
 3. Install the dependencies
 
