@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const authToken = process.env.slackAuthToken
+const ssmName = process.env.SSM;
 
 /* Returns an Array with Slack users IDs by email */
 const getUserIds = (emails) => {
@@ -14,18 +14,25 @@ const getSlackId = (userEmail) => {
   const url = 'https://slack.com/api/users.lookupByEmail?'
   const params = new URLSearchParams({ email: userEmail })
 
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${authToken}`,
-  }
+  const params = {
+    Name: ssmName, /* required */
+    WithDecryption: true
+  };
+  ssm.getParameter(params, function(err, data) {
 
-  return fetch(url + params, { headers: headers })
-    .then((res) => res.json())
-    .then((json) => {
-      if (json.ok) {
-        return json.user.id
-      }
-    })
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${data.Parameter.Value}`,
+    }
+  
+    return fetch(url + params, { headers: headers })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.ok) {
+          return json.user.id
+        }
+      })
+  });
 }
 
 module.exports = getUserIds

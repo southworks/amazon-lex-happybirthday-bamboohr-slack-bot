@@ -1,4 +1,4 @@
-const authToken = process.env.slackAuthToken
+const ssmName = process.env.SSM;
 const getBirthdaysMessage = require('../packages/birthdays')
 const channels = require('../packages/channels')
 const fetch = require('node-fetch')
@@ -10,25 +10,31 @@ const postToSlack = (channel, callback) => {
     let response
 
     if (message) {
-      const headers = {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
-      }
-      const body = JSON.stringify({ text: message, channel: channel })
-
-      fetch(url, { method: 'post', body: body, headers: headers })
-        .then((res) => res.json())
-        .then((json) => {
-          console.log(json)
-
-          if (json.ok) {
-            response = { statusCode: 200, body: 'Message sent!' }
-          } else {
-            response = { statusCode: 501, body: JSON.stringify(json) }
-          }
-
-          callback(response)
-        })
+      const params = {
+        Name: ssmName,
+        WithDecryption: true
+      };
+      ssm.getParameter(params, function(err, data) {
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${data.Parameter.Value}`,
+        }
+        const body = JSON.stringify({ text: message, channel: channel })
+  
+        fetch(url, { method: 'post', body: body, headers: headers })
+          .then((res) => res.json())
+          .then((json) => {
+            console.log(json)
+  
+            if (json.ok) {
+              response = { statusCode: 200, body: 'Message sent!' }
+            } else {
+              response = { statusCode: 501, body: JSON.stringify(json) }
+            }
+  
+            callback(response)
+          });
+      });
     } else {
       response = { statusCode: 200, body: "There aren't any birthday today." }
 
@@ -45,7 +51,7 @@ const proactive = (event, context, callback) => {
         callback(null, response)
       })
     })
-    .catch((err) => callback(null, err))
+    .catch((err) => callback(null, err));
 }
 
 module.exports = { proactive }
