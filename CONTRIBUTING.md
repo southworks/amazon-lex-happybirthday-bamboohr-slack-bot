@@ -4,7 +4,7 @@ Thank you for reading the contributing guidelines of the project. It will help y
 
 ## Issues, Feature Request & Questions
 
-Before submitting **issues**, **features requests**, or **questions**, please do a quick search in [Open Issues](https://github.com/southworks/amazon-lex-happybirthday-bamboohr-slack-bot/issues?q=is%3Aopen+is%3Aissue) to verify if it was already created. If there is an existing issue, add your comments to that one. 
+Before submitting **issues**, **feature requests**, or **questions**, please do a quick search in [Open Issues](https://github.com/southworks/amazon-lex-happybirthday-bamboohr-slack-bot/issues?q=is%3Aopen+is%3Aissue) to verify if it was already created. If there is an existing issue, add your comments to that one. 
 
 ### Writing Great Issues & Feature Requests
 
@@ -33,9 +33,9 @@ Before submitting **issues**, **features requests**, or **questions**, please do
 - **Features/Issues**: Always branch off from Main
   
   - Prefix: action/* e.g.: `add/new-command`, `fix/birthday-message-issue`
-  
-    >  Actions available: `add`, `update`, `fix`, and `remove`
     
+  >  Actions available: `add`, `update`, `fix`, and `remove`
+  
 - **Hotfix**: Always branch off from Main
   
   - Prefix: hotfix/* e.g.: `hotfix/remove-duplicate-load-data`
@@ -46,21 +46,16 @@ Before submitting **issues**, **features requests**, or **questions**, please do
 
 If you are going to contribute to the lambdas functions, follow the next steps to deploy and test them:
 
-1. Clone the repo
+1. Clone the repo.
 
    ```
    git clone https://github.com/southworks/amazon-lex-happybirthday-bamboohr-slack-bot.git
    ```
 
-2. Go to the **birthday-bot** directory
+2. Go to the **birthday-bot** directory and install the dependencies.
 
    ```
    cd amazon-lex-happybirthday-bamboohr-slack-bot/birthday-bot
-   ```
-
-3. Install the dependencies
-
-   ```
    npm install
    ```
 
@@ -116,12 +111,14 @@ Pull Requests are a great way to keep track of tasks, enhancements, and bugs for
 
 #### Writing great pull requests
 
+In order to follow styling guides and keep the code well formatted, please run the [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) tools before submitting your pull request. You can use the `npm lint` command to verify warnings and errors. Then, use `npm lint:fix` to fix the auto-fixable errors. Finally, to fix common format errors run `npm prettier`. 
+
 - Choose a descriptive title and add the context of the changes using brakes. 
   - ex: `[Serverless] Remove dynamo reference`, `[AWS Lex] add channel slot`
 - If the pull request fixes an issue:
   - Add the name of the issue as the title. 
-    - ex: ISSUE #003: `Use s3 instead of dynamoDB` ---> PR Title: `[ISSUE#003] use s3 instead of dynamoDB`
+    -  e.g.: ISSUE #003: `Use s3 instead of dynamoDB` ---> PR Title: `[ISSUE#003] use s3 instead of dynamoDB`
   - Add the number of the related issue at the beginning following the pull request template.
-    - ex: `Fixes #003` 
+    -  e.g.: `Fixes #003` 
 - Provide all the information about the changes made in the pull request.
 - Add screenshots or animated GIFs.
