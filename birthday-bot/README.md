@@ -4,7 +4,7 @@
 
 - [AWS Account](https://aws.amazon.com/account/) 
 
-- Setup [Serverless](https://www.serverless.com/framework/docs/providers/aws/guide/intro/) to deploy the bot resources. You can configure it following this [guide](./setup-serveless.md)
+- Setup [Serverless](https://www.serverless.com/framework/docs/providers/aws/guide/intro/) to deploy the bot resources. You can configure it following this [guide](../docs/serverless.md)
 
 - [PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7)
 
@@ -12,7 +12,7 @@
 
 ### Import Amazon Lex Bot
 
-> You need to setup and deploy the resources using [Serverless](https://www.serverless.com/framework/docs/providers/aws/guide/intro/) before configure the AWS Lex service. You can configure it following this [guide](./setup-serveless.md)
+> You need to setup and deploy the resources using [Serverless](https://www.serverless.com/framework/docs/providers/aws/guide/intro/) before configure the AWS Lex service. You can configure it following this [guide](../docs/serverless.md)
 
 1. Got to the **models** directory, open a PowerShell terminal and run the next command. 
 
@@ -26,11 +26,11 @@
 
 4. In the **Import Bot** dialog, browse to the **models** directory, select the **BirthdayBot_Model.zip** and click on **import**. 
 
-   <img alt="import-bot" src="./images/import-bot.png" style="float:left; width:60%">
+   <img alt="import-bot" src="../docs/images/import-bot.png" style="float:left; width:60%">
 
    (Optional) In case you already have a resource with the same name, you will see a confirmation dialog to **overwrite** it. Be careful and check twice before clicking on **overwrite and continue**.
 
-   <img alt="overwrite-resource" src="./images/overwrite-bot.png" style="float:left; width:60%">
+   <img alt="overwrite-resource" src="../docs/images/overwrite-bot.png" style="float:left; width:60%">
 
 5. Open the **BirthdayBot**, for the **GetBirthdays** and **SelectChannel** intents.
 
@@ -42,17 +42,17 @@
 
       Intent: **selectChannel** => Lambda function: **birthday-bot-dev-configChannel**
 
-      <img alt="select-lambda-fulfillment" src="./images/select-lambda-fulfillment.png" style="float: left; width:60%">
+      <img alt="select-lambda-fulfillment" src="../docs/images/select-lambda-fulfillment.png" style="float: left; width:60%">
 
    2. Click on **Save Intent**
 
 6. On the up right corner, Click on **Build**. Then, click on **Test Chatbot** to test the bot.
 
-   <img alt="build-and-test" src="./images/build-and-test.png" style="float: left; width:60%">
+   <img alt="build-and-test" src="../docs/images/build-and-test.png" style="float: left; width:60%">
 
 7. On the up right corner, Click on **Publish**, enter the alias and publish the bot. 
 
-   <img alt="publish-bot" src="./images/publish-bot.png" style="float:left; width:60%" >
+   <img alt="publish-bot" src="../docs/images/publish-bot.png" style="float:left; width:60%" >
 
 
 
@@ -62,7 +62,7 @@ In order to link our bot to Slack, we have to create an application on the Slack
 
 1. Go to [create a Slack application](https://api.slack.com/apps) channel, and create a new slack application.
 
-   <img alt="create-slack-app" src="./images/create-slack-app.png" style="float: left">
+   <img alt="create-slack-app" src="../docs/images/create-slack-app.png" style="float: left">
 
 2. In the **Basic Information** page. Record the following **App Credentials:**
 
@@ -84,7 +84,7 @@ In order to link our bot to Slack, we have to create an application on the Slack
 
    The console will create the bot channel association and returns the **Postback URL** and **OAuth** URLs.  
 
-   <img alt="activate-channel" src="./images/activate-channel.png" style="float:left; width:60%">
+   <img alt="activate-channel" src="../docs/images/activate-channel.png" style="float:left; width:60%">
 
    Record them in order to update your **Slack application** configuration to use these endpoints as follows:
 
@@ -99,14 +99,14 @@ In order to link our bot to Slack, we have to create an application on the Slack
 
 7. In the **Redirect URLs** section, add the **OAuth URL** that Amazon Lex provided in the previous step, click on **Add**. Then **Save URLs**
 
-   <img alt="add-urls" src="./images/add-urls.png" style="float:left; width:60%">
+   <img alt="add-urls" src="../docs/images/add-urls.png" style="float:left; width:60%">
 
 8. In the **Scopes** section, click on **Add an OAuth Scope** button, add the next permissions:
 
    - `chat:write`
    - `team:read`
 
-   <img alt="add-scopes" src="./images/add-scopes.png" style="float: left">
+   <img alt="add-scopes" src="../docs/images/add-scopes.png" style="float: left">
 
 7. In the left menu, choose **Interactivity & Shortcuts**.
 
@@ -114,7 +114,7 @@ In order to link our bot to Slack, we have to create an application on the Slack
    2. Enter the **Postback URL** that you saved in step 4.
    3. Then, click on **Save Changes**
 
-      <img alt="save-interactive-changes" src="./images/save-interactive-changes.png" style="width:60%; float:left">
+      <img alt="save-interactive-changes" src="../docs/images/save-interactive-changes.png" style="width:60%; float:left">
 
 8. In the left menu, choose **Event Subscriptions**.
 
@@ -126,7 +126,7 @@ In order to link our bot to Slack, we have to create an application on the Slack
 
    4. Click on **Save Changes**
 
-      <img alt="subscribe-events" src="./images/subscribe-events.png" style="float:left; width:60%">
+      <img alt="subscribe-events" src="../docs/images/subscribe-events.png" style="float:left; width:60%">
 
 11. In the left menu, choose **Manage Distribution**, click on **Add to Slack** to install the application. Authorize the bot to respond to messages.
 
