@@ -30,6 +30,11 @@ You can see the architecture, that we used to make the birthday bot work, in the
 
 - [AWS Account](https://aws.amazon.com/)
 
+## Check our docs
+
+- [Setting up the Bot](./birthday-bot/README.md)
+- [Setup Serverless](./docs/serverless.md)
+
 ## Further reading
 
 - [Create AWS Lex intents](https://docs.aws.amazon.com/lex/latest/dg/gs2-create-bot-intent.html)
