@@ -12,7 +12,6 @@ Before submitting  and **issue**, **feature request**, or **question**, please d
 - Avoid listing multiple bugs or requests in the same issue. Always write a single bug or feature request per issue. 
 - Avoid adding your issue as a comment to an existing one unless it's for the exact input. Issues can look similar, but have different causes.
 - Add screenshots or animated GIFs.
-- Add a label
 
 ### Submitting Issues 
 
