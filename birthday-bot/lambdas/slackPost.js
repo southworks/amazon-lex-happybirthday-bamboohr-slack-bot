@@ -2,6 +2,8 @@ const ssmName = process.env.SSM;
 const getBirthdaysMessage = require('../packages/birthdays')
 const channels = require('../packages/channels')
 const fetch = require('node-fetch')
+const AWS = require('aws-sdk')
+const ssm = new AWS.SSM();
 
 const postToSlack = (channel, callback) => {
   const url = 'https://slack.com/api/chat.postMessage'
