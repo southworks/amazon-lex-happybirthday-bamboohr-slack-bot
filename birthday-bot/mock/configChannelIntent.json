@@ -1,43 +1,39 @@
 {
-  "messageVersion":"1.0",
-  "invocationSource":"FulfillmentCodeHook",
-  "userId":"123456abcdef",
-  "sessionAttributes":{},
-  "requestAttributes":null,
-  "bot":{
-    "name":"BirthdayBot",
-    "alias":"$LATEST",
-    "version":"$LATEST"
+  "messageVersion": "1.0",
+  "invocationSource": "FulfillmentCodeHook",
+  "userId": "123456abcdef",
+  "sessionAttributes": {},
+  "requestAttributes": null,
+  "bot": {
+    "name": "BirthdayBot",
+    "alias": "$LATEST",
+    "version": "$LATEST"
   },
-  "outputDialogMode":"Text",
-  "currentIntent":{
-    "name":"selectChannel",
-    "slots":{
-      "channel":"{TEAM_NAME_WITHOUT_#}"
+  "outputDialogMode": "Text",
+  "currentIntent": {
+    "name": "selectChannel",
+    "slots": {
+      "channel": "{TEAM_NAME_WITHOUT_#}"
     },
-    "slotDetails":{
-      "channel":[
-        "Object"
-      ]
+    "slotDetails": {
+      "channel": ["Object"]
     },
-    "confirmationStatus":"None",
-    "nluIntentConfidenceScore":null
+    "confirmationStatus": "None",
+    "nluIntentConfidenceScore": null
   },
-  "alternativeIntents":[],
-  "inputTranscript":"{TEAM_NAME_WITHOUT_#}",
-  "recentIntentSummaryView":[
+  "alternativeIntents": [],
+  "inputTranscript": "{TEAM_NAME_WITHOUT_#}",
+  "recentIntentSummaryView": [
     {
-      "intentName":"selectChannel",
-      "checkpointLabel":null,
-      "slots":[
-        "Object"
-      ],
-      "confirmationStatus":"None",
-      "dialogActionType":"ElicitSlot",
-      "fulfillmentState":null,
-      "slotToElicit":"channel"
+      "intentName": "selectChannel",
+      "checkpointLabel": null,
+      "slots": ["Object"],
+      "confirmationStatus": "None",
+      "dialogActionType": "ElicitSlot",
+      "fulfillmentState": null,
+      "slotToElicit": "channel"
     }
   ],
-  "sentimentResponse":null,
-  "kendraResponse":null
+  "sentimentResponse": null,
+  "kendraResponse": null
 }
