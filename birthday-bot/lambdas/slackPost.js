@@ -1,9 +1,9 @@
-const ssmName = process.env.SSM;
 const getBirthdaysMessage = require('../packages/birthdays')
 const channels = require('../packages/channels')
 const fetch = require('node-fetch')
 const AWS = require('aws-sdk')
 const ssm = new AWS.SSM();
+const AUTH_TOKEN_SSM = process.env.AUTH_TOKEN_SSM;
 
 const postToSlack = (channel, callback) => {
   const url = 'https://slack.com/api/chat.postMessage'
@@ -13,7 +13,7 @@ const postToSlack = (channel, callback) => {
 
     if (message) {
       const params = {
-        Name: ssmName,
+        Name: AUTH_TOKEN_SSM,
         WithDecryption: true
       };
       ssm.getParameter(params, function(err, data) {

@@ -1,7 +1,7 @@
 const fetch = require('node-fetch')
 const AWS = require('aws-sdk')
 const ssm = new AWS.SSM();
-const ssmName = process.env.SSM;
+const AUTH_TOKEN_SSM = process.env.AUTH_TOKEN_SSM;
 
 /* Returns an Array with Slack users IDs by email */
 const getUserIds = (emails) => {
@@ -17,7 +17,7 @@ const getSlackId = (userEmail) => {
   const params = new URLSearchParams({ email: userEmail })
 
   const ssmParams = {
-    Name: ssmName, /* required */
+    Name: AUTH_TOKEN_SSM, /* required */
     WithDecryption: true
   };
   ssm.getParameter(ssmParams, function(err, data) {
