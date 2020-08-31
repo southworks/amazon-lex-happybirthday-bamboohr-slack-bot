@@ -7,7 +7,6 @@ const configParams = {
   Bucket: BUCKET,
   Key: CONFIG_KEY,
 }
-const CHANNEL_ID = 'channel'
 
 /* [String] Retrieve a channel name from storage S3 file */
 const getChannel = () => {
@@ -48,8 +47,7 @@ const setChannel = (name) => {
 
 const newChannel = (name) => {
   return {
-    id: CHANNEL_ID,
-    text: name,
+    channel: name,
     updatedAt: new Date().toISOString(),
   }
 }
