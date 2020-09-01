@@ -106,7 +106,7 @@ In order to link our bot to Slack, we have to create an application on the Slack
    - `chat:write`
    - `groups:read`
    - `im:history`
-   - `incoming-webhoow`
+   - `incoming-webhook`
    - `team:read`
    - `users:read`
    - `users:read.email`
