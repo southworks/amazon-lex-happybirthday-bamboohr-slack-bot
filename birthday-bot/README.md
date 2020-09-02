@@ -104,7 +104,12 @@ In order to link our bot to Slack, we have to create an application on the Slack
 8. In the **Scopes** section, click on **Add an OAuth Scope** button, add the next permissions:
 
    - `chat:write`
+   - `groups:read`
+   - `im:history`
+   - `incoming-webhook`
    - `team:read`
+   - `users:read`
+   - `users:read.email`
 
    <img alt="add-scopes" src="../docs/images/add-scopes.png" style="float: left">
 
