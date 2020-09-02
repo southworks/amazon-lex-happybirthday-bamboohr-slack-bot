@@ -24,11 +24,16 @@ When the user configures the channel, the lambda function triggered by this inte
 
 You can see the architecture, that we used to make the birthday bot work, in the following diagram:
 
-![Architecture diagram](./images/birthday-bot.jpg)
+![Architecture diagram](./docs/images/birthday-bot.jpg)
 
 ## Prerequisites
 
 - [AWS Account](https://aws.amazon.com/)
+
+## Check our docs
+
+- [Setting up the Bot](./birthday-bot/README.md)
+- [Setup Serverless](./docs/serverless.md)
 
 ## Further reading
 
