@@ -24,7 +24,7 @@ const getChannel = () => {
       } else {
         console.log(`Channel File Found: ${data.Body.toString()}`)
 
-        resolve(JSON.parse(data.Body).text)
+        resolve(JSON.parse(data.Body).channel)
       }
     })
   })
