@@ -14,7 +14,9 @@
         "fulfillmentActivity": {
           "type": "ReturnIntent"
         },
-        "sampleUtterances": ["I want to select a new channel"],
+        "sampleUtterances": [
+          "I want to select a new channel"
+        ],
         "slots": [
           {
             "sampleUtterances": [],
@@ -42,7 +44,11 @@
         "fulfillmentActivity": {
           "type": "ReturnIntent"
         },
-        "sampleUtterances": ["Hi", "Hello", "Good morning"],
+        "sampleUtterances": [
+          "Hi",
+          "Hello",
+          "Good morning"
+        ],
         "slots": [],
         "followUpPrompt": {
           "prompt": {
@@ -77,7 +83,9 @@
         "fulfillmentActivity": {
           "type": "ReturnIntent"
         },
-        "sampleUtterances": ["I want birthdays of today"],
+        "sampleUtterances": [
+          "I want birthdays of today"
+        ],
         "slots": [],
         "conclusionStatement": {
           "messages": [

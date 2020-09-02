@@ -1,25 +1,33 @@
 {
-  "messageVersion": "1.0",
-  "invocationSource": "FulfillmentCodeHook",
-  "userId": "123456abcdef",
-  "sessionAttributes": {},
-  "requestAttributes": null,
-  "bot": {
-    "name": "BirthdayBot",
-    "alias": "$LATEST",
-    "version": "$LATEST"
+  "messageVersion":"1.0",
+  "invocationSource":"FulfillmentCodeHook",
+  "userId":"123456abcdef",
+  "sessionAttributes":{
+
   },
-  "outputDialogMode": "Text",
-  "currentIntent": {
-    "name": "GetBirthdays",
-    "slots": {},
-    "slotDetails": {},
-    "confirmationStatus": "None",
-    "nluIntentConfidenceScore": null
+  "requestAttributes":null,
+  "bot":{
+     "name":"BirthdayBot",
+     "alias":"$LATEST",
+     "version":"$LATEST"
   },
-  "alternativeIntents": [],
-  "inputTranscript": "I want the birthdays of today",
-  "recentIntentSummaryView": null,
-  "sentimentResponse": null,
-  "kendraResponse": null
+  "outputDialogMode":"Text",
+  "currentIntent":{
+     "name":"GetBirthdays",
+     "slots":{
+
+     },
+     "slotDetails":{
+
+     },
+     "confirmationStatus":"None",
+     "nluIntentConfidenceScore":null
+  },
+  "alternativeIntents":[
+
+  ],
+  "inputTranscript":"I want the birthdays of today",
+  "recentIntentSummaryView":null,
+  "sentimentResponse":null,
+  "kendraResponse":null
 }
