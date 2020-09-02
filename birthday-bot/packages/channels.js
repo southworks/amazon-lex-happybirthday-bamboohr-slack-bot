@@ -7,6 +7,7 @@ const configParams = {
   Bucket: BUCKET,
   Key: CONFIG_KEY,
 }
+const CHANNEL_ID = 'channel'
 
 /* [String] Retrieve a channel name from storage S3 file */
 const getChannel = () => {
@@ -18,11 +19,11 @@ const getChannel = () => {
   return new Promise((resolve, reject) => {
     S3.getObject(params, (err, data) => {
       if (err) {
-        console.log(`Channel file not found, I will create it`)
+        console.log('Channel File Not Found, then I will create it')
 
         reject(err)
       } else {
-        console.log(`Channel file found: ${data.Body.toString()}`)
+        console.log(`Channel File Found: ${data.Body.toString()}`)
 
         resolve(JSON.parse(data.Body).text)
       }
@@ -47,8 +48,9 @@ const setChannel = (name) => {
 
 const newChannel = (name) => {
   return {
-    channel: name,
-    lastUpdate: new Date().toISOString()
+    id: CHANNEL_ID,
+    text: name,
+    updatedAt: new Date().toISOString(),
   }
 }
 
