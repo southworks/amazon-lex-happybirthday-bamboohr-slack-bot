@@ -1,20 +1,10 @@
-// This environment variable is an int used to change the bot timezone, it can be positive or negative.
-// When set to 0, it'll take UTC time, which you can change by setting the offset that works best for you.
-const UTC_OFFSET = process.env.UTC_OFFSET
+// This environment variable is an int used to change the bot timezone. It can be anyone from https://momentjs.com/timezone/
+const TIME_ZONE = process.env.TIME_ZONE
 
 /* Returns a string with current date in DD/MM format. */
 const getCurrentDate = () => {
-  // Get UTC time in milliseconds
-  const utcTime = new Date().getTime()
-
-  // Creates a new date using the UTC time, plus the UTC_OFFSET (multiplied by 3600000 in order to get milliseconds)
-  const date = new Date(utcTime + UTC_OFFSET * 3600000)
-
-  // Left justify with 0
-  const day = ('0' + date.getUTCDate()).slice(-2)
-  const month = ('0' + (date.getUTCMonth() + 1)).slice(-2)
-
-  return `${day}/${month}`
+  //returns the current date based on the configured time zone.
+  return moment.tz(TIME_ZONE).format("DD/MM")
 }
 
 /* Read and parse Json file from path. */
