@@ -58,7 +58,7 @@ const getBirthdaysEmails = async () => {
   const users = await readStore()
   const emails = []
   users.forEach((user) => {
-    if (user.birthday.substring(5).includes(today)) emails.push(user.email)
+    if (user.birthday.substring(5) === today) emails.push(user.email)
   })
 
   return emails
