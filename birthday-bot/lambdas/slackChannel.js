@@ -60,7 +60,6 @@ const checkChannel = (name) => {
       return fetch(url + params, { method: 'get' })
         .then((res) => res.json())
         .then((json) => {
-          console.log(json)
           const channel = json.channels.find((channel) => channel.name === name)
           return channel ? { id: channel.id, name: channel.name } : ''
         })
