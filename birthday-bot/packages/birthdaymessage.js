@@ -24,7 +24,7 @@ const idTag = (id) => `<@${id}>`
 
 /* Returns a generated random message */
 function getMsgWithEmojis(ids) {
-  if (!ids.length) {
+  if (typeof ids === 'undefined' || !ids.length) {
     return ''
   }
 
