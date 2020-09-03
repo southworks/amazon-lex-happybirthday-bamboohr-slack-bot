@@ -1,3 +1,4 @@
+const moment = require('moment-timezone')
 // This environment variable is an int used to change the bot timezone. It can be anyone from https://momentjs.com/timezone/
 const TIME_ZONE = process.env.TIME_ZONE
 
