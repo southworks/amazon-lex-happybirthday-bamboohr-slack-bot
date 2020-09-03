@@ -21,6 +21,7 @@ const readStore = async () => {
     downloadBlockBlobResponse.readableStreamBody
   )
     .then((data) => JSON.parse(data))
+    //.then((employees) => employees.map(userParser))
 
   return blobData
 }
@@ -42,7 +43,6 @@ const streamToString = async (readableStream) => {
  * It parse users to give us digested data:
  *   { email: 'employee@company.com', birthday: 'DD/MM' }
  */
-/*
 const BIRTH_MONTH_INDEX = 1
 const BIRTH_DAY_INDEX = 2
 
@@ -52,14 +52,13 @@ const userParser = (employee) => {
 
   return { birthday: birthday, email: employee.Email }
 }
-*/
 
 const getBirthdaysEmails = async () => {
   const today = getCurrentDate()
   const users = await readStore()
   const emails = []
   users.forEach((user) => {
-    if (user.birthday.includes(today)) emails.push(user.email)
+    if (user.birthday.substring(5).includes(today)) emails.push(user.email)
   })
 
   return emails
