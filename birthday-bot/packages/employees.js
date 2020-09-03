@@ -21,7 +21,6 @@ const readStore = async () => {
     downloadBlockBlobResponse.readableStreamBody
   )
     .then((data) => JSON.parse(data))
-    //.then((employees) => employees.map(userParser))
 
   return blobData
 }
@@ -44,7 +43,7 @@ const getBirthdaysEmails = async () => {
   const users = await readStore()
   const emails = []
   users.forEach((user) => {
-    if (user.Birthday.substring(5) === today) emails.push(user.email)
+    if (user.Birthday.substring(5) === today) emails.push(user.Email)
   })
 
   return emails
