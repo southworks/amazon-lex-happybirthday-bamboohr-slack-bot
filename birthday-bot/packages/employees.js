@@ -39,26 +39,12 @@ const streamToString = async (readableStream) => {
   })
 }
 
-/*
- * It parse users to give us digested data:
- *   { email: 'employee@company.com', birthday: 'DD/MM' }
- */
-const BIRTH_MONTH_INDEX = 1
-const BIRTH_DAY_INDEX = 2
-
-const userParser = (employee) => {
-  const date = employee.Birthday.split('-')
-  const birthday = `${date[BIRTH_DAY_INDEX]}/${date[BIRTH_MONTH_INDEX]}`
-
-  return { birthday: birthday, email: employee.Email }
-}
-
 const getBirthdaysEmails = async () => {
   const today = getCurrentDate()
   const users = await readStore()
   const emails = []
   users.forEach((user) => {
-    if (user.birthday.substring(5) === today) emails.push(user.email)
+    if (user.Birthday.substring(5) === today) emails.push(user.email)
   })
 
   return emails
