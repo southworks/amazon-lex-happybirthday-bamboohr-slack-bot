@@ -1,4 +1,4 @@
-const getBirthdaysMessage = require('../packages/birthdays')
+const getBirthdaysMessage = require('../services/birthdays')
 
 const close = (sessionAttributes, fulfillmentState, message) => {
   return {

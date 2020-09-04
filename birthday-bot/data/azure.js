@@ -1,4 +1,4 @@
-const { getCurrentDate } = require('./utils')
+const { getCurrentDate } = require('../helpers/utils')
 const { BlobServiceClient } = require('@azure/storage-blob')
 
 const connectionString = process.env.AZURE_BLOB_CONNECTION_STRING

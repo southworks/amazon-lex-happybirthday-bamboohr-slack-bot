@@ -4,7 +4,7 @@ provider:
   name: aws
   runtime: nodejs12.x
   memorySize: 256
-  environment: ${file(env.${opt:stage, self:provider.stage}.yml)}
+  environment: ${file(env/env.${opt:stage, self:provider.stage}.yml)}
   iamRoleStatements:
     - Effect: Allow
       Action:

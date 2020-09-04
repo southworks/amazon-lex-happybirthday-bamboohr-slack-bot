@@ -1,5 +1,5 @@
-const getBirthdaysMessage = require('../packages/birthdays')
-const channels = require('../packages/channels')
+const getBirthdaysMessage = require('../services/birthdays')
+const channels = require('../data/amazon')
 const fetch = require('node-fetch')
 const AWS = require('aws-sdk')
 const ssm = new AWS.SSM()
