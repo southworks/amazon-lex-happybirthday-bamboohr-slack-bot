@@ -11,6 +11,10 @@ provider:
         - s3:GetObject
         - s3:PutObject
       Resource: 'arn:aws:s3:::${self:provider.environment.S3_BUCKET}/*'
+    - Effect: Allow
+      Action:
+        - ssm:GetParameter
+      Resource: 'arn:aws:ssm:us-east-1:839649480346:parameter${self:provider.environment.AUTH_TOKEN_SSM}'
 
 functions:
   configChannel:
