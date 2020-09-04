@@ -1,11 +1,12 @@
-const moment = require('moment-timezone')
-// This environment variable is an int used to change the bot timezone. It can be anyone from https://momentjs.com/timezone/
-const TIME_ZONE = process.env.TIME_ZONE
+/* Returns a string with current date with default date format MM-DD. */
+const getCurrentDate = (dateFormat) => {
+  // This environment variable is an int used to change the bot timezone. It can be anyone from https://momentjs.com/timezone/
+  const moment = require('moment-timezone')
+  const TIME_ZONE = process.env.TIME_ZONE
 
-/* Returns a string with current date in MM-DD format. */
-const getCurrentDate = () => {
-  //returns the current date based on the configured time zone.
-  return moment.tz(TIME_ZONE).format("MM-DD")
+  if (dateFormat === undefined) dateFormat = 'MM-DD'
+
+  return moment.tz(TIME_ZONE).format(dateFormat)
 }
 
 /* Read and parse Json file from path. */
