@@ -1,12 +1,12 @@
-/* Returns a string with current date in DD/MM format. */
-const getCurrentDate = () => {
-  const date = new Date()
+/* Returns a string with current date with default date format MM-DD. */
+const getCurrentDate = (dateFormat) => {
+  // This environment variable is an int used to change the bot timezone. It can be anyone from https://momentjs.com/timezone/
+  const moment = require('moment-timezone')
+  const TIME_ZONE = process.env.TIME_ZONE
 
-  // Left justify with 0
-  const day = ('0' + date.getDate()).slice(-2)
-  const month = ('0' + (date.getMonth() + 1)).slice(-2)
+  if (dateFormat === undefined) dateFormat = 'MM-DD'
 
-  return `${day}/${month}`
+  return moment.tz(TIME_ZONE).format(dateFormat)
 }
 
 /* Read and parse Json file from path. */
