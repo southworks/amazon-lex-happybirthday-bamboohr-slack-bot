@@ -37,7 +37,7 @@ You can see the architecture, that we used to make the birthday bot work, in the
 
 ## Contributing
 
-- [See our contributing guide](./CONTRIBUTING.md)
+- [See our contribution guidelines](./CONTRIBUTING.md)
 
 ## Further reading
 
