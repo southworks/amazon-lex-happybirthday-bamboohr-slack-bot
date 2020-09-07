@@ -1,4 +1,4 @@
-## Bot Setup Steps
+## Getting Started
 
 ### Prerequisites
 
