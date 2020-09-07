@@ -1,3 +1,9 @@
+### Index
+
+1. [Deploy serverless application](./serverless.md)
+2. [Set up the Lex bot](./lex-bot.md)
+3. [Set up Slack](./slack.md)
+
 ### Import Amazon Lex Bot
 
 > You need to setup and deploy the resources using [Serverless](https://www.serverless.com/framework/docs/providers/aws/guide/intro/) before configure the AWS Lex service. You can configure it following this [guide](./serverless.md)

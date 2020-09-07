@@ -1,3 +1,9 @@
+### Index
+
+1. [Deploy serverless application](./serverless.md)
+2. [Set up the Lex bot](./lex-bot.md)
+3. [Set up Slack](./slack.md)
+
 # Serverless application
 
 [Serverless Framework](https://www.serverless.com/open-source/) is an open source framework to manage serverless applications, this allows you to develop, deploy, and test locally the app, making the development process easier.
