@@ -70,20 +70,30 @@ If you are going to contribute to the lambdas functions, follow the next steps t
 Using  [Serverless Framework](https://www.serverless.com/open-source/) you are able to run an instance of the Lambda function from your computer without deploying it. 
 
 1. In the **birthday-bot** directory, open a terminal.
-
 2. Install the dependencies.
-
-   ```
+  ```
    npm install
-   ```
+  ```
+3. Config the env.dev.yml with the environment variables, you should set the following:
+
+  ```
+   AZURE_BLOB_CONNECTION_STRING: <Connection string>
+   AZURE_BLOB_CONTAINER_NAME: <Container Name>
+   AZURE_BLOB_NAME: <Blob storage name>
+   S3_BUCKET: <Bucket name>
+   AUTH_TOKEN_SSM: </path/to/token>
+   TIME_ZONE: <Continent/Country>
+  ```
 
 3. Run the next command.
 
    ```
+- Config \configChannelIntent.json to the channel we want to test an then run:
+serverless invoke local --stage dev --function configChannel --path .\mock\configChannelIntent.json
+serverless invoke local --stage dev --function getBirthdays --path .\mock\getBirthdaysIntent.json
+serverless invoke local --stage dev --function proactiveBirthdayMessage
    serverless invoke local --function <FUNCTION_NAME>
    ```
-
-
 
 ### Contributing to Birthday Bot
 
