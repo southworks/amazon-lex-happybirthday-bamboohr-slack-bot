@@ -30,11 +30,6 @@ You can see the architecture defined in the serverless application in the follow
 
 ![image.png](https://storage.googleapis.com/slite-api-files-production/files/39c0c8cf-9cde-476d-a0d7-7e288a2ebe70/image.png)
 
-## Prerequisites
-
-- [Node.js](https://nodejs.org/en/)
-- [AWS account](https://aws.amazon.com/es)
-
 ## To run this project
 
 1. Install **Serverless Framework**. Open a terminal, and run the next command:
