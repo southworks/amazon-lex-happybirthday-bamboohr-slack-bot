@@ -6,8 +6,6 @@
 
 ### Import Amazon Lex Bot
 
-> You need to setup and deploy the resources using [Serverless](https://www.serverless.com/framework/docs/providers/aws/guide/intro/) before configure the AWS Lex service. You can configure it following this [guide](./serverless.md)
-
 1. Got to the **models** directory, open a PowerShell terminal and run the next command.
 
    ```powershell
