@@ -10,6 +10,6 @@
 
 1. [Deploy serverless application](../docs/serverless.md)
 2. [Set up the Lex bot](../docs/lex-bot.md)
-3. [Set up Slack](../docs/slack.md)
+3. [Set up Slack App and connect with Lex](../docs/slack.md)
 
 

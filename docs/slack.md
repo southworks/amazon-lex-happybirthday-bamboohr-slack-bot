@@ -2,7 +2,7 @@
 
 1. [Deploy serverless application](./serverless.md)
 2. [Set up the Lex bot](./lex-bot.md)
-3. **Set up Slack**
+3. **Set up Slack App and connect with Lex**
 
 ### Connect with Slack
 

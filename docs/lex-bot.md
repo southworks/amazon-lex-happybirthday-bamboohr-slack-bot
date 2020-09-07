@@ -2,7 +2,7 @@
 
 1. [Deploy serverless application](./serverless.md)
 2. **Set up the Lex bot**
-3. [Set up Slack](./slack.md)
+3. [Set up Slack App and connect with Lex](./slack.md)
 
 ### Import Amazon Lex Bot
 
@@ -48,7 +48,7 @@
 
    <img alt="publish-bot" src="./images/publish-bot.png" style="float:left; width:60%" >
 
-[<- Deploy serverless application](./serverless.md) | [Set up Slack ->](./slack.md)
+[<- Deploy serverless application](./serverless.md) | [Set up Slack App and connect with Lex ->](./slack.md)
 
 ### Further reading
 
