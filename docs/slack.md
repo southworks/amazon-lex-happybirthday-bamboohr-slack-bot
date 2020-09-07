@@ -87,6 +87,7 @@ In order to link our bot to Slack, we have to create an application on the Slack
 
 12. In slack app go to **Direct Messages** section, choose your bot and send messages related to the configured intents.
 
+[<- Set up the Lex bot](./lex-bot.md)
 
 ### Further reading
 

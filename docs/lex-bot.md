@@ -48,6 +48,7 @@
 
    <img alt="publish-bot" src="./images/publish-bot.png" style="float:left; width:60%" >
 
+[<- Deploy serverless application](./serverless.md) | [Set up Slack ->](./slack.md)
 
 ### Further reading
 

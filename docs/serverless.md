@@ -60,6 +60,9 @@ You can see the architecture defined in the serverless application in the follow
    >
    > For development set them `env.dev.yml`.
 
+
+[<- Index](../birthday-bot/README.md) | [Set up the Lex bot ->](./lex-bot.md)
+
 ## Further reading
 - [Serverless CLI Reference for AWS](https://www.serverless.com/framework/docs/providers/aws/cli-reference/)
 - [AWS Lambda](https://aws.amazon.com/es/lambda/)
