@@ -1,6 +1,6 @@
 ### Index
 
-1. [Deploy serverless application](./serverless.md)
+1. **Deploy serverless application**
 2. [Set up the Lex bot](./lex-bot.md)
 3. [Set up Slack](./slack.md)
 

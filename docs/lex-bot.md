@@ -1,7 +1,7 @@
 ### Index
 
 1. [Deploy serverless application](./serverless.md)
-2. [Set up the Lex bot](./lex-bot.md)
+2. **Set up the Lex bot**
 3. [Set up Slack](./slack.md)
 
 ### Import Amazon Lex Bot
