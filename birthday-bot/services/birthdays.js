@@ -1,6 +1,6 @@
-const getBirthdaysEmails = require('./employees')
-const getUserIds = require('./slack')
-const getMsgWithEmojis = require('./birthdaymessage')
+const getBirthdaysEmails = require('../data/azure')
+const getUserIds = require('../data/slack')
+const getMsgWithEmojis = require('../packages/birthdaymessage')
 
 const getBirthdaysMessage = () => {
   return getBirthdaysEmails()

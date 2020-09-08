@@ -1,6 +1,7 @@
 const { Templates, MultiLanguageLG } = require('botbuilder-lg')
 const templatesPerLocale = new Map()
-templatesPerLocale.set('', Templates.parseFile(`${__dirname}/sentences.lg`))
+// eslint-disable-next-line max-len
+templatesPerLocale.set('', Templates.parseFile(`${__dirname}/../resources/sentences.lg`))
 const multiLangLG = new MultiLanguageLG(templatesPerLocale)
 
 /* Returns a string with tagged users. */
