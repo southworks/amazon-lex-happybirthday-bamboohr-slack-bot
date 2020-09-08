@@ -10,8 +10,6 @@ class Amazon {
     Key: this.CONFIG_KEY,
   }
 
-  constructor() {}
-
   getChannel() {
     const params = {
       ...this.configParams,

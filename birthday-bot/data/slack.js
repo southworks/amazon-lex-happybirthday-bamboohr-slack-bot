@@ -7,8 +7,6 @@ class Slack {
 
   lookUpByEmailURL = 'https://slack.com/api/users.lookupByEmail?'
   
-  constructor() {}
-  
   getUserObject(userEmail) {
     const params = new URLSearchParams({ email: userEmail })
     const ssmParams = {
