@@ -6,6 +6,7 @@ const AUTH_TOKEN_SSM = process.env.AUTH_TOKEN_SSM
 class Slack {
 
   lookUpByEmailURL = 'https://slack.com/api/users.lookupByEmail?'
+  usersConversationUrl = 'https://slack.com/api/users.conversations?'
   
   constructor() {}
   
@@ -31,7 +32,7 @@ class Slack {
 
   async getChannels(token) {
   
-    const url = 'https://slack.com/api/users.conversations?'
+    const url = this.usersConversationUrl
 
     const params = new URLSearchParams({
       token,
