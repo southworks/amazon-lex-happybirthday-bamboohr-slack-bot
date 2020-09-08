@@ -6,7 +6,7 @@ class Amazon {
   BUCKET = process.env.S3_BUCKET
   CONFIG_KEY = 'config.json'
   configParams = {
-    Bucket: BUCKET,
+    Bucket: this.BUCKET,
     Key: this.CONFIG_KEY,
   }
 
