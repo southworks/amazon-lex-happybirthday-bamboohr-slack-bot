@@ -2,10 +2,10 @@ const { BlobServiceClient } = require('@azure/storage-blob')
 
 class Azure {
 
-  constructor(connString, containerName, blobName) {
-    this.connectionString = connString
-    this.containerName = containerName
-    this.blobName = blobName
+  constructor() {
+    this.connectionString = process.env.AZURE_BLOB_CONNECTION_STRING
+    this.containerName = process.env.AZURE_BLOB_CONTAINER_NAME
+    this.blobName = process.env.AZURE_BLOB_NAME
   }
 
   /*
