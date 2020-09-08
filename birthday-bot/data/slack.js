@@ -40,7 +40,7 @@ class Slack {
 
     return await fetch(url + params, { method: 'get' })
         .then((res) => res.json())
-        .then((json) => json.channels)
+        .then((json) => json)
   }
 }
 

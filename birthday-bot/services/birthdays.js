@@ -37,8 +37,8 @@ const checkChannel = async (name) => {
   }
 
   return await ssm.getParameter(ssmParams, (_, data) => {
-      return slackObject.getChannels(data.Parameter.Value).then(channels => {
-        const channel = channels.find((channel) => channel.name === name)
+      return slackObject.getChannels(data.Parameter.Value).then(slackJson => {
+        const channel = slackJson.channels.find((channel) => channel.name === name)
         channelResult = channel ? { id: channel.id, name: channel.name } : ''
       });
   })
