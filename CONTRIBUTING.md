@@ -82,9 +82,9 @@ Using  [Serverless Framework](https://www.serverless.com/open-source/) you are a
     AZURE_BLOB_NAME: <Blob storage name>
     S3_BUCKET: <Bucket name>
     AUTH_TOKEN_SSM: </path/to/token>
-    TIME_ZONE: <Continent/Country>
+    TIME_ZONE: <timezone>
     ```
-    Note: To set up TIME ZONE go to the official [link](https://www.serverless.com/open-source/) to configure the moment time correctly.
+    Note: To set up TIME ZONE go to the official documentation [link](https://momentjs.com/timezone/) to configure the moment time correctly.
 4. Config `configChannelIntent.json` and `getBirthdaysIntent.json` to configure intents which we want to use with the lambda function as described in the step 5.
 5. Run the next command.
 
