@@ -26,11 +26,6 @@ class Slack {
         }
         return fetch(this.lookUpByEmailURL + params, { headers: headers })
           .then((res) => res.json())
-          .then((json) => {
-            if (json.ok) {
-              return json.user.id
-            }
-          })
       })
   }
 }
