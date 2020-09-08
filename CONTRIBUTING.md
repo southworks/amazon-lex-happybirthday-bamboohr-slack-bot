@@ -84,7 +84,8 @@ Using  [Serverless Framework](https://www.serverless.com/open-source/) you are a
     AUTH_TOKEN_SSM: </path/to/token>
     TIME_ZONE: <Continent/Country>
     ```
-4. Config `\fileIntent.json` either for channel or birthdays which we want to use with the lambda function as the step 5
+    Note: To set up TIME ZONE go to the official [link](https://www.serverless.com/open-source/) to configure the moment time correctly.
+4. Config `configChannelIntent.json` and `getBirthdaysIntent.json` to configure intents which we want to use with the lambda function as described in the step 5.
 5. Run the next command.
 
    ```
