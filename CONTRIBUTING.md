@@ -86,7 +86,7 @@ Using  [Serverless Framework](https://www.serverless.com/open-source/) you are a
     ```
     Note: To set up TIME ZONE go to the official documentation [link](https://momentjs.com/timezone/) to configure the moment time correctly.
 4. Config `configChannelIntent.json` and `getBirthdaysIntent.json` to configure intents which we want to use with the lambda function as described in the step 5.
-5. Run the next command.
+5. Run the next commands to test each function:
 
    ```
     serverless invoke local --stage dev --function configChannel --path .\mock\configChannelIntent.json
