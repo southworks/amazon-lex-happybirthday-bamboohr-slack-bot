@@ -1,6 +1,7 @@
 const channels = require('../data/amazon')
 const AWS = require('aws-sdk')
 const Slack = require('../data/slack')
+const services = require('../services/birthdays')
 const ssm = new AWS.SSM()
 const slackObject = new Slack
 const AUTH_TOKEN_SSM = process.env.AUTH_TOKEN_SSM
@@ -23,7 +24,7 @@ function dispatch(intentRequest, callback) {
 
   let response
 
-  checkChannel(channelName).then((channel) => {
+  services.checkChannel(channelName).then((channel) => {
     if (channel) {
       channels.setChannel(channel.name)
       response = `The channel <#${channel.id}> was configured correctly`
@@ -40,23 +41,6 @@ function dispatch(intentRequest, callback) {
       })
     )
   })
-}
-
-const checkChannel = async (name) => {
-  let channelResult = '';
-  const ssmParams = {
-    Name: AUTH_TOKEN_SSM,
-    WithDecryption: true,
-  }
-
-  return await ssm.getParameter(ssmParams, (_, data) => {
-      return slackObject.getChannels(data.Parameter.Value).then(channels => {
-        const channel = channels.find((channel) => channel.name === name)
-        channelResult = channel ? { id: channel.id, name: channel.name } : ''
-      });
-  })
-  .promise()
-  .then(() => channelResult)
 }
 
 const config = (event, context, callback) => {

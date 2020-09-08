@@ -1,6 +1,10 @@
-const getUserIds = require('../data/slack')
 const getMsgWithEmojis = require('../packages/birthdaymessage')
 const { getCurrentDate } = require('../helpers/utils')
+const Slack = require('../data/slack')
+const AWS = require('aws-sdk')
+const slackObject = new Slack
+const ssm = new AWS.SSM()
+const AUTH_TOKEN_SSM = process.env.AUTH_TOKEN_SSM
 
 const getBirthdaysMessage = () => {
   return getBirthdaysEmails()
@@ -25,4 +29,21 @@ const getUserIds = (emails) => {
   return Promise.all(promises).then((userIds) => userIds.filter((el) => el))
 }
 
-module.exports = getBirthdaysMessage
+const checkChannel = async (name) => {
+  let channelResult = '';
+  const ssmParams = {
+    Name: AUTH_TOKEN_SSM,
+    WithDecryption: true,
+  }
+
+  return await ssm.getParameter(ssmParams, (_, data) => {
+      return slackObject.getChannels(data.Parameter.Value).then(channels => {
+        const channel = channels.find((channel) => channel.name === name)
+        channelResult = channel ? { id: channel.id, name: channel.name } : ''
+      });
+  })
+  .promise()
+  .then(() => channelResult)
+}
+
+module.exports = { getBirthdaysMessage, checkChannel }
