@@ -18,4 +18,11 @@ const getBirthdaysEmails = async () => {
     .map((user) => user.Email)
 }
 
+// WARN: This function should be refactored to use Slack class
+/* Returns an Array with Slack users IDs by email */
+const getUserIds = (emails) => {
+  const promises = emails.map((email) => getSlackId(email))
+  return Promise.all(promises).then((userIds) => userIds.filter((el) => el))
+}
+
 module.exports = getBirthdaysMessage
