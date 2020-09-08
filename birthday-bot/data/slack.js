@@ -9,7 +9,7 @@ class Slack {
   
   constructor() {}
   
-  getSlackId(userEmail) {
+  getUserObject(userEmail) {
     const params = new URLSearchParams({ email: userEmail })
     const ssmParams = {
       Name: AUTH_TOKEN_SSM /* required */,
