@@ -1,10 +1,5 @@
 const channels = require('../data/amazon')
-const AWS = require('aws-sdk')
-const Slack = require('../data/slack')
 const services = require('../services/birthdays')
-const ssm = new AWS.SSM()
-const slackObject = new Slack
-const AUTH_TOKEN_SSM = process.env.AUTH_TOKEN_SSM
 
 function close(sessionAttributes, fulfillmentState, message) {
   return {
