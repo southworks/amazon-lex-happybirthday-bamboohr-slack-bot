@@ -22,11 +22,11 @@ const getRandomInt = (max) => Math.floor(Math.random() * max)
 
 const getRandom = (array) => array[getRandomInt(array.length)]
 
-const birthdaysMessageToResponse = (message, sessionAttributes, type) => {
+const messageToResponse = (message, sessionAttributes) => {
   return {
     sessionAttributes,
     dialogAction: {
-      type,
+      type: 'Close',
       fulfillmentState: 'Fulfilled',
       message: {
         contentType: 'PlainText',
@@ -35,4 +35,4 @@ const birthdaysMessageToResponse = (message, sessionAttributes, type) => {
     }}
 }
 
-module.exports = { getCurrentDate, readJSON, getRandomInt, getRandom, birthdaysMessageToResponse }
+module.exports = { getCurrentDate, readJSON, getRandomInt, getRandom, messageToResponse }
