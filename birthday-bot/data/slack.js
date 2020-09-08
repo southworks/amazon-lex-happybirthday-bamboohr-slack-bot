@@ -28,6 +28,20 @@ class Slack {
           .then((res) => res.json())
       })
   }
+
+  async getChannels(token) {
+  
+    const url = 'https://slack.com/api/users.conversations?'
+
+    const params = new URLSearchParams({
+      token,
+      types: 'public_channel,private_channel',
+    })
+
+    return await fetch(url + params, { method: 'get' })
+        .then((res) => res.json())
+        .then((json) => json.channels)
+  }
 }
 
 module.exports = Slack

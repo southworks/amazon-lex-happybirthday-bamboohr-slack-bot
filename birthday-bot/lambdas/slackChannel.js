@@ -1,7 +1,8 @@
 const channels = require('../data/amazon')
-const fetch = require('node-fetch')
 const AWS = require('aws-sdk')
+const Slack = require('../data/slack')
 const ssm = new AWS.SSM()
+const slackObject = new Slack
 const AUTH_TOKEN_SSM = process.env.AUTH_TOKEN_SSM
 
 function close(sessionAttributes, fulfillmentState, message) {
@@ -41,29 +42,21 @@ function dispatch(intentRequest, callback) {
   })
 }
 
-const checkChannel = (name) => {
+const checkChannel = async (name) => {
+  let channelResult = '';
   const ssmParams = {
     Name: AUTH_TOKEN_SSM,
     WithDecryption: true,
   }
 
-  return ssm
-    .getParameter(ssmParams, (_, data) => {})
-    .promise()
-    .then((data) => {
-      const url = 'https://slack.com/api/users.conversations?'
-      const params = new URLSearchParams({
-        token: data.Parameter.Value,
-        types: 'public_channel,private_channel',
-      })
-
-      return fetch(url + params, { method: 'get' })
-        .then((res) => res.json())
-        .then((json) => {
-          const channel = json.channels.find((channel) => channel.name === name)
-          return channel ? { id: channel.id, name: channel.name } : ''
-        })
-    })
+  return await ssm.getParameter(ssmParams, (_, data) => {
+      return slackObject.getChannels(data.Parameter.Value).then(channels => {
+        const channel = channels.find((channel) => channel.name === name)
+        channelResult = channel ? { id: channel.id, name: channel.name } : ''
+      });
+  })
+  .promise()
+  .then(() => channelResult)
 }
 
 const config = (event, context, callback) => {
