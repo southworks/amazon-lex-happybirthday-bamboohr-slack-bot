@@ -26,7 +26,7 @@ functions:
   configChannel:
     handler: lambdas/channel.config
   getBirthdays:
-    handler: lambdas/birthdays.list
+    handler: lambdas/birthday.list
   proactiveBirthdayMessage:
     handler: lambdas/slackPost.proactive
     events:
