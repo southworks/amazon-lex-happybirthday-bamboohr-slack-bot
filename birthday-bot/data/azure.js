@@ -19,12 +19,20 @@ class Azure {
     const blockBlobClient = containerClient.getBlockBlobClient(this.blobName)
 
     const downloadBlockBlobResponse = await blockBlobClient.download(0)
+    let blobDataJSON
 
-    const blobData = await this.streamToString(
+    try {
+      const blobData = await this.streamToString(
         downloadBlockBlobResponse.readableStreamBody
-    ).then((data) => JSON.parse(data))
+      )
+      blobDataJSON = JSON.parse(blobData)
+      
+    } catch (error) {
+      console.error('AZURE: error getting blobData', error)
+      blobDataJSON = {}
+    }
 
-    return blobData
+    return blobDataJSON
   }
 
   /*
