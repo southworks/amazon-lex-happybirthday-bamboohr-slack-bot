@@ -1,16 +1,14 @@
 const channels = require('../data/amazon')
-const fetch = require('node-fetch')
-const AWS = require('aws-sdk')
-const ssm = new AWS.SSM()
-const AUTH_TOKEN_SSM = process.env.AUTH_TOKEN_SSM
 const utils = require('../helpers/utils')
+const services = require('../services/birthdays')
 
 const config = (event, _, callback) => {
   const sessionAttributes = event.sessionAttributes
   const slots = event.currentIntent.slots
   const channelName = slots.channel
 
-  checkChannel(channelName)
+  services
+    .checkChannel(channelName)
     .then((channel) => {
       if (channel) {
         channels.setChannel(channel.name)
@@ -26,32 +24,6 @@ const config = (event, _, callback) => {
       )
     )
     .catch((err) => callback(err))
-}
-
-// TODO: For checkChannel method should be moved to service layer and remove this implementation from here
-const checkChannel = (name) => {
-  const ssmParams = {
-    Name: AUTH_TOKEN_SSM,
-    WithDecryption: true,
-  }
-
-  return ssm
-    .getParameter(ssmParams, (_, data) => {})
-    .promise()
-    .then((data) => {
-      const url = 'https://slack.com/api/users.conversations?'
-      const params = new URLSearchParams({
-        token: data.Parameter.Value,
-        types: 'public_channel,private_channel',
-      })
-
-      return fetch(url + params, { method: 'get' })
-        .then((res) => res.json())
-        .then((json) => {
-          const channel = json.channels.find((channel) => channel.name === name)
-          return channel ? { id: channel.id, name: channel.name } : ''
-        })
-    })
 }
 
 module.exports = { config }

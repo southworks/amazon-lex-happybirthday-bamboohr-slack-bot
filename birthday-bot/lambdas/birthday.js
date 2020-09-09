@@ -1,8 +1,9 @@
-const getBirthdaysMessage = require('../services/birthdays')
+const services = require('../services/birthdays')
 const utils = require('../helpers/utils')
 
 const list = (event, context, callback) => {
-  getBirthdaysMessage()
+  services
+    .getBirthdaysMessage()
     .then((message) =>
       callback(
         null,
