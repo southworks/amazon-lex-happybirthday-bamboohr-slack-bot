@@ -38,7 +38,7 @@ class Azure {
   /*
   * It compose binary data to String
   */
-  async streamToString(readableStream) {
+  streamToString(readableStream) {
     const chunks = []
 
     return new Promise((resolve, reject) => {
