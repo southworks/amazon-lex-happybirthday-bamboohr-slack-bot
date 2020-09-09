@@ -12,7 +12,7 @@ const getBirthdaysMessage = () => {
     .then((ids) => getMsgWithEmojis(ids))
 }
 
-// TODO: For checkChannel method should be moved to service layer and remove this implementation from here
+// TODO: For checkChannel method should be moved to into birthdays class and remove this implementation from here
 const checkChannel = (name) => {
   const ssmParams = {
     Name: AUTH_TOKEN_SSM,
