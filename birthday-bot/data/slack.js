@@ -1,26 +1,23 @@
 const fetch = require('node-fetch')
-const AWS = require('aws-sdk')
-const ssm = new AWS.SSM()
+const Amazon = require('./amazon')
 const AUTH_TOKEN_SSM = process.env.AUTH_TOKEN_SSM
 
 class Slack {
 
   lookUpByEmailURL = 'https://slack.com/api/users.lookupByEmail?'
   
+  constructor() {
+    amazon = new Amazon()
+  }
+
   getUserObject(userEmail) {
     const params = new URLSearchParams({ email: userEmail })
-    const ssmParams = {
-      Name: AUTH_TOKEN_SSM /* required */,
-      WithDecryption: true,
-    }
 
-    return ssm
-      .getParameter(ssmParams, (_, data) => {})
-      .promise()
-      .then((data) => {
+    return this.amazon.getSSMParameter(AUTH_TOKEN_SSM, true)
+      .then((token) => {
         const headers = {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${data.Parameter.Value}`,
+          Authorization: `Bearer ${token}`,
         }
         return fetch(this.lookUpByEmailURL + params, { headers: headers })
           .then((res) => res.json())
