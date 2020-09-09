@@ -31,4 +31,5 @@ const newChannel = (name) => {
     updatedAt: new Date().toISOString(),
   }
 }
+
 module.exports = getBirthdaysMessage
