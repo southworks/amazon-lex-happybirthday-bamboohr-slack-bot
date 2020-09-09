@@ -8,7 +8,7 @@ class Amazon {
   }
   
   getFile(bucket, config_key) {
-    configParams = {
+    const configParams = {
       Bucket: bucket,
       Key: config_key,
     }
@@ -34,7 +34,7 @@ class Amazon {
   }
 
   putFile(bucket, config_key, data) {
-    configParams = {
+    const configParams = {
       Bucket: bucket,
       Key: config_key,
     }
