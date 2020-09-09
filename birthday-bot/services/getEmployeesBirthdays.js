@@ -1,10 +1,9 @@
-const getUserIds = require('../data/slack')
 const getMsgWithEmojis = require('../packages/birthdaymessage')
 const { getCurrentDate } = require('../helpers/utils')
 const Azure = require('../data/Azure')
 const Slack = require('../data/Slack')
 
-class EmployeesBirthdays {
+class Birthdays {
   constructor() {
     this.azureData = new Azure()
     this.slackData = new Slack()
@@ -45,4 +44,4 @@ class EmployeesBirthdays {
     // solve this filter function
   }
 }
-module.exports = EmployeesBirthdays
+module.exports = Birthdays
