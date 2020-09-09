@@ -3,8 +3,8 @@ const AWS = require('aws-sdk')
 class Amazon {
 
   constructor() {
-    S3 = new AWS.S3()
-    ssm = new AWS.SSM()
+    this.S3 = new AWS.S3()
+    this.ssm = new AWS.SSM()
   }
   
   getFile(bucket, config_key) {
