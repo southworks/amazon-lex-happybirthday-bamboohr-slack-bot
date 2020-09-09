@@ -2,17 +2,15 @@ const AWS = require('aws-sdk')
 const S3 = new AWS.S3()
 
 class Amazon {
+  
+  getFile(bucket, config_key) {
+    configParams = {
+      Bucket: bucket,
+      Key: config_key,
+    }
 
-  BUCKET = process.env.S3_BUCKET
-  CONFIG_KEY = 'config.json'
-  configParams = {
-    Bucket: this.BUCKET,
-    Key: this.CONFIG_KEY,
-  }
-
-  getChannel() {
     const params = {
-      ...this.configParams,
+      ...configParams,
       ResponseContentType: 'application/json',
     }
 
@@ -25,31 +23,30 @@ class Amazon {
         } else {
           console.log(`Channel File Found: ${data.Body.toString()}`)
 
-          resolve(JSON.parse(data.Body).channel)
+          resolve(JSON.parse(data.Body))
         }
       })
     })
   }
 
-  setChannel(name) {
-    const params = {
-      ...this.configParams,
-      ContentType: 'application/json',
-      Body: JSON.stringify(this.newChannel(name)),
+  putFile(bucket, config_key, data) {
+    configParams = {
+      Bucket: bucket,
+      Key: config_key,
     }
-    console.log(`Setting Channel: ${JSON.stringify(params)}`)
+
+    const params = {
+      ...configParams,
+      ContentType: 'application/json',
+      Body: JSON.stringify(data),
+    }
+
+    console.log(`Storing data: ${JSON.stringify(params)}`)
   
     S3.putObject(params, (err, data) => {
       if (err) console.log(err, err.stack)
       else return data
     })
-  }
-
-  newChannel(name) {
-    return {
-      channel: name,
-      updatedAt: new Date().toISOString(),
-    }
   }
 }
 

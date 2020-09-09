@@ -24,4 +24,11 @@ const getUserIds = (emails) => {
   return Promise.all(promises).then((userIds) => userIds.filter((el) => el))
 }
 
+
+const newChannel = (name) => {
+  return {
+    channel: name,
+    updatedAt: new Date().toISOString(),
+  }
+}
 module.exports = getBirthdaysMessage
