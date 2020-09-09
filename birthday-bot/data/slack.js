@@ -4,7 +4,7 @@ class Slack {
 
   lookUpByEmailURL = 'https://slack.com/api/users.lookupByEmail?'
 
-  getUserObject(userEmail, token) {
+  getUserByEmail(userEmail, token) {
     const params = new URLSearchParams({ email: userEmail })
     const headers = {
       'Content-Type': 'application/json',
