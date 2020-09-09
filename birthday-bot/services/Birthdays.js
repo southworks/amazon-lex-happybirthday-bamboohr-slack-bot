@@ -33,11 +33,14 @@ class Birthdays {
     const emails = await this.getBirthdaysEmails()
     console.log(emails)
 
-    const promises = emails.map((email) => this.Slack.getUser(email))
+    const promises = emails.map((email) => this.slackData.getUserObject(email))
 
     return Promise.all(promises).then(
       // (userObjects) => userObjects.filter((el) => el)
-      (users) => users.filter((el) => el)
+      // (users) => users.filter((el) => el)
+      (json) => {
+        return json.filter((json) => json.ok).map((users) => users.user.id)
+      }
       // First:json.ok, map(json.user.id)
       // here I have to return json.user.id
     )

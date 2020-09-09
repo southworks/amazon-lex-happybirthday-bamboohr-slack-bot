@@ -1,4 +1,4 @@
-const EmployeesBirthdays = require('../services/getEmployeesBirthdays')
+const EmployeesBirthdays = require('../services/Birthdays')
 
 const close = (sessionAttributes, fulfillmentState, message) => {
   return {
