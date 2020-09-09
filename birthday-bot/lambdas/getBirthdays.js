@@ -1,4 +1,4 @@
-const getBirthdaysMessage = require('../services/birthdays')
+const EmployeesBirthdays = require('../services/getEmployeesBirthdays')
 
 const close = (sessionAttributes, fulfillmentState, message) => {
   return {
@@ -13,8 +13,8 @@ const close = (sessionAttributes, fulfillmentState, message) => {
 
 const dispatch = (intentRequest, callback) => {
   const sessionAttributes = intentRequest.sessionAttributes
-
-  getBirthdaysMessage().then((message) => {
+  const birthday = new EmployeesBirthdays()
+  birthday.getBirthdaysMessage().then((message) => {
     callback(
       close(sessionAttributes, 'Fulfilled', {
         contentType: 'PlainText',

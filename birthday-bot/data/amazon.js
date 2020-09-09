@@ -1,12 +1,11 @@
 const AWS = require('aws-sdk')
 
 class Amazon {
-
   constructor() {
-    S3 = new AWS.S3()
-    ssm = new AWS.SSM()
+    var S3 = new AWS.S3()
+    var ssm = new AWS.SSM()
   }
-  
+
   getFile(bucket, config_key) {
     configParams = {
       Bucket: bucket,
@@ -46,7 +45,7 @@ class Amazon {
     }
 
     console.log(`Storing data: ${JSON.stringify(params)}`)
-  
+
     this.S3.putObject(params, (err, data) => {
       if (err) console.log(err, err.stack)
       else return data
