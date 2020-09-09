@@ -22,15 +22,15 @@ const getRandomInt = (max) => Math.floor(Math.random() * max)
 
 const getRandom = (array) => array[getRandomInt(array.length)]
 
-const messageToResponse = (message, sessionAttributes) => {
+const messageToResponse = (content, fulfillmentState, sessionAttributes) => {
   return {
     sessionAttributes,
     dialogAction: {
       type: 'Close',
-      fulfillmentState: 'Fulfilled',
+      fulfillmentState,
       message: {
         contentType: 'PlainText',
-        content: message || "There aren't birthdays today",
+        content,
       },
     }}
 }
