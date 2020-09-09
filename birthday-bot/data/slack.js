@@ -1,6 +1,4 @@
 const fetch = require('node-fetch')
-const Amazon = require('./amazon')
-const AUTH_TOKEN_SSM = process.env.AUTH_TOKEN_SSM
 
 class Slack {
 
@@ -15,7 +13,7 @@ class Slack {
 
     return fetch(this.lookUpByEmailURL + params, { headers: headers })
       .then((res) => res.json())
-  }
+    }
 }
 
 module.exports = Slack
