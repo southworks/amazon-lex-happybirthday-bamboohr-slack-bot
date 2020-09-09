@@ -1,4 +1,3 @@
-const getUserIds = require('../data/slack')
 const getMsgWithEmojis = require('../packages/birthdaymessage')
 const { getCurrentDate } = require('../helpers/utils')
 
