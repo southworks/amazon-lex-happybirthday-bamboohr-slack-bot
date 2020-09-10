@@ -3,6 +3,7 @@
 ### Prerequisites
 
 - [AWS Account](https://aws.amazon.com/account/)
+- AWS user with [this IAM Policy](./models/birthdayBotIAMPolicy.json) as minimum
 - [Node.js](https://nodejs.org/en/)
 - [PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7)
 
