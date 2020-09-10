@@ -1,42 +1,40 @@
-const getBirthdaysMessage = require('../services/birthdays')
-const channels = require('../data/amazon')
+const { getBirthdaysMessage } = require('../services/birthdays')
+const Amazon = require('../data/amazon')
 const fetch = require('node-fetch')
-const AWS = require('aws-sdk')
-const ssm = new AWS.SSM()
-const AUTH_TOKEN_SSM = process.env.AUTH_TOKEN_SSM
 
+// TODO: Move the method postToSlack to channel controller then remove this implementation and js file
 const postToSlack = (channel, callback) => {
   const url = 'https://slack.com/api/chat.postMessage'
 
-  getBirthdaysMessage().then((message) => {
+  getBirthdaysMessage().then(async (message) => {
     let response
+    const amazon = new Amazon()
 
     if (message) {
-      const params = {
-        Name: AUTH_TOKEN_SSM,
-        WithDecryption: true,
+      const token = await amazon.getSSMParameter(
+        process.env.AUTH_TOKEN_SSM,
+        true
+      )
+
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       }
-      ssm.getParameter(params, (_, data) => {
-        const headers = {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${data.Parameter.Value}`,
-        }
-        const body = JSON.stringify({ text: message, channel: channel })
+      const body = JSON.stringify({ text: message, channel: channel })
 
-        fetch(url, { method: 'post', body: body, headers: headers })
-          .then((res) => res.json())
-          .then((json) => {
-            console.log(json)
+      fetch(url, { method: 'post', body: body, headers: headers })
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json)
 
-            if (json.ok) {
-              response = { statusCode: 200, body: 'Message sent!' }
-            } else {
-              response = { statusCode: 501, body: JSON.stringify(json) }
-            }
+          if (json.ok) {
+            response = { statusCode: 200, body: 'Message sent!' }
+          } else {
+            response = { statusCode: 501, body: JSON.stringify(json) }
+          }
 
-            callback(response)
-          })
-      })
+          callback(response)
+        })
     } else {
       response = { statusCode: 200, body: "There aren't any birthdays today." }
 
@@ -45,15 +43,15 @@ const postToSlack = (channel, callback) => {
   })
 }
 
-const proactive = (event, context, callback) => {
-  channels
-    .getChannel()
-    .then((channelName) => {
-      postToSlack(channelName, (response) => {
-        callback(null, response)
-      })
-    })
-    .catch((err) => callback(null, err))
+const proactive = async (event, context, callback) => {
+  const amazon = new Amazon()
+  const channelObj = await amazon.getFile(process.env.S3_BUCKET, 'config.json')
+  console.log('channelObj 1', channelObj)
+  console.log('channelObj 2', channelObj.channel)
+
+  postToSlack(channelObj.channel, (response) => {
+    callback(null, response)
+  })
 }
 
 module.exports = { proactive }

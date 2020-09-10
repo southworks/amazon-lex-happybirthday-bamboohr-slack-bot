@@ -1,57 +1,51 @@
 const AWS = require('aws-sdk')
-const S3 = new AWS.S3()
 
 class Amazon {
-
-  BUCKET = process.env.S3_BUCKET
-  CONFIG_KEY = 'config.json'
-  configParams = {
-    Bucket: this.BUCKET,
-    Key: this.CONFIG_KEY,
+  constructor() {
+    this.S3 = new AWS.S3()
+    this.ssm = new AWS.SSM()
   }
 
-  constructor() {}
-
-  getChannel() {
+  getFile(bucket, config_key) {
     const params = {
-      ...this.configParams,
+      Bucket: bucket,
+      Key: config_key,
       ResponseContentType: 'application/json',
     }
 
-    return new Promise((resolve, reject) => {
-      S3.getObject(params, (err, data) => {
-        if (err) {
-          console.log('Channel File Not Found, then I will create it')
-
-          reject(err)
-        } else {
-          console.log(`Channel File Found: ${data.Body.toString()}`)
-
-          resolve(JSON.parse(data.Body).channel)
-        }
+    return this.S3.getObject(params)
+      .promise()
+      .then((data) => {
+        console.log(`Channel File Found: ${data.Body.toString()}`)
+        return JSON.parse(data.Body)
       })
-    })
   }
 
-  setChannel(name) {
+  putFile(bucket, config_key, data) {
     const params = {
-      ...this.configParams,
+      Bucket: bucket,
+      Key: config_key,
       ContentType: 'application/json',
-      Body: JSON.stringify(this.newChannel(name)),
+      Body: JSON.stringify(data),
     }
-    console.log(`Setting Channel: ${JSON.stringify(params)}`)
-  
-    S3.putObject(params, (err, data) => {
-      if (err) console.log(err, err.stack)
-      else return data
-    })
+
+    console.log(`Storing data: ${JSON.stringify(params)}`)
+
+    return this.S3.putObject(params)
+      .promise()
+      .then((data) => data)
   }
 
-  newChannel(name) {
-    return {
-      channel: name,
-      updatedAt: new Date().toISOString(),
+  getSSMParameter(name, decryption) {
+    const ssmParams = {
+      Name: name,
+      WithDecryption: decryption,
     }
+
+    return this.ssm
+      .getParameter(ssmParams)
+      .promise()
+      .then((data) => data.Parameter.Value)
   }
 }
 
