@@ -1,8 +1,8 @@
-const getMsgWithEmojis = require('../packages/birthdaymessage')
 const { getCurrentDate } = require('../helpers/utils')
 const Azure = require('../data/Azure')
 const Slack = require('../data/Slack')
 const Amazon = require('../data/Amazon')
+const { Templates, MultiLanguageLG } = require('botbuilder-lg')
 
 class Birthdays {
   constructor() {
@@ -10,18 +10,55 @@ class Birthdays {
     this.slackData = new Slack()
     this.amazonData = new Amazon()
     this.AUTH_TOKEN_SSM = process.env.AUTH_TOKEN_SSM
+    this.templatesPerLocale = new Map()
+    this.templatesPerLocale.set(
+      '',
+      Templates.parseFile(`${__dirname}/../resources/sentences.lg`)
+    )
+    this.multiLangLG = new MultiLanguageLG(this.templatesPerLocale)
   }
-  // //////////////getBirthdaysMessage is going to be on another file.
+
+  /* Returns a generated random message */
+  getMsgWithEmojis(ids) {
+    if (typeof ids === 'undefined' || !ids.length) {
+      return ''
+    }
+
+    const taggedIds = this.joinIds(ids)
+    const output = this.multiLangLG.generate('greetingTemplate', {
+      name: taggedIds,
+    })
+    return output
+  }
+
+  /* Returns a string with tagged users. */
+  joinIds(ids) {
+    const taggedUsers = ids.map(this.idTag)
+    let joined = ''
+
+    if (taggedUsers.length > 1) {
+      const lastOne = taggedUsers.pop()
+      joined = taggedUsers.join(', ')
+      joined += ` and ${lastOne}`
+    } else {
+      joined = taggedUsers.join('')
+    }
+
+    return joined
+  }
+
+  /* Tags ID with mention */
+  idTag(id) {
+    return `<@${id}>`
+  }
 
   getBirthdaysMessage() {
     return this.getBirthdaysEmails()
       .then((emails) => this.getUserIds(emails))
-      .then((ids) => getMsgWithEmojis(ids))
+      .then((ids) => this.getMsgWithEmojis(ids))
   }
 
-  // //////////
-
-  // This function use Azure class
+  // This function uses Azure class
   async getBirthdaysEmails() {
     const today = getCurrentDate()
     const users = await this.azureData.readStore()
@@ -30,7 +67,7 @@ class Birthdays {
       .map((user) => user.Email)
   }
 
-  // This function use Slack class
+  // This function uses Slack class
   /* Returns an Array with Slack users IDs by email */
   async getUserIds() {
     const emails = await this.getBirthdaysEmails()
@@ -43,16 +80,9 @@ class Birthdays {
       this.slackData.getUserByEmail(email, token)
     )
 
-    return Promise.all(promises).then(
-      // (userObjects) => userObjects.filter((el) => el)
-      // (users) => users.filter((el) => el)
-      (json) => {
-        return json.filter((json) => json.ok).map((users) => users.user.id)
-      }
-      // First:json.ok, map(json.user.id)
-      // here I have to return json.user.id
-    )
-    // solve this filter function
+    return Promise.all(promises).then((json) => {
+      return json.filter((json) => json.ok).map((users) => users.user.id)
+    })
   }
 }
 module.exports = Birthdays
