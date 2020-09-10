@@ -1,55 +1,53 @@
 const AWS = require('aws-sdk')
-const S3 = new AWS.S3()
 
-const BUCKET = process.env.S3_BUCKET
-const CONFIG_KEY = 'config.json'
-const configParams = {
-  Bucket: BUCKET,
-  Key: CONFIG_KEY,
-}
+class Amazon {
 
-/* [String] Retrieve a channel name from storage S3 file */
-const getChannel = () => {
-  const params = {
-    ...configParams,
-    ResponseContentType: 'application/json',
+  constructor() {
+    this.S3 = new AWS.S3()
+    this.ssm = new AWS.SSM()
   }
-
-  return new Promise((resolve, reject) => {
-    S3.getObject(params, (err, data) => {
-      if (err) {
-        console.log('Channel File Not Found, then I will create it')
-
-        reject(err)
-      } else {
+  
+  getFile(bucket, config_key) {
+    const params = {
+      Bucket: bucket,
+      Key: config_key,
+      ResponseContentType: 'application/json',
+    }
+    
+    return this.S3.getObject(params)
+      .promise()
+      .then((data) => {
         console.log(`Channel File Found: ${data.Body.toString()}`)
-
-        resolve(JSON.parse(data.Body).channel)
-      }
-    })
-  })
-}
-
-/* [String] Set a channel name to storage S3 file */
-const setChannel = (name) => {
-  const params = {
-    ...configParams,
-    ContentType: 'application/json',
-    Body: JSON.stringify(newChannel(name)),
+        return JSON.parse(data.Body)
+      })
   }
-  console.log(`Setting Channel: ${JSON.stringify(params)}`)
 
-  S3.putObject(params, (err, data) => {
-    if (err) console.log(err, err.stack)
-    else return data
-  })
-}
+  putFile(bucket, config_key, data) {
+    const params = {
+      Bucket: bucket,
+      Key: config_key,
+      ContentType: 'application/json',
+      Body: JSON.stringify(data),
+    }
 
-const newChannel = (name) => {
-  return {
-    channel: name,
-    updatedAt: new Date().toISOString(),
+    console.log(`Storing data: ${JSON.stringify(params)}`)
+  
+    return this.S3.putObject(params)
+      .promise()
+      .then((data) => data)
+  }
+
+  getSSMParameter(name, decryption) {
+    const ssmParams = {
+      Name: name,
+      WithDecryption: decryption,
+    }
+
+    return this.ssm
+      .getParameter(ssmParams, (_, data) => {})
+      .promise()
+      .then((data) => data.Parameter.Value)
   }
 }
 
-module.exports = { getChannel, setChannel }
+module.exports = Amazon

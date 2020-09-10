@@ -22,6 +22,13 @@ const getRandomInt = (max) => Math.floor(Math.random() * max)
 
 const getRandom = (array) => array[getRandomInt(array.length)]
 
+const newChannel = (name) => {
+  return {
+    channel: name,
+    updatedAt: new Date().toISOString(),
+  }
+}
+
 const messageToResponse = (content, fulfillmentState, sessionAttributes) => {
   return {
     sessionAttributes,
@@ -35,4 +42,5 @@ const messageToResponse = (content, fulfillmentState, sessionAttributes) => {
     }}
 }
 
-module.exports = { getCurrentDate, readJSON, getRandomInt, getRandom, messageToResponse }
+module.exports = { getCurrentDate, readJSON, getRandomInt, getRandom, messageToResponse, newChannel }
+
