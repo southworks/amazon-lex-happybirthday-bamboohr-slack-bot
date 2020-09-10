@@ -1,12 +1,12 @@
-# Amazon-Lex-Happy-Birthday-Bot
+# Amazon Lex Happy Birthday Bot
 
 This project aims to show you how to use AWS services to implement a proactive HappyBirthdayBot, integrating Amazon Lex as a conversational interface, Slack as a messaging channel, and BambooHR as a source of birthdates.
 
 Before starting, these are some concept you might familiar with:
 
-+ [Amazon Lex](https://aws.amazon.com/lex/) is a service for building conversational interfaces into any application using voice and text.
-+ [BambooHR](https://www.bamboohr.com/) is a technology company that provides human resources software as a service.
-+ [Slack](https://slack.com/) is a communication platform, mainly used by teams and enterprises.
+- [Amazon Lex](https://aws.amazon.com/lex/) is a service for building conversational interfaces into any application using voice and text.
+- [BambooHR](https://www.bamboohr.com/) is a technology company that provides human resources software as a service.
+- [Slack](https://slack.com/) is a communication platform, mainly used by teams and enterprises.
 
 ## How it works
 
@@ -24,7 +24,7 @@ When the user configures the channel, the lambda function triggered by this inte
 
 You can see the architecture, that we used to make the birthday bot work, in the following diagram:
 
-![Architecture diagram](./docs/images/birthday-bot.jpg)
+![Architecture diagram](./docs/images/BirthdayBot-v2-New.png)
 
 ## Prerequisites
 
@@ -34,6 +34,10 @@ You can see the architecture, that we used to make the birthday bot work, in the
 
 - [Setting up the Bot](./birthday-bot/README.md)
 - [Setup Serverless](./docs/serverless.md)
+
+## Contributing
+
+- [See our contribution guidelines](./CONTRIBUTING.md)
 
 ## Further reading
 

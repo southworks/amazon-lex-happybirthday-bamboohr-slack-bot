@@ -19,18 +19,25 @@ class Azure {
     const blockBlobClient = containerClient.getBlockBlobClient(this.blobName)
 
     const downloadBlockBlobResponse = await blockBlobClient.download(0)
+    let blobDataJSON
 
-    const blobData = await this.streamToString(
+    try {
+      const blobData = await this.streamToString(
         downloadBlockBlobResponse.readableStreamBody
-    ).then((data) => JSON.parse(data))
+      )
+      blobDataJSON = JSON.parse(blobData)
+      
+    } catch (error) {
+      throw `AZURE: error getting blobData, ${error}`
+    }
 
-    return blobData
+    return blobDataJSON
   }
 
   /*
   * It compose binary data to String
   */
-  async streamToString(readableStream) {
+  streamToString(readableStream) {
     const chunks = []
 
     return new Promise((resolve, reject) => {

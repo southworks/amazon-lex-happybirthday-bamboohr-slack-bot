@@ -2,25 +2,21 @@ const AWS = require('aws-sdk')
 
 class Amazon {
   constructor() {
-    var S3 = new AWS.S3()
-    var ssm = new AWS.SSM()
+    this.S3 = new AWS.S3()
+    this.ssm = new AWS.SSM()
   }
 
   getFile(bucket, config_key) {
-    configParams = {
+    const params = {
       Bucket: bucket,
       Key: config_key,
-    }
-
-    const params = {
-      ...configParams,
       ResponseContentType: 'application/json',
     }
 
     return new Promise((resolve, reject) => {
       this.S3.getObject(params, (err, data) => {
         if (err) {
-          console.log('Channel File Not Found, then I will create it')
+          throw new Error(err)
 
           reject(err)
         } else {
@@ -33,13 +29,9 @@ class Amazon {
   }
 
   putFile(bucket, config_key, data) {
-    configParams = {
+    const params = {
       Bucket: bucket,
       Key: config_key,
-    }
-
-    const params = {
-      ...configParams,
       ContentType: 'application/json',
       Body: JSON.stringify(data),
     }
@@ -47,7 +39,7 @@ class Amazon {
     console.log(`Storing data: ${JSON.stringify(params)}`)
 
     this.S3.putObject(params, (err, data) => {
-      if (err) console.log(err, err.stack)
+      if (err) throw new Error(err)
       else return data
     })
   }
