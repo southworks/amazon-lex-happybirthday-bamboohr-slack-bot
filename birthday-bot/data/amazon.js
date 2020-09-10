@@ -1,19 +1,18 @@
 const AWS = require('aws-sdk')
 
 class Amazon {
-
   constructor() {
     this.S3 = new AWS.S3()
     this.ssm = new AWS.SSM()
   }
-  
+
   getFile(bucket, config_key) {
     const params = {
       Bucket: bucket,
       Key: config_key,
       ResponseContentType: 'application/json',
     }
-    
+
     return this.S3.getObject(params)
       .promise()
       .then((data) => {
@@ -31,7 +30,7 @@ class Amazon {
     }
 
     console.log(`Storing data: ${JSON.stringify(params)}`)
-  
+
     return this.S3.putObject(params)
       .promise()
       .then((data) => data)
@@ -44,7 +43,7 @@ class Amazon {
     }
 
     return this.ssm
-      .getParameter(ssmParams, (_, data) => {})
+      .getParameter(ssmParams)
       .promise()
       .then((data) => data.Parameter.Value)
   }

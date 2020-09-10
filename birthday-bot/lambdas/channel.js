@@ -12,8 +12,13 @@ const config = (event, _, callback) => {
     .then((channel) => {
       if (channel) {
         const amz = new Amazon()
-        amz.putFile(process.env.S3_BUCKET, 'config.json', utils.newChannel(channel.name))
-        return `The channel <#${channel.id}> was configured correctly`
+        return amz
+          .putFile(
+            process.env.S3_BUCKET,
+            'config.json',
+            utils.newChannel(channel.name)
+          )
+          .then(() => `The channel <#${channel.id}> was configured correctly`)
       }
       // eslint-disable-next-line max-len
       return 'That channel is not available for me, add me to the channel by clicking on me, then selecting "Add this app to a channel", and finally, choosing the channel\'s name'

@@ -2,6 +2,7 @@ const { getBirthdaysMessage } = require('../services/birthdays')
 const Amazon = require('../data/amazon')
 const fetch = require('node-fetch')
 
+// TODO: Move the method postToSlack to channel controller then remove this implementation and js file
 const postToSlack = (channel, callback) => {
   const url = 'https://slack.com/api/chat.postMessage'
 
@@ -10,28 +11,30 @@ const postToSlack = (channel, callback) => {
     const amazon = new Amazon()
 
     if (message) {
-      const token = await amazon.getSSMParameter(process.env.AUTH_TOKEN_SSM, true)
-      
-        const headers = {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        }
-        const body = JSON.stringify({ text: message, channel: channel })
+      const token = await amazon.getSSMParameter(
+        process.env.AUTH_TOKEN_SSM,
+        true
+      )
 
-        fetch(url, { method: 'post', body: body, headers: headers })
-          .then((res) => res.json())
-          .then((json) => {
-            console.log(json)
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }
+      const body = JSON.stringify({ text: message, channel: channel })
 
-            if (json.ok) {
-              response = { statusCode: 200, body: 'Message sent!' }
-            } else {
-              response = { statusCode: 501, body: JSON.stringify(json) }
-            }
+      fetch(url, { method: 'post', body: body, headers: headers })
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json)
 
-            callback(response)
-          })
-      
+          if (json.ok) {
+            response = { statusCode: 200, body: 'Message sent!' }
+          } else {
+            response = { statusCode: 501, body: JSON.stringify(json) }
+          }
+
+          callback(response)
+        })
     } else {
       response = { statusCode: 200, body: "There aren't any birthdays today." }
 
@@ -41,7 +44,6 @@ const postToSlack = (channel, callback) => {
 }
 
 const proactive = async (event, context, callback) => {
-
   const amazon = new Amazon()
   const channelObj = await amazon.getFile(process.env.S3_BUCKET, 'config.json')
   console.log('channelObj 1', channelObj)
