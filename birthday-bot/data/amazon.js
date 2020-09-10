@@ -13,19 +13,12 @@ class Amazon {
       ResponseContentType: 'application/json',
     }
 
-    return new Promise((resolve, reject) => {
-      this.S3.getObject(params, (err, data) => {
-        if (err) {
-          throw new Error(err)
-
-          reject(err)
-        } else {
-          console.log(`Channel File Found: ${data.Body.toString()}`)
-
-          resolve(JSON.parse(data.Body))
-        }
+    return this.S3.getObject(params)
+      .promise()
+      .then((data) => {
+        console.log(`Channel File Found: ${data.Body.toString()}`)
+        return JSON.parse(data.Body)
       })
-    })
   }
 
   putFile(bucket, config_key, data) {
@@ -38,10 +31,9 @@ class Amazon {
 
     console.log(`Storing data: ${JSON.stringify(params)}`)
 
-    this.S3.putObject(params, (err, data) => {
-      if (err) throw new Error(err)
-      else return data
-    })
+    return this.S3.putObject(params)
+      .promise()
+      .then((data) => data)
   }
 
   getSSMParameter(name, decryption) {
@@ -51,7 +43,7 @@ class Amazon {
     }
 
     return this.ssm
-      .getParameter(ssmParams, (_, data) => {})
+      .getParameter(ssmParams)
       .promise()
       .then((data) => data.Parameter.Value)
   }

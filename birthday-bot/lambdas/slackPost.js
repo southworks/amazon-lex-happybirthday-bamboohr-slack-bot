@@ -2,6 +2,7 @@ const Birthdays = require('../services/birthdays')
 const Amazon = require('../data/amazon')
 const fetch = require('node-fetch')
 
+// TODO: Move the method postToSlack to channel controller then remove this implementation and js file
 const postToSlack = (channel, callback) => {
   const url = 'https://slack.com/api/chat.postMessage'
   const birthday = new Birthdays()

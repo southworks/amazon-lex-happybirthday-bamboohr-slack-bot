@@ -23,12 +23,6 @@ class Birthdays {
     if (typeof ids === 'undefined' || !ids.length) {
       return ''
     }
-
-    const taggedIds = this.joinIds(ids)
-    const output = this.multiLangLG.generate('greetingTemplate', {
-      name: taggedIds,
-    })
-    return output
   }
 
   /* Returns a string with tagged users. */
@@ -83,6 +77,24 @@ class Birthdays {
     return Promise.all(promises).then((json) => {
       return json.filter((json) => json.ok).map((users) => users.user.id)
     })
+  }
+
+  // TODO: The checkChannel method should be moved to birthdays class and remove this implementation from here
+  checkChannel(name) {
+    const slack = new Slack()
+    const amazon = new Amazon()
+
+    return amazon
+      .getSSMParameter(process.env.AUTH_TOKEN_SSM, true)
+      .then((token) =>
+        slack.getUsersConversations(token).then((slackJson) => {
+          const channel = slackJson.channels.find(
+            (channel) => channel.name === name
+          )
+
+          return channel ? { id: channel.id, name: channel.name } : ''
+        })
+      )
   }
 }
 module.exports = Birthdays
