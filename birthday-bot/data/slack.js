@@ -5,28 +5,44 @@ class Slack {
   usersConversationUrl = 'https://slack.com/api/users.conversations?'
 
   getUserByEmail(userEmail, token) {
-    const params = new URLSearchParams({ email: userEmail })
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+    const params = {
+      email: userEmail,
     }
 
-    return fetch(this.lookUpByEmailURL + params, {
-      headers: headers,
-    }).then((res) => res.json())
+    return this.getData(
+      this.lookUpByEmailURL,
+      token,
+      'application/json',
+      params
+    )
   }
 
   getUsersConversations(token) {
-    const url = this.usersConversationUrl
-
-    const params = new URLSearchParams({
-      token,
+    const params = {
       types: 'public_channel,private_channel',
-    })
+    }
 
-    return fetch(url + params, { method: 'get' })
-      .then((res) => res.json())
-      .then((json) => json)
+    return this.getData(
+      this.usersConversationUrl,
+      token,
+      'application/json',
+      params
+    )
+  }
+
+  getData(endpoint, token, contentType, iparams) {
+    const params = new URLSearchParams(iparams)
+
+    const headers = {
+      'Content-Type': contentType,
+      Authorization: `Bearer ${token}`,
+    }
+    console.log(endpoint)
+    return fetch(endpoint + params, {
+      headers: headers,
+    }).then((res) => {
+      return res.json()
+    })
   }
 }
 
