@@ -2,7 +2,6 @@ const fetch = require('node-fetch')
 
 class Slack {
   lookUpByEmailURL = 'https://slack.com/api/users.lookupByEmail?'
-<<<<<<< HEAD
 
   constructor() {
     this.amazon = new Amazon()
