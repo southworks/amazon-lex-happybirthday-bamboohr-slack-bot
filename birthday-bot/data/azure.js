@@ -28,7 +28,7 @@ class Azure {
       blobDataJSON = JSON.parse(blobData)
       
     } catch (error) {
-      console.error('AZURE: error getting blobData', error)
+      throw `AZURE: error getting blobData, ${error}`
       blobDataJSON = {}
     }
 
