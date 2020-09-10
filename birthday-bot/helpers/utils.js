@@ -22,4 +22,11 @@ const getRandomInt = (max) => Math.floor(Math.random() * max)
 
 const getRandom = (array) => array[getRandomInt(array.length)]
 
-module.exports = { getCurrentDate, readJSON, getRandomInt, getRandom }
+const newChannel = (name) => {
+  return {
+    channel: name,
+    updatedAt: new Date().toISOString(),
+  }
+}
+
+module.exports = { getCurrentDate, readJSON, getRandomInt, getRandom, newChannel }

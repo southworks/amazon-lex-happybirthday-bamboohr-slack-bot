@@ -1,25 +1,20 @@
 const getBirthdaysMessage = require('../services/birthdays')
-const channels = require('../data/amazon')
+const Amazon = require('../data/amazon')
 const fetch = require('node-fetch')
-const AWS = require('aws-sdk')
-const ssm = new AWS.SSM()
-const AUTH_TOKEN_SSM = process.env.AUTH_TOKEN_SSM
 
 const postToSlack = (channel, callback) => {
   const url = 'https://slack.com/api/chat.postMessage'
 
-  getBirthdaysMessage().then((message) => {
+  getBirthdaysMessage().then(async (message) => {
     let response
+    const amazon = new Amazon()
 
     if (message) {
-      const params = {
-        Name: AUTH_TOKEN_SSM,
-        WithDecryption: true,
-      }
-      ssm.getParameter(params, (_, data) => {
+      const token = await amazon.getSSMParameter(process.env.AUTH_TOKEN_SSM, true)
+      
         const headers = {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${data.Parameter.Value}`,
+          Authorization: `Bearer ${token}`,
         }
         const body = JSON.stringify({ text: message, channel: channel })
 
@@ -36,7 +31,7 @@ const postToSlack = (channel, callback) => {
 
             callback(response)
           })
-      })
+      
     } else {
       response = { statusCode: 200, body: "There aren't any birthdays today." }
 
@@ -45,15 +40,16 @@ const postToSlack = (channel, callback) => {
   })
 }
 
-const proactive = (event, context, callback) => {
-  channels
-    .getChannel()
-    .then((channelName) => {
-      postToSlack(channelName, (response) => {
-        callback(null, response)
-      })
-    })
-    .catch((err) => callback(null, err))
+const proactive = async (event, context, callback) => {
+
+  const amazon = new Amazon()
+  const channelObj = await amazon.getFile(process.env.S3_BUCKET, 'config.json')
+  console.log('channelObj 1', channelObj)
+  console.log('channelObj 2', channelObj.channel)
+
+  postToSlack(channelObj.channel, (response) => {
+    callback(null, response)
+  })
 }
 
 module.exports = { proactive }

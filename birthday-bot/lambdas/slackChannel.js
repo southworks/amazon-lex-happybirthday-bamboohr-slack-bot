@@ -1,8 +1,10 @@
-const channels = require('../data/amazon')
+const amazon = require('../data/amazon')
 const fetch = require('node-fetch')
 const AWS = require('aws-sdk')
+const Amazon = require('../data/amazon')
 const ssm = new AWS.SSM()
 const AUTH_TOKEN_SSM = process.env.AUTH_TOKEN_SSM
+const { newChannel } = require('../helpers/utils')
 
 function close(sessionAttributes, fulfillmentState, message) {
   return {
@@ -21,10 +23,17 @@ function dispatch(intentRequest, callback) {
   const channelName = slots.channel
 
   let response
+  const amz = new Amazon()
 
   checkChannel(channelName).then((channel) => {
     if (channel) {
-      channels.setChannel(channel.name)
+      console.log('channel', channel)
+      const result = amz.putFile(
+        process.env.S3_BUCKET,
+        'config.json',
+        newChannel(channel.name)
+      )
+      console.log('result..', result)
       response = `The channel <#${channel.id}> was configured correctly`
     } else {
       response =
