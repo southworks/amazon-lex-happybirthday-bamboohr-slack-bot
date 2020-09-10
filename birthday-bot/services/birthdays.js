@@ -1,5 +1,6 @@
 const getMsgWithEmojis = require('../packages/birthdaymessage')
 const { getCurrentDate } = require('../helpers/utils')
+const Azure = require('../data/azure')
 
 const getBirthdaysMessage = () => {
   return getBirthdaysEmails()
@@ -10,7 +11,7 @@ const getBirthdaysMessage = () => {
 // WARN: This function should be refactored to use Azure class
 const getBirthdaysEmails = async () => {
   const today = getCurrentDate()
-  const users = await readStore()
+  const users = await azure.readStore()
 
   return users
     .filter((user) => user.Birthday.substring(5) === today)
