@@ -1,6 +1,7 @@
-const services = require('../services/birthdays')
+const Birthdays = require('../services/Birthdays')
 const utils = require('../helpers/utils')
 
+const services = new Birthdays()
 const list = (event, context, callback) => {
   services
     .getBirthdaysMessage()

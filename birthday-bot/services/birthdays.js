@@ -2,11 +2,14 @@ const getMsgWithEmojis = require('../packages/birthdaymessage')
 const { getCurrentDate } = require('../helpers/utils')
 const Azure = require('../data/Azure')
 const Slack = require('../data/Slack')
+const Amazon = require('../data/Amazon')
 
 class Birthdays {
   constructor() {
     this.azureData = new Azure()
     this.slackData = new Slack()
+    this.amazonData = new Amazon()
+    this.AUTH_TOKEN_SSM = process.env.AUTH_TOKEN_SSM
   }
   // //////////////getBirthdaysMessage is going to be on another file.
 
@@ -32,8 +35,13 @@ class Birthdays {
   async getUserIds() {
     const emails = await this.getBirthdaysEmails()
     console.log(emails)
-
-    const promises = emails.map((email) => this.slackData.getUserObject(email))
+    const token = await this.amazonData.getSSMParameter(
+      process.env.AUTH_TOKEN_SSM,
+      true
+    )
+    const promises = emails.map((email) =>
+      this.slackData.getUserByEmail(email, token)
+    )
 
     return Promise.all(promises).then(
       // (userObjects) => userObjects.filter((el) => el)
