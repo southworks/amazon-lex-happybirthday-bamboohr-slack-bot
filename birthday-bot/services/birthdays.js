@@ -4,11 +4,13 @@ const Azure = require('../data/azure')
 const Slack = require('../data/slack')
 const Amazon = require('../data/amazon')
 
+
 const getBirthdaysMessage = () => {
   return getBirthdaysEmails()
     .then((emails) => getUserIds(emails))
     .then((ids) => getMsgWithEmojis(ids))
 }
+
 
 // WARN: This function should be refactored to use Azure class
 const getBirthdaysEmails = async () => {
@@ -35,4 +37,30 @@ const getUserIds = async (emails) => {
   )
 }
 
-module.exports = getBirthdaysMessage
+// TODO: The checkChannel method should be moved to birthdays class and remove this implementation from here
+const checkChannel = (name) => {
+  const ssmParams = {
+    Name: AUTH_TOKEN_SSM,
+    WithDecryption: true,
+  }
+
+  return ssm
+    .getParameter(ssmParams, (_, data) => {})
+    .promise()
+    .then((data) => {
+      const url = 'https://slack.com/api/users.conversations?'
+      const params = new URLSearchParams({
+        token: data.Parameter.Value,
+        types: 'public_channel,private_channel',
+      })
+
+      return fetch(url + params, { method: 'get' })
+        .then((res) => res.json())
+        .then((json) => {
+          const channel = json.channels.find((channel) => channel.name === name)
+          return channel ? { id: channel.id, name: channel.name } : ''
+        })
+    })
+}
+
+module.exports = { getBirthdaysMessage, checkChannel }

@@ -29,4 +29,18 @@ const newChannel = (name) => {
   }
 }
 
-module.exports = { getCurrentDate, readJSON, getRandomInt, getRandom, newChannel }
+const messageToResponse = (content, fulfillmentState, sessionAttributes) => {
+  return {
+    sessionAttributes,
+    dialogAction: {
+      type: 'Close',
+      fulfillmentState,
+      message: {
+        contentType: 'PlainText',
+        content,
+      },
+    }}
+}
+
+module.exports = { getCurrentDate, readJSON, getRandomInt, getRandom, messageToResponse, newChannel }
+
