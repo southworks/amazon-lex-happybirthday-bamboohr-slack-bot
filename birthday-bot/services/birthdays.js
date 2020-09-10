@@ -75,6 +75,7 @@ class Birthdays {
     )
 
     return Promise.all(promises).then((json) => {
+      console.log(json.filter((json) => json.ok).map((users) => users.user.id))
       return json.filter((json) => json.ok).map((users) => users.user.id)
     })
   }
