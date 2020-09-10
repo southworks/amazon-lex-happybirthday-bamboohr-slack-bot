@@ -26,14 +26,9 @@ You can see the architecture, that we used to make the birthday bot work, in the
 
 ![Architecture diagram](./docs/images/BirthdayBot-v2-New.png)
 
-## Prerequisites
+## Getting Started
 
-- [AWS Account](https://aws.amazon.com/)
-
-## Check our docs
-
-- [Setting up the Bot](./birthday-bot/README.md)
-- [Setup Serverless](./docs/serverless.md)
+- [Start here](./birthday-bot/README.md)
 
 ## Contributing
 

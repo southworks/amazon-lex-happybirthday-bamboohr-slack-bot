@@ -1,3 +1,9 @@
+### Index
+
+1. **Deploy serverless application**
+2. [Set up the Lex bot](./lex-bot.md)
+3. [Set up Slack App and connect with Lex](./slack.md)
+
 # Serverless application
 
 [Serverless Framework](https://www.serverless.com/open-source/) is an open source framework to manage serverless applications, this allows you to develop, deploy, and test locally the app, making the development process easier.
@@ -23,11 +29,6 @@ This not include the Lex service configuration because the implementation of it 
 You can see the architecture defined in the serverless application in the following diagram:
 
 ![image.png](https://storage.googleapis.com/slite-api-files-production/files/39c0c8cf-9cde-476d-a0d7-7e288a2ebe70/image.png)
-
-## Prerequisites
-
-- [Node.js](https://nodejs.org/en/)
-- [AWS account](https://aws.amazon.com/es)
 
 ## To run this project
 
@@ -58,6 +59,9 @@ You can see the architecture defined in the serverless application in the follow
    > The environment variables are in `env.yml`.
    >
    > For development set them `env.dev.yml`.
+
+
+[<- Index](../birthday-bot/README.md) | [Set up the Lex bot ->](./lex-bot.md)
 
 ## Further reading
 - [Serverless CLI Reference for AWS](https://www.serverless.com/framework/docs/providers/aws/cli-reference/)
