@@ -1,4 +1,4 @@
-const channels = require('../data/amazon')
+const Amazon = require('../data/amazon')
 const utils = require('../helpers/utils')
 const services = require('../services/birthdays')
 
@@ -11,7 +11,8 @@ const config = (event, _, callback) => {
     .checkChannel(channelName)
     .then((channel) => {
       if (channel) {
-        channels.setChannel(channel.name)
+        const amz = new Amazon()
+        amz.putFile(process.env.S3_BUCKET, 'config.json', utils.newChannel(channel.name))
         return `The channel <#${channel.id}> was configured correctly`
       }
       // eslint-disable-next-line max-len

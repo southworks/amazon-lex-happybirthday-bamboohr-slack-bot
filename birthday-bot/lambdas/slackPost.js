@@ -1,4 +1,4 @@
-const getBirthdaysMessage = require('../services/birthdays')
+const { getBirthdaysMessage } = require('../services/birthdays')
 const Amazon = require('../data/amazon')
 const fetch = require('node-fetch')
 

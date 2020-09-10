@@ -3,6 +3,9 @@ const { getCurrentDate } = require('../helpers/utils')
 const Azure = require('../data/azure')
 const Slack = require('../data/slack')
 const Amazon = require('../data/amazon')
+const AUTH_TOKEN_SSM = process.env.AUTH_TOKEN_SSM
+const AWS = require('aws-sdk')
+const ssm = new AWS.SSM()
 
 
 const getBirthdaysMessage = () => {
