@@ -29,7 +29,6 @@ class Azure {
       
     } catch (error) {
       throw `AZURE: error getting blobData, ${error}`
-      blobDataJSON = {}
     }
 
     return blobDataJSON
