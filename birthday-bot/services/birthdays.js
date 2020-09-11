@@ -7,6 +7,7 @@ const Channel = require('../services/channel')
 
 class Birthdays {
   constructor() {
+    let id
     this.azure = new Azure()
     this.slack = new Slack()
     this.amazon = new Amazon()
