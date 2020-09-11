@@ -1,10 +1,13 @@
-const services = require('../services/birthdays')
+const Birthdays = require('../services/birthdays')
 const utils = require('../helpers/utils')
+const { joinUsers } = require('../helpers/message')
 
 const list = (event, context, callback) => {
-  services
-    .getBirthdaysMessage()
-    .then((message) =>
+  new Birthdays()
+    .getBirthdays()
+    .then((users) => {
+      const message = joinUsers(users)
+
       callback(
         null,
         utils.messageToResponse(
@@ -13,8 +16,21 @@ const list = (event, context, callback) => {
           event.sessionAttributes
         )
       )
-    )
+    })
     .catch((err) => callback(err))
 }
 
-module.exports = { list }
+const proactive = (event, context, callback) => {
+  new Birthdays().sendBirthdayMessage().then((res) => {
+    if (res.ok) {
+      callback(null, { statusCode: 200, body: 'Message sent!' })
+    } else {
+      callback(null, {
+        statusCode: 200,
+        body: `There was an error., ${res.error}`,
+      })
+    }
+  })
+}
+
+module.exports = { list, proactive }

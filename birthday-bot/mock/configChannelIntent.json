@@ -13,7 +13,7 @@
   "currentIntent": {
     "name": "selectChannel",
     "slots": {
-      "channel": "{TEAM_NAME_WITHOUT_#}"
+      "channel": "gnalog-team"
     },
     "slotDetails": {
       "channel": ["Object"]
@@ -22,7 +22,7 @@
     "nluIntentConfidenceScore": null
   },
   "alternativeIntents": [],
-  "inputTranscript": "{TEAM_NAME_WITHOUT_#}",
+  "inputTranscript": "gnalog-team",
   "recentIntentSummaryView": [
     {
       "intentName": "selectChannel",

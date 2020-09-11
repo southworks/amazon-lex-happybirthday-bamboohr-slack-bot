@@ -1,11 +1,13 @@
+const { idTag } = require('./utils')
 const { Templates, MultiLanguageLG } = require('botbuilder-lg')
 const templatesPerLocale = new Map()
-// eslint-disable-next-line max-len
-templatesPerLocale.set('', Templates.parseFile(`${__dirname}/../resources/sentences.lg`))
+templatesPerLocale.set(
+  '',
+  Templates.parseFile(`${__dirname}/../resources/sentences.lg`)
+)
 const multiLangLG = new MultiLanguageLG(templatesPerLocale)
 
-/* Returns a string with tagged users. */
-const joinIds = (ids) => {
+const joinUsers = (ids) => {
   const taggedUsers = ids.map(idTag)
   let joined = ''
 
@@ -20,18 +22,15 @@ const joinIds = (ids) => {
   return joined
 }
 
-/* Tags ID with mention */
-const idTag = (id) => `<@${id}>`
-
 /* Returns a generated random message */
 function getMsgWithEmojis(ids) {
   if (typeof ids === 'undefined' || !ids.length) {
     return ''
   }
 
-  const taggedIds = joinIds(ids)
+  const taggedIds = joinUsers(ids)
   const output = multiLangLG.generate('greetingTemplate', { name: taggedIds })
   return output
 }
 
-module.exports = getMsgWithEmojis
+module.exports = { getMsgWithEmojis, joinUsers }

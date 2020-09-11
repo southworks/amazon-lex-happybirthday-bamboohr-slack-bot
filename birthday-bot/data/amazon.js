@@ -2,41 +2,44 @@ const AWS = require('aws-sdk')
 
 class Amazon {
   constructor() {
-    this.S3 = new AWS.S3()
+    this.s3 = new AWS.S3()
     this.ssm = new AWS.SSM()
   }
 
-  getFile(bucket, config_key) {
+  async getFile(bucket, configKey) {
     const params = {
       Bucket: bucket,
-      Key: config_key,
+      Key: configKey,
       ResponseContentType: 'application/json',
     }
 
-    return this.S3.getObject(params)
+    return this.s3
+      .getObject(params)
       .promise()
-      .then((data) => {
-        console.log(`Channel File Found: ${data.Body.toString()}`)
-        return JSON.parse(data.Body)
+      .then((data) => JSON.parse(data.Body))
+      .catch((error) => {
+        throw new Error(`AWS: error getting JSON file from S3, ${error}`)
       })
   }
 
-  putFile(bucket, config_key, data) {
+  async putFile(bucket, configKey, data) {
     const params = {
       Bucket: bucket,
-      Key: config_key,
+      Key: configKey,
       ContentType: 'application/json',
       Body: JSON.stringify(data),
     }
 
-    console.log(`Storing data: ${JSON.stringify(params)}`)
-
-    return this.S3.putObject(params)
+    return this.s3
+      .putObject(params)
       .promise()
       .then((data) => data)
+      .catch((error) => {
+        throw new Error(`AWS: error setting JSON file from S3, ${error}`)
+      })
   }
 
-  getSSMParameter(name, decryption) {
+  async getSSMParameter(name, decryption) {
     const ssmParams = {
       Name: name,
       WithDecryption: decryption,
@@ -46,6 +49,9 @@ class Amazon {
       .getParameter(ssmParams)
       .promise()
       .then((data) => data.Parameter.Value)
+      .catch((error) => {
+        throw new Error(`AWS: error getting parameter from SSM, ${error}`)
+      })
   }
 }
 

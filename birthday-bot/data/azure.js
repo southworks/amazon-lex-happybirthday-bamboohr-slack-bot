@@ -7,9 +7,7 @@ class Azure {
     this.blobName = process.env.AZURE_BLOB_NAME
   }
 
-  /*
-   * It reads employees data from Azure Blob Store
-   */
+  /* It reads employees data from Azure Blob Store */
   async readStore() {
     const blobServiceClient = BlobServiceClient.fromConnectionString(
       this.connectionString
@@ -19,24 +17,19 @@ class Azure {
     )
     const blockBlobClient = containerClient.getBlockBlobClient(this.blobName)
 
-    const downloadBlockBlobResponse = await blockBlobClient.download(0)
-    let blobDataJSON
-
     try {
+      const downloadBlockBlobResponse = await blockBlobClient.download(0)
+
       const blobData = await this.streamToString(
         downloadBlockBlobResponse.readableStreamBody
       )
-      blobDataJSON = JSON.parse(blobData)
+      return JSON.parse(blobData)
     } catch (error) {
-      throw `AZURE: error getting blobData, ${error}`
+      throw new Error(`AZURE: error getting blobData, ${error}`)
     }
-
-    return blobDataJSON
   }
 
-  /*
-   * It compose binary data to String
-   */
+  /* It compose binary data to String */
   streamToString(readableStream) {
     const chunks = []
 
