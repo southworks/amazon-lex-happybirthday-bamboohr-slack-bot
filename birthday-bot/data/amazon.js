@@ -6,7 +6,7 @@ class Amazon {
     this.ssm = new AWS.SSM()
   }
 
-  async getFile(bucket, configKey) {
+  getFile(bucket, configKey) {
     const params = {
       Bucket: bucket,
       Key: configKey,
@@ -22,7 +22,7 @@ class Amazon {
       })
   }
 
-  async putFile(bucket, configKey, data) {
+  putFile(bucket, configKey, data) {
     const params = {
       Bucket: bucket,
       Key: configKey,
@@ -39,7 +39,7 @@ class Amazon {
       })
   }
 
-  async getSSMParameter(name, decryption) {
+  getSSMParameter(name, decryption) {
     const ssmParams = {
       Name: name,
       WithDecryption: decryption,

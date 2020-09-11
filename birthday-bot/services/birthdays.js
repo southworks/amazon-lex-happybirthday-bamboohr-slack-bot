@@ -13,17 +13,14 @@ class Birthdays {
   }
 
   async sendBirthdayMessage() {
-    const channelJson = await new Channel().getChannel()
+    const channel = await new Channel().getChannel()
 
     return this.getBirthdays()
       .then((usersIds) => getMsgWithEmojis(usersIds))
-      .then((message) => {
-        if (message) return this.slack.postToSlack(channelJson.channel, message)
-        else return { ok: false, error: 'No message to sent.' }
-      })
+      .then((message) => this.slack.postToSlack(channel, message))
   }
 
-  async getBirthdays() {
+  getBirthdays() {
     return this.getBirthdaysEmails().then((emails) => this.getUserIds(emails))
   }
 
@@ -36,7 +33,7 @@ class Birthdays {
       .map((user) => user.Email)
   }
 
-  async getUserIds(emails) {
+  getUserIds(emails) {
     const promises = emails.map((email) => this.slack.getUserByEmail(email))
 
     return Promise.all(promises).then((users) =>

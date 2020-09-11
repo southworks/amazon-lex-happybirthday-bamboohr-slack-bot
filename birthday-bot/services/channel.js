@@ -10,7 +10,7 @@ class Channel {
     this.BUCKET = process.env.S3_BUCKET
   }
 
-  async checkChannel(name) {
+  checkChannel(name) {
     return this.slack.getUsersConversations().then((slackJson) => {
       const channel = slackJson.channels.find(
         (channel) => channel.name === name
