@@ -1,48 +1,54 @@
 const fetch = require('node-fetch')
+const Amazon = require('../data/amazon')
 
 class Slack {
-  lookUpByEmailURL = 'https://slack.com/api/users.lookupByEmail?'
-  usersConversationUrl = 'https://slack.com/api/users.conversations?'
+  constructor() {
+    this.AUTH_TOKEN_SSM = process.env.AUTH_TOKEN_SSM
+  }
 
-  getUserByEmail(userEmail, token) {
-    const params = {
+  getUserByEmail(userEmail) {
+    const lookUpByEmailUrl = 'https://slack.com/api/users.lookupByEmail?'
+
+    return this.sendRequest(lookUpByEmailUrl, 'GET', '', {
       email: userEmail,
-    }
-
-    return this.getData(
-      this.lookUpByEmailURL,
-      token,
-      'application/json',
-      params
-    )
-  }
-
-  getUsersConversations(token) {
-    const params = {
-      types: 'public_channel,private_channel',
-    }
-
-    return this.getData(
-      this.usersConversationUrl,
-      token,
-      'application/json',
-      params
-    )
-  }
-
-  getData(endpoint, token, contentType, iparams) {
-    const params = new URLSearchParams(iparams)
-
-    const headers = {
-      'Content-Type': contentType,
-      Authorization: `Bearer ${token}`,
-    }
-    console.log(endpoint)
-    return fetch(endpoint + params, {
-      headers: headers,
-    }).then((res) => {
-      return res.json()
     })
+  }
+
+  getUsersConversations() {
+    const usersConversationUrl = 'https://slack.com/api/users.conversations?'
+
+    return this.sendRequest(usersConversationUrl, 'GET', '', {
+      types: 'public_channel,private_channel',
+    })
+  }
+
+  postToSlack(channel, message) {
+    const postMessageUrl = 'https://slack.com/api/chat.postMessage'
+    const body = JSON.stringify({ text: message, channel: channel })
+
+    return this.sendRequest(postMessageUrl, 'POST', body, {})
+  }
+
+  async sendRequest(endpoint, method, body, uriParams) {
+    this.slackToken = this.slackToken
+      ? this.slackToken
+      : await new Amazon().getSSMParameter(this.AUTH_TOKEN_SSM, true)
+
+    const myInit = {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.slackToken}`,
+      },
+    }
+
+    if (body) {
+      myInit.body = body
+    }
+
+    const params = new URLSearchParams(uriParams)
+
+    return fetch(endpoint + params, myInit).then((res) => res.json())
   }
 }
 

@@ -1,56 +1,47 @@
-const getMsgWithEmojis = require('../packages/birthdaymessage')
 const { getCurrentDate } = require('../helpers/utils')
+const { getMsgWithEmojis } = require('../helpers/message')
 const Azure = require('../data/azure')
 const Slack = require('../data/slack')
 const Amazon = require('../data/amazon')
+const Channel = require('../services/channel')
 
-const getBirthdaysMessage = () => {
-  return getBirthdaysEmails()
-    .then((emails) => getUserIds(emails))
-    .then((ids) => getMsgWithEmojis(ids))
-}
+class Birthdays {
+  constructor() {
+    this.azure = new Azure()
+    this.slack = new Slack()
+    this.amazon = new Amazon()
+  }
 
-// WARN: This function should be refactored to use Azure class
-const getBirthdaysEmails = async () => {
-  const today = getCurrentDate()
-  const az = new Azure()
-  const users = await az.readStore()
+  async sendBirthdayMessage() {
+    const channel = await new Channel().getChannel()
 
-  return users
-    .filter((user) => user.Birthday.substring(5) === today)
-    .map((user) => user.Email)
-}
+    return this.getBirthdays()
+      .then((usersIds) => getMsgWithEmojis(usersIds))
+      .then((message) => this.slack.postToSlack(channel, message))
+  }
 
-// WARN: This function should be refactored to use Slack class
-/* Returns an Array with Slack users IDs by email */
-const getUserIds = async (emails) => {
-  const slack = new Slack()
-  const amazon = new Amazon()
-  const token = await amazon.getSSMParameter(process.env.AUTH_TOKEN_SSM, true)
-  const promises = emails.map((email) => slack.getUserByEmail(email, token))
-  return Promise.all(promises).then((users) =>
-    users.map((user) => {
-      return user.user.id
-    })
-  )
-}
+  getBirthdays() {
+    return this.getBirthdaysEmails().then((emails) => this.getUserIds(emails))
+  }
 
-// TODO: The checkChannel method should be moved to birthdays class and remove this implementation from here
-const checkChannel = (name) => {
-  const slack = new Slack()
-  const amazon = new Amazon()
+  async getBirthdaysEmails() {
+    const today = getCurrentDate()
+    const users = await this.azure.readStore()
 
-  return amazon
-    .getSSMParameter(process.env.AUTH_TOKEN_SSM, true)
-    .then((token) =>
-      slack.getUsersConversations(token).then((slackJson) => {
-        const channel = slackJson.channels.find(
-          (channel) => channel.name === name
-        )
+    return users
+      .filter((user) => user.Birthday.substring(5) === today)
+      .map((user) => user.Email)
+  }
 
-        return channel ? { id: channel.id, name: channel.name } : ''
-      })
+  getUserIds(emails) {
+    const promises = emails.map((email) => this.slack.getUserByEmail(email))
+
+    return Promise.all(promises).then((users) =>
+      users
+        .filter((userJson) => userJson.ok)
+        .map((userJson) => userJson.user.id)
     )
+  }
 }
 
-module.exports = { getBirthdaysMessage, checkChannel }
+module.exports = Birthdays

@@ -28,7 +28,7 @@ functions:
   getBirthdays:
     handler: lambdas/birthday.list
   proactiveBirthdayMessage:
-    handler: lambdas/slackPost.proactive
+    handler: lambdas/birthday.proactive
     events:
       - schedule: cron(50 11 2-30/2 * ? *)
 
