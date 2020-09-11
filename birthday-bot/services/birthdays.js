@@ -14,14 +14,10 @@ class Birthdays {
 
   async sendBirthdayMessage() {
     const channelJson = await new Channel().getChannel()
-    // console.log(channel)
+
     return this.getBirthdays()
-      .then((usersIds) => {
-        console.log(usersIds)
-        return getMsgWithEmojis(usersIds)
-      })
+      .then((usersIds) => getMsgWithEmojis(usersIds))
       .then((message) => {
-        console.log(message)
         if (message) return this.slack.postToSlack(channelJson.channel, message)
         else return { ok: false, error: 'No message to sent.' }
       })
