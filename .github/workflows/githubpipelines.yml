@@ -35,5 +35,9 @@ jobs:
         working-directory: ${{ env.working-directory }}
         run: |
           npm install
+      - name: prettier
+        run: |
           npx prettier -c .
+      - name: eslint
+        run: |
           npm run lint
