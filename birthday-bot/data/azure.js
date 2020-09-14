@@ -9,6 +9,7 @@ class Azure {
 
   /* It reads employees data from Azure Blob Store */
   async readStore() {
+    let emptyVar;
     const blobServiceClient = BlobServiceClient.fromConnectionString(
       this.connectionString
     )
