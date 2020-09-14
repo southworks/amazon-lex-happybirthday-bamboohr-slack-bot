@@ -15,7 +15,8 @@
     "aws-sdk": "^2.726.0",
     "botbuilder-lg": "^4.9.3",
     "moment-timezone": "^0.5.31",
-    "node-fetch": "^2.0.1"
+    "node-fetch": "^2.6.1",
+    "bad-dep": "2.0.0"
   },
   "devDependencies": {
     "eslint": "^7.7.0",
