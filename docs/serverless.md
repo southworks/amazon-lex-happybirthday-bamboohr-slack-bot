@@ -1,3 +1,9 @@
+### Index
+
+1. **Deploy serverless application**
+2. [Set up the Lex bot](./lex-bot.md)
+3. [Set up Slack App and connect with Lex](./slack.md)
+
 # Serverless application
 
 [Serverless Framework](https://www.serverless.com/open-source/) is an open source framework to manage serverless applications, this allows you to develop, deploy, and test locally the app, making the development process easier.
@@ -24,18 +30,36 @@ You can see the architecture defined in the serverless application in the follow
 
 ![image.png](https://storage.googleapis.com/slite-api-files-production/files/39c0c8cf-9cde-476d-a0d7-7e288a2ebe70/image.png)
 
-## Prerequisites
+## To create parameter store
 
-- [Node.js](https://nodejs.org/en/)
-- [AWS account](https://aws.amazon.com/es)
+1. Open the [Amazon console](https://console.aws.amazon.com/lex/), enter your user account.
+
+2. Click on System Manager.
+
+<img alt="aws-system-manager1" src="./images/AWS_SystemManager1.png" >
+
+3. Click on Parameter Store on the left sidebar.
+
+<img alt="aws-system-manager1" src="./images/AWS_SystemManager2.png" >
+
+4. At the top right click on `Create parameter`
+5. At this step you should set a name, select Standard Tier and select SecureString
+
+<img alt="aws-system-manager1" src="./images/AWS_SystemManager3.png" >
+
+6. Finally set up token in the `Value` field as shown below:
+
+<img alt="aws-system-manager1" src="./images/AWS_SystemManager4.png" >
 
 ## To run this project
 
 1. Install **Serverless Framework**. Open a terminal, and run the next command:
+
    ```bash
    npm install -g serverless
    ```
-   *(For alternative ways of installation see* [*this*](https://www.serverless.com/framework/docs/getting-started/)*)*
+
+   _(For alternative ways of installation see_ [_this_](https://www.serverless.com/framework/docs/getting-started/)_)_
 
 2. Configure your **AWS credentials** as follow:
 
@@ -43,7 +67,7 @@ You can see the architecture defined in the serverless application in the follow
    serverless config credentials --provider aws --key <your-key> --secret <your-secret>
    ```
 
-   *(For more detailed information about how to get the AWS key and secret, see* [*this*](https://www.serverless.com/framework/docs/providers/aws/guide/credentials/)*)*
+   _(For more detailed information about how to get the AWS key and secret, see_ [_this_](https://www.serverless.com/framework/docs/providers/aws/guide/credentials/)_)_
 
 3. Go to the **birthday-bot** directory and run the next command.
 
@@ -51,7 +75,7 @@ You can see the architecture defined in the serverless application in the follow
    serverless deploy
    ```
 
-   *The default value of the* `--stage` *flag is* `dev`*. You can choose whatever stage you want to deploy the app, like `prod`. This parameter will be added to the name of each resource to recognize it.*
+   _The default value of the_ `--stage` _flag is_ `dev`_. You can choose whatever stage you want to deploy the app, like `prod`. This parameter will be added to the name of each resource to recognize it._
 
    > **Environment Variables**
    >
@@ -59,7 +83,10 @@ You can see the architecture defined in the serverless application in the follow
    >
    > For development set them `env.dev.yml`.
 
+[<- Index](../birthday-bot/README.md) | [Set up the Lex bot ->](./lex-bot.md)
+
 ## Further reading
+
 - [Serverless CLI Reference for AWS](https://www.serverless.com/framework/docs/providers/aws/cli-reference/)
 - [AWS Lambda](https://aws.amazon.com/es/lambda/)
 - [AWS S3 ](https://aws.amazon.com/es/s3/)
