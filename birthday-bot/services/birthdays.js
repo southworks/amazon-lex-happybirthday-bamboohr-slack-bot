@@ -13,11 +13,11 @@ class Birthdays {
   }
 
   async sendBirthdayMessage() {
-    const channel = await new Channel().getChannel()
+    const channelJson = await new Channel().getChannel()
 
     return this.getBirthdays()
       .then((usersIds) => getMsgWithEmojis(usersIds))
-      .then((message) => this.slack.postToSlack(channel, message))
+      .then((message) => this.slack.postToSlack(channelJson.channel, message))
   }
 
   getBirthdays() {
