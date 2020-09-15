@@ -11,7 +11,7 @@ class Azure {
   async readStore() {
     const blobServiceClient = BlobServiceClient.fromConnectionString(
       this.connectionString
-    );
+    )
     const containerClient = blobServiceClient.getContainerClient(
       this.containerName
     )
