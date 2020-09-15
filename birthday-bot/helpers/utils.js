@@ -9,17 +9,38 @@ const getCurrentDate = (dateFormat) => {
   return moment.tz(TIME_ZONE).format(dateFormat)
 }
 
-/* Read and parse Json file from path. */
-const readJSON = (path) => {
-  const { readFileSync } = require('fs')
-  const data = readFileSync(path)
-  const json = JSON.parse(data)
-
-  return json
-}
-
 const getRandomInt = (max) => Math.floor(Math.random() * max)
 
 const getRandom = (array) => array[getRandomInt(array.length)]
 
-module.exports = { getCurrentDate, readJSON, getRandomInt, getRandom }
+const idTag = (id) => `<@${id}>`
+
+const newChannel = (name) => {
+  return {
+    channel: name,
+    updatedAt: new Date().toISOString(),
+  }
+}
+
+const messageToResponse = (content, fulfillmentState, sessionAttributes) => {
+  return {
+    sessionAttributes,
+    dialogAction: {
+      type: 'Close',
+      fulfillmentState,
+      message: {
+        contentType: 'PlainText',
+        content,
+      },
+    },
+  }
+}
+
+module.exports = {
+  getCurrentDate,
+  getRandom,
+  getRandomInt,
+  idTag,
+  messageToResponse,
+  newChannel,
+}

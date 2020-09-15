@@ -6,4 +6,4 @@ jspm_packages
 .serverless
 
 # Environment
-env.*.yml
+env/env.*.yml

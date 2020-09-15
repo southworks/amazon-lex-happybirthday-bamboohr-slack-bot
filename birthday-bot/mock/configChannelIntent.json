@@ -13,7 +13,7 @@
   "currentIntent": {
     "name": "selectChannel",
     "slots": {
-      "channel": "{TEAM_NAME_WITHOUT_#}"
+      "channel": "{CHANNEL_NAME_WITHOUT_#}"
     },
     "slotDetails": {
       "channel": ["Object"]
@@ -22,7 +22,7 @@
     "nluIntentConfidenceScore": null
   },
   "alternativeIntents": [],
-  "inputTranscript": "{TEAM_NAME_WITHOUT_#}",
+  "inputTranscript": "{CHANNEL_NAME_WITHOUT_#}",
   "recentIntentSummaryView": [
     {
       "intentName": "selectChannel",
