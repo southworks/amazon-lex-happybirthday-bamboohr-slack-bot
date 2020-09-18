@@ -24,7 +24,7 @@ When the user configures the channel, the lambda function triggered by this inte
 
 You can see the architecture, that we used to make the birthday bot work, in the following diagram:
 
-![Architecture diagram](./docs/images/BirthdayBot-v3-New.png)
+![Architecture diagram](./docs/images/BirthdayBot.png)
 
 ## Getting Started
 
