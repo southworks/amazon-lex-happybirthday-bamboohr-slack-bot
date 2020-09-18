@@ -28,7 +28,7 @@ This not include the Lex service configuration because the implementation of it 
 
 You can see the architecture defined in the serverless application in the following diagram:
 
-![image.png](https://storage.googleapis.com/slite-api-files-production/files/39c0c8cf-9cde-476d-a0d7-7e288a2ebe70/image.png)
+![BirthdayBot Serverless](./images/BirthdayBot-Serverless.png)
 
 ## To create parameter store
 
@@ -36,20 +36,20 @@ You can see the architecture defined in the serverless application in the follow
 
 2. Click on System Manager.
 
-<img alt="aws-system-manager1" src="./images/AWS_SystemManager1.png" >
+![AWS Systems Manager 1](./images/AWS_SystemManager1.png)
 
 3. Click on Parameter Store on the left sidebar.
 
-<img alt="aws-system-manager1" src="./images/AWS_SystemManager2.png" >
+![AWS Systems Manager 2](./images/AWS_SystemManager2.png)
 
 4. At the top right click on `Create parameter`
 5. At this step you should set a name, select Standard Tier and select SecureString
 
-<img alt="aws-system-manager1" src="./images/AWS_SystemManager3.png" >
+![AWS Systems Manager 3](./images/AWS_SystemManager3.png)
 
 6. Finally set up token in the `Value` field as shown below:
 
-<img alt="aws-system-manager1" src="./images/AWS_SystemManager4.png" >
+![AWS Systems Manager 4](./images/AWS_SystemManager4.png)
 
 ## To run this project
 
