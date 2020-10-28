@@ -23,6 +23,12 @@ class Slack {
   }
 
   postToSlack(channel, message) {
+    if (!message)
+      return {
+        ok: true,
+        message: { text: 'No birthdays today. No message to sent.' },
+      }
+
     const postMessageUrl = 'https://slack.com/api/chat.postMessage'
     const body = JSON.stringify({ text: message, channel: channel })
 
