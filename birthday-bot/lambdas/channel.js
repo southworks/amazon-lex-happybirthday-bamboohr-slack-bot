@@ -13,7 +13,11 @@ const config = (event, _, callback) => {
         return channelService
           .setChannel(channel.name)
           .then(() => `The channel <#${channel.id}> was configured correctly`)
-          .catch(() => 'There was an error configuring the channel.')
+          .catch(() => {
+            const errMessage = 'There was an error configuring the channel.'
+            console.log(errMessage)
+            return errMessage
+          })
       } else {
         // eslint-disable-next-line max-len
         return 'That channel is not available for me, add me to the channel by clicking on me, then selecting "Add this app to a channel", and finally, choosing the channel\'s name'
@@ -25,7 +29,10 @@ const config = (event, _, callback) => {
         utils.messageToResponse(message, 'Fulfilled', sessionAttributes)
       )
     )
-    .catch((err) => callback(err))
+    .catch((err) => {
+      console.log('Error configuring channel.', err)
+      callback(err)
+    })
 }
 
 module.exports = { config }

@@ -17,17 +17,21 @@ const list = (event, context, callback) => {
         )
       )
     })
-    .catch((err) => callback(err))
+    .catch((err) => {
+      console.log('Error listing birthdays.', err)
+      callback(err)
+    })
 }
 
 const proactive = (event, context, callback) => {
   new Birthdays().sendBirthdayMessage().then((res) => {
     if (res.ok) {
-      callback(null, { statusCode: 200, body: 'Message sent!' })
+      callback(null, { statusCode: 200, body: `OK! ${res.message.text}` })
     } else {
+      console.log('Error sending proactive message.', res)
       callback(null, {
         statusCode: 200,
-        body: `There was an error., ${res.error}`,
+        body: `Message not sent! ${res.error}`,
       })
     }
   })
